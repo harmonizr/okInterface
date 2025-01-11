@@ -4,14 +4,14 @@
     "sites": [
         {
             "key": "豆瓣",
-            "name": "本源由「柒豪」维护",
+            "name": "豆瓣推荐",
             "type": 3,
             "api": "csp_Douban",
             "searchable": 0
         },
         {
             "key": "公告",
-            "name": "Q群 | 511873584",
+            "name": "预告片",
             "type": 3,
             "api": "csp_YGP",
             "searchable": 0
