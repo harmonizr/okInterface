@@ -406,7 +406,7 @@
             "key": "hipy_js_奇珍异兽[官]",
             "name": "奇珍异兽[官](drpy_t3)",
             "type": 3,
-            "api": "./js/drpy2.min.js",
+            "api": "https://gitlab.com/duomv/dzhipy/-/raw/main/drpy_libs/drpy2.min.js?ref_type=heads",
             "searchable": 1,
             "quickSearch": 1,
             "filterable": 1,
