@@ -345,6 +345,47 @@
             "changeable": 0,
             "ext": "./js/云盘.js"
         },
+         {
+            "key": "WexfeimaoziyuanGuard",
+            "name": "💓肥猫┃4K💓",
+            "type": 3,
+            "api": "csp_WexfeimaoziyuanGuard",
+            "searchable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "WexydbixinGuard",
+            "name": "💓比心┃YD💓",
+            "type": 3,
+            "api": "csp_WexydbixinGuard",
+            "searchable": 1,
+            "changeable": 1
+        },
+           {
+            "key": "Wexnullname",
+            "name": "💓无名┃4K💓",
+            "type": 3,
+            "api": "csp_WexnullnameGuard",
+            "searchable": 1,
+            "changeable": 1,
+            "timeout": 120
+        },
+        {
+            "key": "Wexyingchao",
+            "name": "💓鸟巢┃4K💓",
+            "type": 3,
+            "api": "csp_WexyingchaoGuard",
+            "searchable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "Wexwanni",
+            "name": "💓玩你┃4K💓",
+            "type": 3,
+            "api": "csp_WexwanniGuard",
+            "searchable": 1,
+            "changeable": 1
+        },
         {
             "key": "哔哩",
             "name": "哔哩｜4K",
