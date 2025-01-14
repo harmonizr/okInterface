@@ -369,7 +369,7 @@
         },
         {
             "key": "盘他",
-            "name": "💓‍盘他┃4K💓‍",
+            "name": "盘他┃4K",
             "type": 3,
             "api": "csp_WexYDpantaGuard",
             "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;84a77c1e614adefebc585ad068d113d4",
@@ -378,7 +378,7 @@
         },
         {
             "key": "Wexyingchao",
-            "name": "💓鸟巢┃4K💓",
+            "name": "鸟巢┃4K",
             "type": 3,
             "api": "csp_WexyingchaoGuard",
             "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;84a77c1e614adefebc585ad068d113d4",
@@ -387,7 +387,7 @@
         },
         {
             "key": "WexfeimaoziyuanGuard",
-            "name": "💓肥猫┃4K💓",
+            "name": "肥猫┃4K",
             "type": 3,
             "api": "csp_WexfeimaoziyuanGuard",
             "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;84a77c1e614adefebc585ad068d113d4",
@@ -396,7 +396,7 @@
         },
         {
             "key": "WexydbixinGuard",
-            "name": "💓比心┃YD💓",
+            "name": "比心┃YD",
             "type": 3,
             "api": "csp_WexydbixinGuard",
             "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;84a77c1e614adefebc585ad068d113d4",
@@ -405,7 +405,7 @@
         },
            {
             "key": "Wexnullname",
-            "name": "💓无名┃4K💓",
+            "name": "无名┃4K",
             "type": 3,
             "api": "csp_WexnullnameGuard",
             "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;84a77c1e614adefebc585ad068d113d4",
@@ -415,7 +415,7 @@
         },
         {
             "key": "Wexyingchao",
-            "name": "💓鸟巢┃4K💓",
+            "name": "鸟巢┃4K",
             "type": 3,
             "api": "csp_WexyingchaoGuard",
             "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;84a77c1e614adefebc585ad068d113d4",
@@ -424,54 +424,54 @@
         },
         {
             "key": "Wexwanni",
-            "name": "💓玩你┃4K💓",
+            "name": "玩你┃4K",
             "type": 3,
             "api": "csp_WexwanniGuard",
             "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;84a77c1e614adefebc585ad068d113d4",
             "searchable": 1,
             "changeable": 1
         },
-        {
-            "key": "哔哩",
-            "name": "哔哩｜4K",
-            "type": 3,
-            "api": "csp_Bilimd",
-            "searchable": 1,
-            "quickSearch": 1,
-            "filterable": 1,
-            "style": {
-                "type": "rect",
-                "ratio": 1.597
-            },
-            "ext": {
-                "cookie": "./cookie/哔哩.txt"
-            },
-            "timeout": 10
-        },
-        {
-            "key": "芒果",
-            "name": "芒果 | 影视",
-            "type": 3,
-            "api": "./js/drpy2.min.js",
-            "searchable": 1,
-            "quickSearch": 1,
-            "filterable": 1,
-            "order_num": 0,
-            "changeable": 0,
-            "ext": "./js/芒果.js"
-        },
-        {
-            "key": "腾讯",
-            "name": "腾讯 | 影视",
-            "type": 3,
-            "api": "./js/drpy2.min.js",
-            "searchable": 1,
-            "quickSearch": 1,
-            "filterable": 1,
-            "order_num": 0,
-            "changeable": 0,
-            "ext": "./js/腾讯.js"
-        },
+        // {
+        //     "key": "哔哩",
+        //     "name": "哔哩｜4K",
+        //     "type": 3,
+        //     "api": "csp_Bilimd",
+        //     "searchable": 1,
+        //     "quickSearch": 1,
+        //     "filterable": 1,
+        //     "style": {
+        //         "type": "rect",
+        //         "ratio": 1.597
+        //     },
+        //     "ext": {
+        //         "cookie": "./cookie/哔哩.txt"
+        //     },
+        //     "timeout": 10
+        // },
+        // {
+        //     "key": "芒果",
+        //     "name": "芒果 | 影视",
+        //     "type": 3,
+        //     "api": "./js/drpy2.min.js",
+        //     "searchable": 1,
+        //     "quickSearch": 1,
+        //     "filterable": 1,
+        //     "order_num": 0,
+        //     "changeable": 0,
+        //     "ext": "./js/芒果.js"
+        // },
+        // {
+        //     "key": "腾讯",
+        //     "name": "腾讯 | 影视",
+        //     "type": 3,
+        //     "api": "./js/drpy2.min.js",
+        //     "searchable": 1,
+        //     "quickSearch": 1,
+        //     "filterable": 1,
+        //     "order_num": 0,
+        //     "changeable": 0,
+        //     "ext": "./js/腾讯.js"
+        // },
         {
             "key": "皮皮",
             "name": "皮皮｜影视",
