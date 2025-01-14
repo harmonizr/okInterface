@@ -548,6 +548,7 @@
             "name": "哔哩教育[官](drpy_t3)",
             "type": 3,
             "api": "./drpy_libs/drpy2.min.js",
+            "jar":"./jar/pg.jar?md5=7633f8ea346c082b7aa163be58aed023",
             "searchable": 1,
             "quickSearch": 1,
             "filterable": 1,
