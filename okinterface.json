@@ -574,7 +574,26 @@
             "searchable": 1,
             "changeable": 1
         },
+      
         {
+            "key": "SubaibaiGuard",
+            "name": "🎇白白┃秒播🎇",
+            "type": 3,
+            "api": "csp_SubaibaiGuard",
+            "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;84a77c1e614adefebc585ad068d113d4",
+            "searchable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "csp_Nmys",
+            "name": "🎇伯伯┃秒播🎇",
+            "type": 3,
+            "api": "csp_WexNmysGuard",
+            "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;84a77c1e614adefebc585ad068d113d4",
+            "searchable": 1,
+            "changeable": 1
+        },
+          {
             "key": "木耳",
             "name": "🛝木耳┃采集🛝",
             "type": 1,
@@ -635,24 +654,6 @@
             "header": {
                 "user-agent": "Mozilla/5.0(WindowsNT10.0;Win64;x64)AppleWebKit/537.36(KHTML,likeGecko)Chrome/125.0.0.0Safari/537.36"
                 }
-        },
-        {
-            "key": "SubaibaiGuard",
-            "name": "🎇白白┃秒播🎇",
-            "type": 3,
-            "api": "csp_SubaibaiGuard",
-            "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;84a77c1e614adefebc585ad068d113d4",
-            "searchable": 1,
-            "changeable": 1
-        },
-        {
-            "key": "csp_Nmys",
-            "name": "🎇伯伯┃秒播🎇",
-            "type": 3,
-            "api": "csp_WexNmysGuard",
-            "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;84a77c1e614adefebc585ad068d113d4",
-            "searchable": 1,
-            "changeable": 1
         },
         {
             "key": "push_agent",
