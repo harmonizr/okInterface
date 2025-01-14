@@ -570,7 +570,7 @@
         "key": "腾讯弹幕",
         "name": "企鹅｜弹幕",
         "type": 3,
-        "api": "./drpy_libs/drpy2.min.js",
+        "api": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/drpy2.min.js",
 
         "ext": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/腾讯弹幕.js"
         },
@@ -578,21 +578,21 @@
         "key": "芒果弹幕",
         "name": "芒芒｜弹幕",
         "type": 3,
-        "api": "./drpy_libs/drpy2.min.js",
+        "api": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/drpy2.min.js",
         "ext": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/芒果弹幕.js"
         },
         {
         "key": "爱奇艺弹幕",
         "name": "艺艺｜弹幕",
         "type": 3,
-        "api": "./drpy_libs/drpy2.min.js",
+        "api": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/drpy2.min.js",
         "ext": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/爱奇艺弹幕.js"
         },
         {
         "key": "优酷弹幕",
         "name": "酷酷｜弹幕",
         "type": 3,
-        "api": "./drpy_libs/drpy2.min.js",
+        "api": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/drpy2.min.js",
         "ext": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/优酷弹幕.js"
         },
         {
