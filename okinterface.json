@@ -536,7 +536,9 @@
             "key": "hipy_js_哔哩影视[官]",
             "name": "哔哩影视[官](drpy_t3)",
             "type": 3,
-            "api": "./drpy_libs/drpy2.min.js",
+            //"api": "./drpy_libs/drpy2.min.js",
+            "api": "csp_Bilimd",
+
             "searchable": 1,
             "quickSearch": 1,
             "filterable": 1,
