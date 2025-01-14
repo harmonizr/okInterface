@@ -1,7 +1,7 @@
 {
     "spider": "./jar/柒豪.jar;md5;8adb5356ec27e9113a166749fee46b7d",
 
-    "logo": "./图片/柒豪.jpg",
+    "logo": "./png/Image_152647033423173.jpg",
     "sites": [
         {
             "key": "豆瓣",
