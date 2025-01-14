@@ -345,7 +345,23 @@
             "changeable": 0,
             "ext": "./js/云盘.js"
         },
-         {
+        {
+            "key": "盘他",
+            "name": "💓‍盘他┃4K💓‍",
+            "type": 3,
+            "api": "csp_WexYDpantaGuard",
+            "searchable": 1,
+            "changeable": 1
+        },
+        {
+            "key": "Wexyingchao",
+            "name": "💓鸟巢┃4K💓",
+            "type": 3,
+            "api": "csp_WexyingchaoGuard",
+            "searchable": 1,
+            "changeable": 1
+        },
+        {
             "key": "WexfeimaoziyuanGuard",
             "name": "💓肥猫┃4K💓",
             "type": 3,
