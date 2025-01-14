@@ -567,6 +567,34 @@
             "ext": "./drpy_js/我的哔哩[官].js?type=url&params=../json/哔哩大全.json"
         },
         {
+        "key": "腾讯弹幕",
+        "name": "企鹅｜弹幕",
+        "type": 3,
+        "api": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/drpy2.min.js",
+        "ext": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/腾讯弹幕.js"
+        },
+        {
+        "key": "芒果弹幕",
+        "name": "芒芒｜弹幕",
+        "type": 3,
+        "api": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/drpy2.min.js",
+        "ext": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/芒果弹幕.js"
+        },
+        {
+        "key": "爱奇艺弹幕",
+        "name": "艺艺｜弹幕",
+        "type": 3,
+        "api": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/drpy2.min.js",
+        "ext": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/爱奇艺弹幕.js"
+        },
+        {
+        "key": "优酷弹幕",
+        "name": "酷酷｜弹幕",
+        "type": 3,
+        "api": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/drpy2.min.js",
+        "ext": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/优酷弹幕.js"
+        },
+        {
             "key": "Wexshandian",
             "name": "🌺闪电┃秒播🌺",
             "type": 3,
@@ -820,6 +848,35 @@
         }
     ],
     "parses": [
+         {
+        "name": "内部解析",
+        "type": 1,
+        "url": "http://39.106.63.186/jiexi.php?user=username20250107&pwd=username20250107&url=",
+        "ext": {
+            "flag": [
+            "qq",
+            "腾讯",
+            "qiyi",
+            "爱奇艺",
+            "奇艺",
+            "youku",
+            "优酷",
+            "sohu",
+            "搜狐",
+            "letv",
+            "乐视",
+            "mgtv",
+            "芒果",
+            "tnmb",
+            "seven",
+            "bilibili",
+            "1905"
+            ],
+            "header": {
+                "User-Agent": "okhttp/4.9.1"
+                }
+            }
+        },
         {
 			"name": "777",
 			"url": "https://jx.777jiexi.com/player/?url=",
