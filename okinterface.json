@@ -1,5 +1,6 @@
 {
-    "spider": "https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;8adb5356ec27e9113a166749fee46b7d",
+	"spider": "./jar/pg.jar?md5=7633f8ea346c082b7aa163be58aed023",
+
     "logo": "./图片/柒豪.jpg",
     "sites": [
         {
