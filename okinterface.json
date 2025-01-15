@@ -765,6 +765,39 @@
             "filterable": 1
         },
         //pg:http://www.fish2018.us.kg/p//jsm.json
+         {
+            "key": "ddys",
+            "name": "低端影视|网盘",
+            "type": 3,
+            "api": "csp_Ddys",
+            "quickSearch": 1,
+            "changeable": 1,
+            "filterable": 1,
+            "timeout": 60,
+            "ext": "./json/tokenm.json$$$https://ddys.pro/$$$proxy$$$1$$$"
+        },
+        {
+            "key": "Xinshijue",
+            "name": "新视觉|网盘",
+            "type": 3,
+            "api": "csp_Xinshijue",
+            "quickSearch": 1,
+            "changeable": 1,
+            "filterable": 1,
+            "timeout": 60,
+            "ext": "./json/tokenm.json$$$https://6080z.com/$$$noproxy$$$1$$$./lib/wogg.json"
+        },
+        {
+            "key": "团长资源",
+            "name": "团长资源|网盘",
+            "type": 3,
+            "api": "csp_TZFile",
+            "quickSearch": 1,
+            "changeable": 1,
+            "filterable": 1,
+            "timeout": 120,
+            "ext": "./json/tokenm.json$$$noproxy$$$1"
+        },
         {
             "key":"drpy_js_愛盤搜",
             "name":"爱盘搜[js]|夸",
