@@ -770,6 +770,7 @@
             "name": "低端影视|网盘",
             "type": 3,
             "api": "csp_Ddys",
+            "jar": "./jar/pg.jar",
             "quickSearch": 1,
             "changeable": 1,
             "filterable": 1,
@@ -781,17 +782,19 @@
             "name": "新视觉|网盘",
             "type": 3,
             "api": "csp_Xinshijue",
+            "jar": "./jar/pg.jar",
             "quickSearch": 1,
             "changeable": 1,
             "filterable": 1,
             "timeout": 60,
-            "ext": "./json/tokenm.json$$$https://6080z.com/$$$noproxy$$$1$$$./lib/wogg.json"
+            "ext": "./json/tokenm.json$$$https://6080z.com/$$$noproxy$$$1$$$./json/wogg.json"
         },
         {
             "key": "团长资源",
             "name": "团长资源|网盘",
             "type": 3,
             "api": "csp_TZFile",
+            "jar": "./jar/pg.jar",
             "quickSearch": 1,
             "changeable": 1,
             "filterable": 1,
