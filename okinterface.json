@@ -566,7 +566,7 @@
 			"quickSearch": 1,
 			"filterable": 1,
 			"order_num": 0,
-			"ext": "./drpy_js/我的哔哩[官].js"
+			"ext": "https://gitlab.com/duomv/dzhipy/-/raw/main/drpy_js/%E6%88%91%E7%9A%84%E5%93%94%E5%93%A9%5B%E5%AE%98%5D.js?type=url&params=https://gitlab.com/duomv/dzhipy/-/raw/main/json/%E5%93%94%E5%93%A9%E6%95%99%E8%82%B2.json"
 		},
 		{
 			"key": "hipy_js_我的哔哩[官]1",
