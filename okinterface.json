@@ -756,13 +756,18 @@
             "name":"爱盘搜[js]|夸",
             "type":3,
             "api": "./drpy_libs/drpy2.min.js",
-            "ext":"./js/aipanso.js", 
             "quickSearch":1,
             "changeable":1, 
             "timeout":60,
         	"style": {
-                    "type": "list",
-                    "ratio": 1.1
+                "type": "list",
+                "ratio": 1.1
+            },
+            "ext": {
+                "commonConfig":"./js/aipanso.js", 
+                "token": "http://127.0.0.1:9978/file/TVBox/token.txt",
+                "cookie": "http://127.0.0.1:9978/file/TVBox/quark.txt",
+                "uc_cookie": "http://127.0.0.1:9978/file/TVBox/uc.txt"
             }
         },
         {
@@ -785,7 +790,13 @@
             "api":"csp_MiaoSou",
             "jar": "./jar/pg.jar",
             "timeout":60, 
-            "ext":"./json/tokenm.json",
+            //"ext":"./json/tokenm.json",
+             "ext": {
+                "commonConfig":"./js/aipanso.js", 
+                "token": "http://127.0.0.1:9978/file/TVBox/token.txt",
+                "cookie": "http://127.0.0.1:9978/file/TVBox/quark.txt",
+                "uc_cookie": "http://127.0.0.1:9978/file/TVBox/uc.txt"
+            },
             "style": {
                 "type": "list",
                 "ratio": 1.1
