@@ -785,7 +785,12 @@
             "api":"csp_MiaoSou",
             "jar": "./jar/pg.jar",
             "timeout":60, 
-            "ext":"./json/tokenm.json",
+            //"ext":"./json/tokenm.json",
+             "ext": {
+                "token": "http://127.0.0.1:9978/file/TVBox/token.txt",
+                "cookie": "http://127.0.0.1:9978/file/TVBox/quark.txt",
+                "uc_cookie": "http://127.0.0.1:9978/file/TVBox/uc.txt"
+            },
             "style": {
                 "type": "list",
                 "ratio": 1.1
