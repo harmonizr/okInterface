@@ -772,7 +772,7 @@
             "api":"csp_UpYun",
             "jar": "./jar/pg.jar",
             "timeout":30, 
-            "ext":"./lib/tokenm.json",
+            "ext":"./json/tokenm.json",
             "style": {			
                 "type": "list",
                 "ratio": 1.1
