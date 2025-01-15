@@ -65,7 +65,7 @@
             "indexs": 0,
             "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;84a77c1e614adefebc585ad068d113d4"
         },
-         {
+        {
             "key": "网盘配置",
             "name": "网盘及彈幕配置",
             "type": 3,
@@ -78,6 +78,7 @@
                 "type": "rect",
                 "ratio": 1.5
             }
+        },
         {
             "key": "玩偶",
             "name": "玩偶 | 4K",
