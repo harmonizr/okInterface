@@ -677,7 +677,79 @@
             "api": "http://jk.baipiao4k.asia/js/drpy2.min.js",
             "ext": "http://60.211.124.23:10101/tvbox/js/gyi.php?key=7894561232&id=风铃"
         },
-       
+        //小米:http://www.mpanso.com/小米/DEMO.json
+        {
+            "key": "csp_Wwys",
+            "name": "👨农民┃1080P",
+            "type": 3,
+            "playerType": 2,
+            "searchable": 1,
+            "changeable": 0,
+            "api": "csp_Wwys",
+            "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736752647017/0113-4.jar;md5;6bd68323863c83157d6bf539faccacd4",
+            "ext": "https://www.wwgz.cn/"
+        },
+        {
+            "key": "csp_Fantuan",
+            "name": "🍙饭团┃1080P",
+            "type": 3,
+            "searchable": 1,
+            "api": "csp_Fantuan",
+            "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736752647017/0113-4.jar;md5;6bd68323863c83157d6bf539faccacd4"
+        },
+        {
+            "key": "瓜子",
+            "name": "🍉瓜子┃1080P",
+            "type": 3,
+            "api": "csp_Gz360",
+            "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736752647017/0113-4.jar;md5;6bd68323863c83157d6bf539faccacd4",
+            "searchable": 1,
+            "quickSearch": 0,
+            "filterable": 1,
+            "order_num": 0,
+            "changeable": 0
+        },
+        {
+        "key": "csp_MiTuApp",
+        "name": "🐰米兔┃1080P",
+        "type": 3,
+        "searchable": 1,
+        "quickSearch": 1,
+        "api": "csp_MiTuApp",
+        "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736752647017/0113-4.jar;md5;6bd68323863c83157d6bf539faccacd4",
+        "ext": "s1/kf8dfHZAgs5H4ledT0oVFC1n/KhNfQfc0onBTauGjjbKin/VdMFrfJlKKnt/ClccntSyJqzbI1hHzGUUmZg7v02l1fvcdAH0iCUzGlopNgnI3rkeQtAwS54GySfRT0IRokasLwr5Rr6pm8/lTNJXMTEkq+9mzK976Dvv80seU9riYmFeBD+EBp8RzurdP02PNc0S2aZPlMbdm5yTIQfI8QeSRJGz+0AIsFOyBoPr4LDptq0AAc37KMhnWDCXF"
+        },
+        {
+        "key": "csp_良人",
+        "name": "👨良人┃1080P",
+        "type": 3,
+        "searchable": 1,
+        "quickSearch": 1,
+        "api": "csp_MiTuApp",
+        "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736752647017/0113-4.jar;md5;6bd68323863c83157d6bf539faccacd4",
+        "ext": "sHR2rlsfjI4L3t4RXQMkn+pzOh0GsJJgcwHHxDs8FcBDGD81qAZtun78VAJxzshCbStdXIlQiksUvc2b5fXyuxJO9KBNp5LzL/pYLLOs1V3R3WOh90eVpJGxxXWEZtoq+F7Cq4CbQ3J1TTXahpYpeXXeevwPopQutGBNaxYkdBgBL6rCgov0BCUWOXriRXNndZJYNJohfwIzBP+iTuz6C8FWXazDuKfwSS4BfeyQuGM="
+        },
+        {
+            "key": "csp_麻花",
+            "name": "🥙麻花┃1080P",
+            "type": 3,
+            "searchable": 1,
+            "quickSearch": 1,
+            "api": "csp_MiTuApp",
+            "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736752647017/0113-4.jar;md5;6bd68323863c83157d6bf539faccacd4",
+            "ext": "sHR2rlsfjI4L3t4RXQMkn8ivSF5g8jXfhsjvizFR8ljN3AOVzpH9pr9GtPv0p/pnhxACPxmzklGulcZ5QfkGRCf6Rs7SjJmolZldAYa939+CUP8xvcjHb492E8waghkGxrtWlTiEC9t4dl/TaQf07LDUAJHsnAKfXpKlbKLXQWnAB8CtibGEXY01QAOeG3k4IaLl5w+AZDEEMHPNX5zL4bnOOk1PYBVZKZWV+DzWC9I="
+        },
+        {
+            "key": "csp_猎手",
+            "name": "💰猎手┃PYTHON",
+            "type": 3,
+            "searchable": 1,
+            "changeable": 1,
+            "quickSearch": 1,
+            "api": "https://drive.almondcloud.cn/f/mnyRt1/py_%E7%94%B5%E5%BD%B1%E7%8C%8E%E6%89%8B.py",
+            "playerType": 2,
+            "filterable": 1
+        },
         // {
         //     "key": "木耳",
         //     "name": "木耳┃采集",
