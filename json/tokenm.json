@@ -1,6 +1,6 @@
 {
 "use_internal_storage":false,
-"token":"http://127.0.0.1:9978/file/TVBox/token.txt",
+"token":"",
 "open_token":"",
 "open_api_url":"get|https://adrive.xdow.net/oauth/access_token",
 "oauth_client_id":"",
@@ -28,8 +28,8 @@
 "proxy":"",
 "danmu":true,
 "quark_danmu":true,
-"quark_cookie":"http://127.0.0.1:9978/file/TVBox/quark.txt",
-"uc_cookie":"http://127.0.0.1:9978/file/TVBox/uc.txt",
+"quark_cookie":"",
+"uc_cookie":"",
 "thunder_username":"",
 "thunder_password":"",
 "thunder_captchatoken":"",
