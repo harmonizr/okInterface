@@ -65,6 +65,19 @@
             "indexs": 0,
             "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;84a77c1e614adefebc585ad068d113d4"
         },
+         {
+            "key": "网盘配置",
+            "name": "网盘及彈幕配置",
+            "type": 3,
+            "api": "csp_Config",
+            "jar": "./jar/pg.jar",
+            "searchable": 0,
+            "changeable": 0,
+            "ext": "./json/tokenm.json",
+            "style": {
+                "type": "rect",
+                "ratio": 1.5
+            }
         {
             "key": "玩偶",
             "name": "玩偶 | 4K",
@@ -785,12 +798,7 @@
             "api":"csp_MiaoSou",
             "jar": "./jar/pg.jar",
             "timeout":60, 
-            //"ext":"./json/tokenm.json",
-             "ext": {
-                "token": "http://127.0.0.1:9978/file/TVBox/token.txt",
-                "cookie": "http://127.0.0.1:9978/file/TVBox/quark.txt",
-                "uc_cookie": "http://127.0.0.1:9978/file/TVBox/uc.txt"
-            },
+            "ext":"./json/tokenm.json",
             "style": {
                 "type": "list",
                 "ratio": 1.1
