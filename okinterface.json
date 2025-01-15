@@ -573,13 +573,13 @@
         // "api": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/drpy2.min.js",
         // "ext": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/腾讯弹幕.js"
         // },
-        // {
-        //     "key": "芒果弹幕",
-        //     "name": "芒芒｜弹幕",
-        //     "type": 3,
-        //     "api": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/drpy2.min.js",
-        //     "ext": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/芒果弹幕.js"
-        // },
+        {
+            "key": "芒果弹幕",
+            "name": "芒芒｜弹幕",
+            "type": 3,
+            "api": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/drpy2.min.js",
+            "ext": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/芒果弹幕.js"
+        },
         // {
         // "key": "爱奇艺弹幕",
         // "name": "艺艺｜弹幕",
