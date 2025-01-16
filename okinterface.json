@@ -127,30 +127,21 @@
             },
             "timeout": 25
         },
-          {
-            "key": "Wexlabi",
-            "name": "蜡笔┃4K",
+        {
+            "key": "蜡笔",
+            "name": "蜡笔 | 4K",
             "type": 3,
-            "api": "csp_WexlabiGuard",
-            "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;84a77c1e614adefebc585ad068d113d4",
-            "searchable": 1,
-            "changeable": 1
+            "api": "csp_Wobg",
+            "quickSearch": 1,
+            "changeable": 1,
+            "filterable": 1,
+            "ext": {
+                "token": "http://127.0.0.1:9978/file/TVBox/token.txt",
+                "cookie": "http://127.0.0.1:9978/file/TVBox/quark.txt",
+                "site": "http://feimaoai.site",
+                "danmu": true
+            }
         },
-        // {
-        //     "key": "蜡笔",
-        //     "name": "蜡笔 | 4K",
-        //     "type": 3,
-        //     "api": "csp_Wobg",
-        //     "quickSearch": 1,
-        //     "changeable": 1,
-        //     "filterable": 1,
-        //     "ext": {
-        //         "token": "http://127.0.0.1:9978/file/TVBox/token.txt",
-        //         "cookie": "http://127.0.0.1:9978/file/TVBox/quark.txt",
-        //         "site": "http://feimaoai.site",
-        //         "danmu": true
-        //     }
-        // },
         {
             "key": "闪电",
             "name": "闪电 | 4K",
@@ -181,6 +172,15 @@
                 "site": "https://mihdr.top",
                 "danmu": true
             }
+        },
+         {
+            "key": "WextudouGuard",
+            "name": "💓‍土豆┃4K💓‍",
+            "type": 3,
+            "api": "csp_WextudouGuard",
+            "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;84a77c1e614adefebc585ad068d113d4",
+            "searchable": 1,
+            "changeable": 1
         },
         {
             "key": "土豆",
