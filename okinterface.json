@@ -208,6 +208,29 @@
             }
         },
         {
+            "key": "csp_UC",
+            "name": "💌UCUC┃4K弹幕",
+            "type": 3,
+            "searchable": 1,
+            "api": "csp_Duopan",
+            "filterable": 1,
+            "ext": {
+                "site_urls": [
+                    "http://www.mucpan.cc",
+                    "http://ucmi.fun",
+                    "http://www.ucmi.fun"
+                ],
+                "url_key": "UC",
+                "token": "",
+                "ucCookie": "",
+                "quarkCookie": "",
+                "threadinfo": {
+                    "chunksize": 450,
+                    "threads": 12
+                }
+            }
+        },
+        {
             "key": "六趣",
             "name": "六趣 | 4K",
             "type": 3,
