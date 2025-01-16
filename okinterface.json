@@ -222,9 +222,9 @@
                     "http://www.ucmi.fun"
                 ],
                 "url_key": "UC",
-                "token": "",
-                "ucCookie": "",
-                "quarkCookie": "",
+                "token": "http://127.0.0.1:9978/file/TVBox/token.txt",
+                "ucCookie": "http://127.0.0.1:9978/file/TVBox/uc.txt",
+                "quarkCookie": "http://127.0.0.1:9978/file/TVBox/quark.txt",
                 "threadinfo": {
                     "chunksize": 450,
                     "threads": 12
