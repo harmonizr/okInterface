@@ -173,47 +173,7 @@
                 "danmu": true
             }
         },
-         {
-            "key": "WextudouGuard",
-            "name": "💓‍土豆┃4K💓‍",
-            "type": 3,
-            "api": "csp_WextudouGuard",
-            "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;84a77c1e614adefebc585ad068d113d4",
-            "searchable": 1,
-            "changeable": 1
-        },
-        {
-            "key": "土豆",
-            "name": "土豆｜4K",
-            "type": 3,
-            "api": "csp_Wobg",
-            "quickSearch": 1,
-            "changeable": 1,
-            "filterable": 1,
-            "ext": {
-                "token": "http://127.0.0.1:9978/file/TVBox/token.txt",
-                "cookie": "http://127.0.0.1:9978/file/TVBox/quark.txt",
-                "uc_cookie": "http://127.0.0.1:9978/file/TVBox/uc.txt",
-                "site": "https://dcyun.cc",
-                "danmu": true
-            }
-        },
-        
-        {
-            "key": "奥秘",
-            "name": "奥秘 | 4K",
-            "type": 3,
-            "api": "csp_Wobg",
-            "quickSearch": 1,
-            "changeable": 1,
-            "filterable": 1,
-            "ext": {
-                "token": "http://127.0.0.1:9978/file/TVBox/token.txt",
-                "cookie": "http://127.0.0.1:9978/file/TVBox/quark.txt",
-                "site": "https://vip.omii.top/",
-                "danmu": true
-            }
-        },
+       
         {
             "key": "欧歌",
             "name": "欧歌 | 4K",
@@ -400,15 +360,7 @@
             "searchable": 1,
             "changeable": 1
         },
-        {
-            "key": "Wexyingchao",
-            "name": "鸟巢┃4K",
-            "type": 3,
-            "api": "csp_WexyingchaoGuard",
-            "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;84a77c1e614adefebc585ad068d113d4",
-            "searchable": 1,
-            "changeable": 1
-        },
+      
         {
             "key": "WexfeimaoziyuanGuard",
             "name": "肥猫┃4K",
@@ -437,15 +389,7 @@
             "changeable": 1,
             "timeout": 120
         },
-        {
-            "key": "Wexyingchao",
-            "name": "鸟巢┃4K",
-            "type": 3,
-            "api": "csp_WexyingchaoGuard",
-            "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;84a77c1e614adefebc585ad068d113d4",
-            "searchable": 1,
-            "changeable": 1
-        },
+     
         {
             "key": "Wexwanni",
             "name": "玩你┃4K",
@@ -455,47 +399,7 @@
             "searchable": 1,
             "changeable": 1
         },
-        // {
-        //     "key": "哔哩",
-        //     "name": "哔哩｜4K",
-        //     "type": 3,
-        //     "api": "csp_Bilimd",
-        //     "searchable": 1,
-        //     "quickSearch": 1,
-        //     "filterable": 1,
-        //     "style": {
-        //         "type": "rect",
-        //         "ratio": 1.597
-        //     },
-        //     "ext": {
-        //         "cookie": "./cookie/哔哩.txt"
-        //     },
-        //     "timeout": 10
-        // },
-        // {
-        //     "key": "芒果",
-        //     "name": "芒果 | 影视",
-        //     "type": 3,
-        //     "api": "./js/drpy2.min.js",
-        //     "searchable": 1,
-        //     "quickSearch": 1,
-        //     "filterable": 1,
-        //     "order_num": 0,
-        //     "changeable": 0,
-        //     "ext": "./js/芒果.js"
-        // },
-        // {
-        //     "key": "腾讯",
-        //     "name": "腾讯 | 影视",
-        //     "type": 3,
-        //     "api": "./js/drpy2.min.js",
-        //     "searchable": 1,
-        //     "quickSearch": 1,
-        //     "filterable": 1,
-        //     "order_num": 0,
-        //     "changeable": 0,
-        //     "ext": "./js/腾讯.js"
-        // },
+      
         {
             "key": "皮皮",
             "name": "皮皮｜影视",
@@ -545,17 +449,7 @@
             "order_num": 0,
             "ext": "./drpy_js/腾云驾雾[官].js"
         },
-        // {
-        //     "key": "hipy_js_百忙无果[官]",
-        //     "name": "百忙无果[官](drpy_t3)",
-        //     "type": 3,
-        //     "api": "./drpy_libs/drpy2.min.js",
-        //     "searchable": 1,
-        //     "quickSearch": 1,
-        //     "filterable": 1,
-        //     "order_num": 0,
-        //     "ext": "./drpy_js/百忙无果[官].js"
-        // },
+       
         {
             "key": "hipy_js_哔哩影视[官]",
             "name": "哔哩影视[官](drpy_t3)",
@@ -825,19 +719,7 @@
                 "ratio": 1.1
             }
         },
-        {
-            "key":"UP云搜",
-            "name":"阿里|UP云搜",
-            "type":3,
-            "api":"csp_UpYun",
-            "jar": "./jar/pg.jar",
-            "timeout":30, 
-            "ext":"./json/tokenm.json",
-            "style": {			
-                "type": "list",
-                "ratio": 1.1
-            }
-        }, 
+       
         {
             "key":"秒搜",
             "name":"秒搜|网盘搜索",
@@ -896,18 +778,7 @@
                 "ratio": 1.1
             }
         },
-        {
-            "key":"Qianfan",
-            "name":"千帆|网盘搜索",
-            "type":3,
-            "api":"csp_Qianfan",
-            "jar": "./jar/pg.jar",
-            "quickSearch":1, 
-            "changeable":1, 
-            "filterable":1, 
-            "timeout":60, 
-            "ext":"./json/tokenm.json$$$https://pan.qianfan.app$$$null$$$./lib/qianfan.txt$$$1"
-        },
+     
         {
             "key":"YunSo",
             "name":"小云搜索|网盘搜索",
