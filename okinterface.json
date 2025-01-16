@@ -195,7 +195,7 @@
             "key": "小米",
             "name": "小米 | 4K",
             "type": 3,
-            "api": "csp_Wobg",
+            "api": "csp_Duopan",
             "quickSearch": 1,
             "changeable": 1,
             "filterable": 1,
@@ -222,9 +222,9 @@
                     "http://www.ucmi.fun"
                 ],
                 "url_key": "UC",
-                "token": "http://127.0.0.1:9978/file/TVBox/token.txt",
-                "ucCookie": "http://127.0.0.1:9978/file/TVBox/uc.txt",
-                "quarkCookie": "http://127.0.0.1:9978/file/TVBox/quark.txt",
+                "token": "",
+                "ucCookie": "",
+                "quarkCookie": "",
                 "threadinfo": {
                     "chunksize": 450,
                     "threads": 12
