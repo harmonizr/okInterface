@@ -577,7 +577,7 @@
 			"quickSearch": 1,
 			"filterable": 1,
 			"order_num": 1,
-			"ext": "./drpy_js/我的哔哩[官].js?type=url&params=./json/哔哩大全.json"
+			"ext": "./drpy_js/我的哔哩[官].js?type=url&params=https://gitlab.com/duomv/dzhipy/-/raw/main/json/%E5%93%94%E5%93%A9%E5%A4%A7%E5%85%A8.json"
 		},
 
         // {
