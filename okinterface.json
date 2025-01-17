@@ -730,7 +730,7 @@
             "changeable": 1,
             "filterable": 1,
             "timeout": 120,
-            "ext": "./json/tokenm.json$$$noproxy$$$1"
+            //"ext": "./json/tokenm.json$$$noproxy$$$1"
         },
         {
             "key":"drpy_js_愛盤搜",
