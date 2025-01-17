@@ -316,23 +316,7 @@
             "changeable": 0,
             "ext": "./js/云盘.js"
         },
-        {
-            "key": "Panta",
-            "name": "盘Ta|网盘",
-            "type": 3,
-            "api": "csp_Panta",
-            "jar":"./jar/pg.jar",
-            "quickSearch": 1,
-            "changeable": 1,
-            "filterable": 1,
-            "timeout": 60,
-            "ext": "./json/tokenm.json$$$https://www.91panta.cn/$$$null$$$1",
-            "style": {
-                "type": "list",
-                "ratio": 1.1
-            }
-        },
-      
+    
         {
             "key": "WexfeimaoziyuanGuard",
             "name": "肥猫┃4K",
@@ -380,14 +364,11 @@
             "ext": "./js/皮皮.json"
         },
         {
-            "key": "新6V",
-            "name": "磁力 | 影视",
+            "key": "芒果弹幕",
+            "name": "芒芒｜弹幕",
             "type": 3,
-            "api": "csp_Xb6v",
-            "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;84a77c1e614adefebc585ad068d113d4",
-            "searchable": 1,
-            "changeable": 0,
-            "timeout": 20
+            "api": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/drpy2.min.js",
+            "ext": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/芒果弹幕.js"
         },
         {
             "key": "hipy_js_奇珍异兽[官]",
@@ -456,13 +437,6 @@
 			"order_num": 1,
 			"ext": "./drpy_js/我的哔哩[官].js?type=url&params=https://gitlab.com/duomv/dzhipy/-/raw/main/json/%E5%93%94%E5%93%A9%E5%A4%A7%E5%85%A8.json"
 		},      
-        {
-            "key": "芒果弹幕",
-            "name": "芒芒｜弹幕",
-            "type": 3,
-            "api": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/drpy2.min.js",
-            "ext": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/芒果弹幕.js"
-        },
         {
             "key": "Wexshandian",
             "name": "闪电┃秒播",
