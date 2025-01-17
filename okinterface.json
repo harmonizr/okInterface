@@ -211,31 +211,18 @@
             "key": "六趣",
             "name": "六趣 | 4K",
             "type": 3,
-            //"api": "csp_Wobg",
-            "api": "csp_Duopan",
-            "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736998904961/0116.jar;md5;5d55d1e0bf4079bc9591d2ce641a9959",
-
+            "api": "csp_Wobg",
             "searchable": 1,
             "quickSearch": 1,
             "filterable": 1,
             "changeable": 1,
-             "ext": {
-            "site_urls": [
-               "https://wp.0v.fit"
-            ],
-            "url_key": "Duopan",
-            "threadinfo": {
-                    "chunksize": 450,
-                    "threads": 12
-                }
+            "ext": {
+                "token": "http://127.0.0.1:9978/file/TVBox/token.txt",
+                "cookie": "http://127.0.0.1:9978/file/TVBox/quark.txt",
+                "uc_cookie": "http://127.0.0.1:9978/file/TVBox/uc.txt",
+                "site": "https://wp.0v.fit",
+                "danmu": true
             }
-            // "ext": {
-            //     "token": "http://127.0.0.1:9978/file/TVBox/token.txt",
-            //     "cookie": "http://127.0.0.1:9978/file/TVBox/quark.txt",
-            //     "uc_cookie": "http://127.0.0.1:9978/file/TVBox/uc.txt",
-            //     "site": "https://wp.0v.fit",
-            //     "danmu": true
-            // }
         },
         {
             "key": "虎斑",
@@ -707,8 +694,8 @@
             "ext": "./json/tokenm.json$$$https://6080z.com/$$$noproxy$$$1$$$./json/wogg.json"
         },
          {
-            "key": "团长资源未改",
-            "name": "团长资源未改|网盘",
+            "key": "团长资源",
+            "name": "团长资源|网盘",
             "type": 3,
             "api": "csp_TZFile",
             "jar": "./jar/pg.jar",          
@@ -717,20 +704,6 @@
             "filterable": 1,
             "timeout": 120,
             "ext": "./json/tokenm.json$$$noproxy$$$1"
-        },
-        {
-            "key": "团长资源",
-            "name": "团长资源|网盘",
-            "type": 3,
-            // "api": "csp_TZFile",
-            // "jar": "./jar/pg.jar",
-            "api": "csp_Duopan",
-            "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736998904961/0116.jar;md5;5d55d1e0bf4079bc9591d2ce641a9959",
-            "quickSearch": 1,
-            "changeable": 1,
-            "filterable": 1
-            //"timeout": 120
-            //"ext": "./json/tokenm.json$$$noproxy$$$1"
         },
         {
             "key":"drpy_js_愛盤搜",
