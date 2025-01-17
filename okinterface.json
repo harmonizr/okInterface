@@ -270,57 +270,22 @@
                 "danmu": true
             }
         },
-        {
-            "key": "米搜",
-            "name": "米搜｜4K",
-            "type": 3,
-            "api": "csp_Qkpanso",
-            "searchable": 1,
-            "filterable": 1,
-            "changeable": 0,
-            "ext": {
-                "cookie": "http://127.0.0.1:9978/file/TVBox/quark.txt",
-                "site": "https://www.misou.fun",
-                "danmu": true
-            }
-        },
-        {
-            "key": "抠搜",
-            "name": "柑橘 | 4K",
-            "type": 3,
-            "api": "csp_KkSs",
-            "searchable": 1,
-            "quickSearch": 1,
-            "changeable": 0,
-            "jar": "./jar/柒豪2.jar;md5;65e12949f9090ca4451bd04338542881",
-            "ext": {
-                "Cloud-drive": "tvfan/Cloud-drive.txt",
-                "from": "4k|auto"
-            }
-        },
-        {
-            "key": "UC",
-            "name": "UC | 4K",
-            "type": 3,
-            "api": "csp_UuSs",
-            "searchable": 1,
-            "quickSearch": 1,
-            "changeable": 0,
-            "jar": "./jar/柒豪2.jar;md5;65e12949f9090ca4451bd04338542881",
-            "ext": {
-                "Cloud-drive": "tvfan/Cloud-drive.txt",
-                "from": "4k|auto"
-            }
-        },
-        {
-            "key": "天翼",
-            "name": "天翼 | 4K‍",
-            "type": 3,
-            "api": "csp_Wexleijing",
-            "jar": "./jar/柒豪3.jar;md5;c0a0b82a9b66c0a6f8919305ee5c3591",
-            "searchable": 1,
-            "changeable": 1
-        },
+        // {
+        //     "key": "米搜",
+        //     "name": "米搜｜4K",
+        //     "type": 3,
+        //     "api": "csp_Qkpanso",
+        //     "searchable": 1,
+        //     "filterable": 1,
+        //     "changeable": 0,
+        //     "ext": {
+        //         "cookie": "http://127.0.0.1:9978/file/TVBox/quark.txt",
+        //         "site": "https://www.misou.fun",
+        //         "danmu": true
+        //     }
+        // },
+        
+        
         {
             "key": "雷鲸",
             "name": "雷鲸 | 4K‍",
@@ -352,13 +317,20 @@
             "ext": "./js/云盘.js"
         },
         {
-            "key": "盘他",
-            "name": "盘他┃4K",
+            "key": "Panta",
+            "name": "盘Ta|网盘",
             "type": 3,
-            "api": "csp_WexYDpantaGuard",
-            "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;84a77c1e614adefebc585ad068d113d4",
-            "searchable": 1,
-            "changeable": 1
+            "api": "csp_Panta",
+            "jar":"./jar/pg.jar",
+            "quickSearch": 1,
+            "changeable": 1,
+            "filterable": 1,
+            "timeout": 60,
+            "ext": "./json/tokenm.json$$$https://www.91panta.cn/$$$null$$$1",
+            "style": {
+                "type": "list",
+                "ratio": 1.1
+            }
         },
       
         {
@@ -412,6 +384,7 @@
             "name": "磁力 | 影视",
             "type": 3,
             "api": "csp_Xb6v",
+            "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;84a77c1e614adefebc585ad068d113d4",
             "searchable": 1,
             "changeable": 0,
             "timeout": 20
@@ -440,7 +413,7 @@
         },
         {
             "key": "hipy_js_腾云驾雾[官]",
-            "name": "腾腾",
+            "name": "企鹅",
             "type": 3,
             "api": "./drpy_libs/drpy2.min.js",
             "searchable": 1,
@@ -482,15 +455,7 @@
 			"filterable": 1,
 			"order_num": 1,
 			"ext": "./drpy_js/我的哔哩[官].js?type=url&params=https://gitlab.com/duomv/dzhipy/-/raw/main/json/%E5%93%94%E5%93%A9%E5%A4%A7%E5%85%A8.json"
-		},
-
-        // {
-        // "key": "腾讯弹幕",
-        // "name": "企鹅｜弹幕",
-        // "type": 3,
-        // "api": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/drpy2.min.js",
-        // "ext": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/腾讯弹幕.js"
-        // },
+		},      
         {
             "key": "芒果弹幕",
             "name": "芒芒｜弹幕",
@@ -498,20 +463,6 @@
             "api": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/drpy2.min.js",
             "ext": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/芒果弹幕.js"
         },
-        // {
-        // "key": "爱奇艺弹幕",
-        // "name": "艺艺｜弹幕",
-        // "type": 3,
-        // "api": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/drpy2.min.js",
-        // "ext": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/爱奇艺弹幕.js"
-        // },
-        // {
-        // "key": "优酷弹幕",
-        // "name": "酷酷｜弹幕",
-        // "type": 3,
-        // "api": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/drpy2.min.js",
-        // "ext": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/优酷弹幕.js"
-        // },
         {
             "key": "Wexshandian",
             "name": "闪电┃秒播",
