@@ -729,7 +729,7 @@
             "quickSearch": 1,
             "changeable": 1,
             "filterable": 1,
-            "timeout": 120,
+            "timeout": 120
             //"ext": "./json/tokenm.json$$$noproxy$$$1"
         },
         {
