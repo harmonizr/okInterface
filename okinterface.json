@@ -364,13 +364,6 @@
             "ext": "./js/皮皮.json"
         },
         {
-            "key": "芒果弹幕",
-            "name": "芒芒｜弹幕",
-            "type": 3,
-            "api": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/drpy2.min.js",
-            "ext": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/芒果弹幕.js"
-        },
-        {
             "key": "hipy_js_奇珍异兽[官]",
             "name": "奇奇",
             "type": 3,
@@ -403,7 +396,13 @@
             "order_num": 0,
             "ext": "./drpy_js/腾云驾雾[官].js"
         },
-       
+        {
+            "key": "芒果弹幕",
+            "name": "芒芒｜弹幕",
+            "type": 3,
+            "api": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/drpy2.min.js",
+            "ext": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/芒果弹幕.js"
+        },
         {
             "key": "hipy_js_哔哩影视[官]",
             "name": "哔哩影视",
@@ -445,8 +444,7 @@
             "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;84a77c1e614adefebc585ad068d113d4",
             "searchable": 1,
             "changeable": 1
-        },
-      
+        },    
         {
             "key": "SubaibaiGuard",
             "name": "白白┃秒播",
