@@ -84,7 +84,7 @@
             "name": "‍聚合┃直播",
             "type": 3,
             "api": "csp_WexallliveGuard",
-            "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt",
+            "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;84a77c1e614adefebc585ad068d113d4",
             "searchable": 1,
             "changeable": 1
         },
@@ -1279,6 +1279,14 @@
             "url": "./js/直播.m3u",
             "playerType": 2,
             "timeout": 10
+        },
+        {
+            "name": "网络直播",
+            "type": 0,
+            "url": "https://tv.iill.top/m3u/Live",
+            "playerType": 1,
+            "ua": "okhttp/3.15"
         }
+  
     ]
 }
