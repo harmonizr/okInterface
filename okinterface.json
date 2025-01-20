@@ -625,6 +625,25 @@
                 "ratio": 1.1
             }
         },
+        //baipiao:https://12448.kstore.space/Baipiao/tvbox/白嫖4K.json
+        {
+            "key": "虎斑兔子",
+            "name": "兔子1080",
+            "type": 3,
+            "api": "./js/drpy2.min.js",
+            "ext": "http://60.211.124.23:10101/tvbox/js/gyi.php?key=7894561232&id=米兔"
+        },
+        {
+            "key": "网盘搜索",
+            "name": "搜索4K",
+            "type": 3,
+            "api": "csp_PanSearch",
+            "searchable": 1,
+            "changeable": 0,
+            "ext": {
+                "commonConfig": "./json/peizhi.json"
+            }
+        },
         // {
         //     "key": "木耳",
         //     "name": "木耳┃采集",
