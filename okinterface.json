@@ -22,6 +22,7 @@
             "name": "网盘配置中心",
             "type": 3,
             "api": "csp_ConfigCenter",
+            "jar":"./jar/baipiao.jar",
             "style": {
                 "type": "rect",
                 "ratio": 1.597
