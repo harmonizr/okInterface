@@ -332,6 +332,9 @@
             "type": 3,
             "api": "csp_WexfeimaoziyuanGuard",
             "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;84a77c1e614adefebc585ad068d113d4",
+            "ext":{
+                "commonConfig": "./JSON/peizhi.json"
+            },
             "searchable": 1,
             "changeable": 1
         },
