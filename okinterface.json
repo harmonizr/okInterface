@@ -128,7 +128,7 @@
         },
         {
             "key": "多多",
-            "name": "多多 | 4K",
+            "name": "多多网盘 | 4K",
             "type": 3,
             "api": "csp_Wobg",
             "quickSearch": 1,
@@ -144,7 +144,7 @@
         },
         {
             "key": "蜡笔",
-            "name": "蜡笔 | 4K",
+            "name": "蜡笔网盘 | 4K",
             "type": 3,
             "api": "csp_Wobg",
             "quickSearch": 1,
@@ -159,7 +159,7 @@
         },
         {
             "key": "闪电",
-            "name": "闪电 | 4K",
+            "name": "闪电网盘 | 4K",
             "type": 3,
             "api": "csp_Wobg",
             "quickSearch": 1,
@@ -174,7 +174,7 @@
         },
         {
             "key": "至臻",
-            "name": "至臻 | 4K",
+            "name": "至臻网盘 | 4K",
             "type": 3,
             "api": "csp_Wobg",
             "quickSearch": 1,
@@ -190,7 +190,7 @@
         },
         {
             "key": "欧歌",
-            "name": "欧歌 | 4K",
+            "name": "欧歌网盘 | 4K",
             "type": 3,
             "api": "csp_Wobg",
             "searchable": 1,
@@ -207,7 +207,7 @@
         },
         {
             "key": "小米",
-            "name": "小米 | 4K",
+            "name": "小米网盘 | 4K",
             "type": 3,
             "api": "csp_Duopan",
             "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736998904961/0116.jar;md5;5d55d1e0bf4079bc9591d2ce641a9959",
@@ -224,7 +224,7 @@
         },
         {
             "key": "六趣",
-            "name": "六趣 | 4K",
+            "name": "六趣网盘 | 4K",
             "type": 3,
             "api": "csp_Wobg",
             "searchable": 1,
@@ -241,7 +241,7 @@
         },
         {
             "key": "虎斑",
-            "name": "虎斑｜4K",
+            "name": "虎斑网盘｜4K",
             "type": 3,
             "api": "csp_Wobg",
             "quickSearch": 1,
@@ -257,7 +257,7 @@
         },
         {
             "key": "下饭",
-            "name": "下饭｜4K",
+            "name": "下饭网盘｜4K",
             "type": 3,
             "api": "csp_Wobg",
             "quickSearch": 1,
@@ -273,7 +273,7 @@
         },
         {
             "key": "趣盘",
-            "name": "趣盘 | 4K",
+            "name": "趣盘网盘 | 4K",
             "type": 3,
             "api": "csp_QuPanSou",
             "searchable": 1,
@@ -303,7 +303,7 @@
         
         {
             "key": "雷鲸",
-            "name": "雷鲸 | 4K‍",
+            "name": "雷鲸网盘 | 4K‍",
             "type": 3,
             "api": "csp_Wextyso",
             "jar": "./jar/柒豪3.jar;md5;c0a0b82a9b66c0a6f8919305ee5c3591",
@@ -312,7 +312,7 @@
         },
         {
             "key": "移动",
-            "name": "移动 |‍ 4K",
+            "name": "移动网盘 |‍ 4K",
             "type": 3,
             "api": "csp_WexYDpanta",
             "jar": "./jar/柒豪3.jar;md5;c0a0b82a9b66c0a6f8919305ee5c3591",
@@ -334,7 +334,7 @@
     
         {
             "key": "WexfeimaoziyuanGuard",
-            "name": "肥猫┃4K",
+            "name": "肥猫网盘┃4K",
             "type": 3,
             "api": "csp_WexfeimaoziyuanGuard",
             "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;84a77c1e614adefebc585ad068d113d4",
@@ -343,7 +343,7 @@
         },
         {
             "key": "WexydbixinGuard",
-            "name": "比心┃YD",
+            "name": "比心网盘┃YD",
             "type": 3,
             "api": "csp_WexydbixinGuard",
             "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;84a77c1e614adefebc585ad068d113d4",
