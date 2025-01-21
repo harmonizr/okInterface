@@ -96,7 +96,7 @@
         },
         {
             "key": "玩偶",
-            "name": "玩偶 | 4K",
+            "name": "玩偶网盘 | 4K",
             "type": 3,
             "api": "csp_Wogg",
             "searchable": 1,
@@ -112,7 +112,7 @@
         },
         {
             "key": "木偶",
-            "name": "木偶 | 4K",
+            "name": "木偶网盘 | 4K",
             "type": 3,
             "api": "csp_Wobg",
             "quickSearch": 1,
