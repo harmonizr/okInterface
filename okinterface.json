@@ -364,25 +364,28 @@
         },
         {
             "key": "hipy_js_奇珍异兽[官]",
-            "name": "奇奇",
+            "name": "奇奇|弹幕",
             "type": 3,
             "api": "./drpy_libs/drpy2.min.js",
             "searchable": 1,
             "quickSearch": 1,
             "filterable": 1,
             "order_num": 0,
-            "ext": "./drpy_js/奇珍异兽[官].js"
+            //"ext": "./drpy_js/奇珍异兽[官].js"
+            "ext":"./js/奇异.js"
         },
         {
             "key": "hipy_js_优酷[官]",
-            "name": "优优",
+            "name": "优优|弹幕",
             "type": 3,
             "api": "./drpy_libs/drpy2.min.js",
             "searchable": 1,
             "quickSearch": 1,
             "filterable": 1,
             "order_num": 0,
-            "ext": "./drpy_js/优酷[官].js"
+            //"ext": "./drpy_js/优酷[官].js"
+             "ext":"./js/优酷.js"
+
         },
         {
             "key": "hipy_js_腾云驾雾[官]",
