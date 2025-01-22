@@ -333,7 +333,7 @@
         },
         {
             "key": "hipy_js_腾云驾雾[官]",
-            "name": "企鹅",
+            "name": "企鹅|弹幕",
             "type": 3,
             "api": "./drpy_libs/drpy2.min.js",
             "searchable": 1,
@@ -767,7 +767,7 @@
         },
                                                                                                 
         {
-            "name": "牛马QQ群：950080131",
+            "name": "牛马解析15+100",
             "type": 1,
             "url": "http://39.106.63.186/algorithm.php?url=",
             "ext": {
@@ -807,7 +807,7 @@
                 }
         },
         {
-            "name": "白嫖4K~",
+            "name": "白嫖解析15+70",
             "type": 1,
             "url": "http://白嫖4k.失眠的夜.icu/Smdy-qiandao/解析/?url="
         },   
