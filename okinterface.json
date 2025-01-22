@@ -394,7 +394,8 @@
             "filterable": 1,
             "order_num": 0,
             //"ext": "./drpy_js/腾云驾雾[官].js$$$https://raw.giteeusercontent.com/songxiangweiAndroid/niuma/raw/master/JS/%E8%85%BE%E8%AE%AF%E5%BC%B9%E5%B9%95.js"
-            "ext": "https://raw.giteeusercontent.com/songxiangweiAndroid/niuma/raw/master/JS/%E8%85%BE%E8%AE%AF%E5%BC%B9%E5%B9%95.js"
+            //"ext": "https://raw.giteeusercontent.com/songxiangweiAndroid/niuma/raw/master/JS/%E8%85%BE%E8%AE%AF%E5%BC%B9%E5%B9%95.js"
+            "ext":"./js/腾讯.js"
 
         },
         {
