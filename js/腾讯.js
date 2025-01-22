@@ -47,14 +47,14 @@ var rule = {
                     parse: 0,
                     url: bata.url,
                     jx: 0,
-                    danmaku: "http://103.36.220.166:91/dmku1/tvbox/zh.php?url=" + input.split("?")[0]
+                    danmaku: "http://43.242.202.175:9595/nnjsdm.php?key=741852963&id" + input.split("?")[0]
                 };
             } else {
                 input = {
                     parse: 0,
                     url: input.split("?")[0],
                     jx: 1,
-                    danmaku: "http://103.36.220.166:91/dmku1/tvbox/zh.php?url=" + input.split("?")[0]
+                    danmaku: "http://43.242.202.175:9595/nnjsdm.php?key=741852963&id" + input.split("?")[0]
                 };
             }
         } catch {
@@ -62,7 +62,7 @@ var rule = {
                 parse: 0,
                 url: input.split("?")[0],
                 jx: 1,
-                danmaku: "http://103.36.220.166:91/dmku1/tvbox/zh.php?url=" + input.split("?")[0]
+                danmaku: "http://43.242.202.175:9595/nnjsdm.php?key=741852963&id" + input.split("?")[0]
             };
         }
     }),
@@ -153,7 +153,7 @@ var rule = {
         let zp = d.filter(function(it) {
             return !(it.type && it.type !== "正片")
         });
-        VOD.vod_play_from = yg.length < 1 ? "柒豪腾讯" : "柒豪腾讯$$$腾讯预告及花絮";
+        VOD.vod_play_from = yg.length < 1 ? "腾讯" : "腾讯预告及花絮";
         VOD.vod_play_url = yg.length < 1 ? d.map(function(it) {
             return it.title + "$" + it.url
         }).join("#") : [zp, yg].map(function(it) {
