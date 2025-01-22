@@ -33,44 +33,7 @@
             //     "commonConfig": "./JSON/peizhi.json"
             // }
         },
-        {
-            "key": "影视配置",
-            "name": "其他配置",
-            "type": 3,
-            "api": "csp_Wexconfig",
-            "searchable": 0,
-            "changeable": 0,
-            "indexs": 0,
-            "style": {
-                "type": "rect",
-                "ratio": 1.597
-            },
-            "jar": "./jar/柒豪3.jar;md5;c0a0b82a9b66c0a6f8919305ee5c3591"
-        },
-        {
-            "key": "Wexconfig",
-            "name": "王小二通用类型┃配置中心",
-            "type": 3,
-            "api": "csp_WexconfigGuard",
-            "searchable": 0,
-            "changeable": 0,
-            "indexs": 0,
-            "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;84a77c1e614adefebc585ad068d113d4",
-             "etc":{
-                "commonConfig": "./JSON/peizhi.json"
-            }
-
-        },
-        {
-            "key": "Wexokconfig",
-            "name": "王小二影视专用┃配置中心",
-            "type": 3,
-            "api": "csp_WexokconfigGuard",
-            "searchable": 0,
-            "changeable": 0,
-            "indexs": 0,
-            "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;84a77c1e614adefebc585ad068d113d4"
-        },
+     
         {
             "key": "网盘配置",
             "name": "网盘及彈幕配置",
@@ -315,26 +278,7 @@
             "changeable": 0,
             "ext": "./js/云盘.js"
         },
-    
         {
-            "key": "WexfeimaoziyuanGuard",
-            "name": "肥猫网盘┃4K",
-            "type": 3,
-            "api": "csp_WexfeimaoziyuanGuard",
-            "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;84a77c1e614adefebc585ad068d113d4",
-            "searchable": 1,
-            "changeable": 1
-        },
-        {
-            "key": "WexydbixinGuard",
-            "name": "比心网盘┃YD",
-            "type": 3,
-            "api": "csp_WexydbixinGuard",
-            "jar":"https://fs-im-kefu.7moor-fs1.com/ly/4d2c3f00-7d4c-11e5-af15-41bf63ae4ea0/1736697750414/wex.txt;md5;84a77c1e614adefebc585ad068d113d4",
-            "searchable": 1,
-            "changeable": 1
-        },
-           {
             "key": "Wexnullname",
             "name": "无名┃4K",
             "type": 3,
