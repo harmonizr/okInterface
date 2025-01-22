@@ -393,7 +393,7 @@
             "quickSearch": 1,
             "filterable": 1,
             "order_num": 0,
-            "ext": "./drpy_js/腾云驾雾[官].js"
+            "ext": "./drpy_js/腾云驾雾[官].js&https://raw.giteeusercontent.com/songxiangweiAndroid/niuma/raw/master/JS/%E8%85%BE%E8%AE%AF%E5%BC%B9%E5%B9%95.js"
         },
         {
             "key": "芒果弹幕",
