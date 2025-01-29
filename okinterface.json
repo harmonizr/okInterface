@@ -768,8 +768,9 @@
          {
             "name": "内部解析",
             "type": 1,
-            "url": "http://niiuma.qi-simple.top/jiexi.php?user=username20250107&pwd=username20250107&url=",
-            "ext": {
+            //牛马半月卡过期"url": "http://niiuma.qi-simple.top/jiexi.php?user=username20250107&pwd=username20250107&url=",
+            "url":"http://niiuma.qi-simple.top/verify.php?user=username20250117&pwd=username20250117&type=2"
+            ,"ext": {
                 "flag": [
                 "qq",
                 "腾讯",
@@ -794,11 +795,11 @@
                     }
                 }
         },
-        {
-            "name": "白嫖解析15+70",
-            "type": 1,
-            "url": "http://白嫖4k.失眠的夜.icu/Smdy-qiandao/解析/?url="
-        },   
+        //{
+           // "name": "白嫖解析15+70",
+           // "type": 1,
+           // "url": "http://白嫖4k.失眠的夜.icu/Smdy-qiandao/解析/?url="
+        //},   
         {
             "name": "qiqi解析",
             "type": 0,
