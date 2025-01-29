@@ -1,6 +1,6 @@
 {
     "spider": "./jar/柒豪.jar;md5;8adb5356ec27e9113a166749fee46b7d",
-    "warningText":"1111",
+    "warningText":"",
     "logo": "./png/Image_152647033423173.jpg",
     "sites": [
         {
@@ -341,13 +341,13 @@
             //"ext": "https://raw.giteeusercontent.com/songxiangweiAndroid/niuma/raw/master/JS/%E8%85%BE%E8%AE%AF%E5%BC%B9%E5%B9%95.js"
             "ext":"./js/腾讯.js"
         },
-        {
-            "key": "芒果弹幕",
-            "name": "芒芒｜弹幕",
-            "type": 3,
-            "api": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/drpy2.min.js",
-            "ext": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/芒果弹幕.js"
-        },
+        //{
+            //"key": "芒果弹幕",
+           // "name": "芒芒｜弹幕",
+           // "type": 3,
+           // "api": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/drpy2.min.js",
+           // "ext": "https://gitee.com/songxiangweiAndroid/niuma/raw/master/JS/芒果弹幕.js"
+       // },
         {
             "key": "hipy_js_哔哩影视[官]",
             "name": "哔哩影视",
