@@ -9,7 +9,7 @@ http-request ^https:\/\/interface3?\.music\.163\.com\/eapi\/search\/complex\/(pa
 
 # 播放器会员歌曲
 http-request ^https:\/\/interface3?\.music\.163\.com\/eapi\/v3\/song\/detail script-path=https://raw.githubusercontent.com/WeiGiegie/666/main/wangyiyun.js, timeout=60,tag=播放器会员歌曲
-#http-request ^https:\/\/interface3?\.music\.163\.com\/eapi\/song\/(chorus|enhance\/|play\/|type\/detail\/get) #script-path=https://raw.githubusercontent.com/WeiGiegie/666/main/wangyiyun.js, timeout=60 ,tag=播放器会员歌
+http-request ^https:\/\/interface3?\.music\.163\.com\/eapi\/song\/(chorus|enhance\/|play\/|type\/detail\/get)  script-path=https://raw.githubusercontent.com/WeiGiegie/666/main/wangyiyun.js, timeout=60 ,tag=播放器会员歌
 http-request ^https:\/\/interface3?\.music\.163\.com\/eapi\/(v1\/artist\/top\/song|v3\/discovery\/recommend\/songs) script-path=https://raw.githubusercontent.com/WeiGiegie/666/main/wangyiyun.js, timeout=60 ,tag=播放器会员
 
 # 侧边栏会员等级
