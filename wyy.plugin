@@ -1,10 +1,3 @@
-[Rewrite]
-# 去除部分广告
-^https?://interface.*\.music\.163\.com/eapi/ad/get - reject
-^https?://interface.*\.music\.163\.com/eapi/ad/config/get - reject
-^https?://interface.*\.music\.163\.com/eapi/ad/iyunIds - reject
-^https?://interface.*\.music\.163\.com/eapi/ad/prefetch/select - reject
-^https?://interface.*\.music\.163\.com/eapi/ad/loading/current - reject
 
 [Script]
 # > 网易云音乐
