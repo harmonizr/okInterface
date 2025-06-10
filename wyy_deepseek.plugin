@@ -1,0 +1,9 @@
+name = 网易云解锁
+desc = 解锁灰色歌曲和VIP内容
+type = script
+pattern = ^https?:\/\/(interface3?|interface)\.music\.163\.com\/(eapi\/(playermode|search\/complex|v3\/song\/detail|song\/(chorus|enhance|play|type\/detail)|v1\/artist\/top\/song|v3\/discovery\/recommend\/songs|vipnewcenter\/app\/resource\/newaccountpage|(homepage|v6)?\/playlist|vipauth\/app\/auth)|weapi\/(song\/lyric|vipauth\/app\/auth))
+script-path = https://your-domain.com/wyy-loon.js
+requires-body = true
+timeout = 30
+engine = ^https?://(interface3?|interface)\.music\.163\.com
+enabled = true
