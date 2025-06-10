@@ -1,3 +1,4 @@
+[Plugin]
 name = 网易云解锁
 desc = 解锁灰色歌曲和VIP内容
 type = script
