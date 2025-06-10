@@ -11,11 +11,8 @@
 
 [Rewrite]
 # 去除部分广告
-^https?://interface.*\.music\.163\.com/eapi/ad/get - reject
-^https?://interface.*\.music\.163\.com/eapi/ad/config/get - reject
-^https?://interface.*\.music\.163\.com/eapi/ad/iyunIds - reject
-^https?://interface.*\.music\.163\.com/eapi/ad/prefetch/select - reject
-^https?://interface.*\.music\.163\.com/eapi/ad/loading/current - reject
+^https?:\/\/(?:ipv4|interface\d?)\.music\.163\.com\/e?api\/(mine\/(collect|rn)\/header\/info|v\d\/user\/detail\/\d+|vipnewcenter\/app\/resource\/newaccountpage|music-vip-membership\/(client|front)\/vip\/info|batch|playlist\/privilege|search\/complex\/page|v\d\/(discovery\/recommend\/songs|playlist\/detail)) header-replace x-aeapi false
+^https?:\/\/interface\d?\.music\.163\.com\/e?api\/vip\/cashier\/tspopup\/get - reject-200
 
 [Script]
 
