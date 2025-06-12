@@ -46,14 +46,14 @@ DOMAIN, ipv6.music.163.com, REJECT
 
 [Rewrite]
 # 新版加密通用
-# ^https?:\/\/(?:ipv4|interface\d?)\.music\.163\.com\/e?api\/(?:batch|v\d\/resource\/comment\/floor\/get|homepage\/block\/page|link\/page\/rcmd\/(block\/resource\/multi\/refresh|resource\/show)|user\/follow\/users\/mixed\/get|link\/home\/framework\/tab|link\/position\/show\/resource|link\/page\/discovery\/resource\/show) header-del x-aeapi
-#^https?:\/\/(?:ipv4|interface\d?)\.music\.163\.com\/e?api\/(?:batch|homepage\/block\/page|v\d\/(?:resource\/comment\/floor\/get|user\/detail\/\d+|discovery\/recommend\/songs|playlist\/detail)|link\/page\/rcmd\/(?:block\/resource\/multi\/refresh|resource\/show)|user\/follow\/users\/mixed\/get|link\/home\/framework\/tab|link\/position\/show\/resource|link\/page\/discovery\/resource\/show|mine\/(?:collect|rn)\/header\/info|vipnewcenter\/app\/resource\/newaccountpage|music-vip-membership\/(?:client|front)\/vip\/info|playlist\/privilege|search\/complex\/page) header-replace x-aeapi false
+^https?:\/\/(?:ipv4|interface\d?)\.music\.163\.com\/e?api\/(?:batch|v\d\/resource\/comment\/floor\/get|homepage\/block\/page|link\/page\/rcmd\/(block\/resource\/multi\/refresh|resource\/show)|user\/follow\/users\/mixed\/get|link\/home\/framework\/tab|link\/position\/show\/resource|link\/page\/discovery\/resource\/show) header-del x-aeapi
+^https?:\/\/(?:ipv4|interface\d?)\.music\.163\.com\/e?api\/(?:batch|homepage\/block\/page|v\d\/(?:resource\/comment\/floor\/get|user\/detail\/\d+|discovery\/recommend\/songs|playlist\/detail)|link\/page\/rcmd\/(?:block\/resource\/multi\/refresh|resource\/show)|user\/follow\/users\/mixed\/get|link\/home\/framework\/tab|link\/position\/show\/resource|link\/page\/discovery\/resource\/show|mine\/(?:collect|rn)\/header\/info|vipnewcenter\/app\/resource\/newaccountpage|music-vip-membership\/(?:client|front)\/vip\/info|playlist\/privilege|search\/complex\/page) header-replace x-aeapi false
 ^https?:\/\/interface\d?\.music\.163\.com\/e?api\/vip\/cashier\/tspopup\/get reject-200
 
 # 开屏广告
 
-^https?:\/\/(?:ipv4|interface\d?)\.music\.163\.com\/e?api\/(mine\/(collect|rn)\/header\/info|v\d\/user\/detail\/\d+|vipnewcenter\/app\/resource\/newaccountpage|music-vip-membership\/(client|front)\/vip\/info|batch|playlist\/privilege|search\/complex\/page|v\d\/(discovery\/recommend\/songs|playlist\/detail)) header-replace x-aeapi false
-^https?:\/\/interface\d?\.music\.163\.com\/e?api\/vip\/cashier\/tspopup\/get - reject-200
+#^https?:\/\/(?:ipv4|interface\d?)\.music\.163\.com\/e?api\/(mine\/(collect|rn)\/header\/info|v\d\/user\/detail\/\d+|vipnewcenter\/app\/resource\/newaccountpage|music-vip-membership\/(client|front)\/vip\/info|batch|playlist\/privilege|search\/complex\/page|v\d\/(discovery\/recommend\/songs|playlist\/detail)) header-replace x-aeapi false
+#^https?:\/\/interface\d?\.music\.163\.com\/e?api\/vip\/cashier\/tspopup\/get - reject-200
 
 
 # 今日运势 商城 Beat专区 音乐收藏家 | type:ACTIVITY | 低至5.2折
