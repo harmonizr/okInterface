@@ -67,7 +67,9 @@ DOMAIN, ipv6.music.163.com, REJECT
 
 # 搜索页 搜索词 热搜卡片 猜你喜欢 我的应用下方提醒
 ^https?:\/\/(?:ipv4|interface\d?)\.music\.163.com\/w?e?api\/search\/default mock-response-body data-type=text
-^https?:\/\/(?:ipv4|interface\d?)\.music\.163\.com\/w?eapi\/(?:activity\/bonus\/playpage\/time\/query|resource-exposure\/|search\/(?:chart\/|rcmd\/keyword\/|specialkeyword\/)) reject-dict
+#^https?:\/\/(?:ipv4|interface\d?)\.music\.163\.com\/w?eapi\/(?:activity\/bonus\/playpage\/time\/query|resource-exposure\/|search\/(?:chart\/|rcmd\/keyword\/|specialkeyword\/)) reject-dict
+^https?:\/\/(?:ipv4|interface\d?)\.music\.163\.com\/w?eapi\/(?:activity\/bonus\/playpage\/time\/query|resource-exposure\/\/(?:chart\/|rcmd\/keyword\/|specialkeyword\/)) reject-dict
+
 
 # 主页播客推荐
 ^https:\/\/(?:ipv4|interface\d?)\.music\.163\.com\/eapi\/my\/podcast\/tab\/recommend reject-dict
