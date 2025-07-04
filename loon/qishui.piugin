@@ -66,7 +66,7 @@ Music_VIP_Free = switch, false, true, tag = 启用[共享会员], desc = 是否�
 
 #----------  会员解锁 ----------#
 # 播放会员歌曲
-#http-response ^https?:\/\/beta-luna\.douyin\.com\/luna\/track_v2 script-path = https://gitee.com/user_hzr/okinterface/raw/master/qishui_song.js, requires-body = true, binary-body-mode = true, timeout = 60, tag = [汽水音乐]免费听, enable={Music_VIP_Free}
+http-response ^https?:\/\/beta-luna\.douyin\.com\/luna\/track_v2 script-path = https://gitee.com/user_hzr/okinterface/raw/master/qishui_song.js, requires-body = true, binary-body-mode = true, timeout = 60, tag = [汽水音乐]免费听, enable={Music_VIP_Free}
 
 
 [MitM]
