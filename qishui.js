@@ -7,7 +7,7 @@ var obj = JSON.parse(body);//JSON.parse()将json形式的body转变成对象处�
 
 obj.data.sections[0].asset_group.assets[2].amount=20;
 obj.data.sections[1].task_group.tasks[0].assets[0].amount=20;
-obj.data.sections[1].task_group.tasks[0].view.subtitle.countdown_text.countdown.duration=20;
+//obj.data.sections[1].task_group.tasks[0].view.subtitle.countdown_text.countdown.duration=20;
 
 body = JSON.stringify(obj);//重新打包回json字符串
 $done({body});//结束修改
