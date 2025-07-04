@@ -10,15 +10,42 @@ obj.data.sections[0].asset_group.assets[2].amount=20;
 
 obj.data.sections[1].task_group.tasks[0].assets[0].amount_type="day";
 obj.data.sections[1].task_group.tasks[0].assets[0].amount=20;
-let countdown_text={
-    "countdown": {
-        "duration": 20,
-        "suffix": "天",
-        "unit": 2,
-        "format": "d"
-    }
-}
-obj.data.sections[1].task_group.tasks[0].view.subtitle.countdown_text.countdown.duration=20;
+// let countdown_text={
+//     "countdown": {
+//         "duration": 20,
+//         "suffix": "天",
+//         "unit": 2,
+//         "format": "d"
+//     }
+// }
+obj.data.sections[1].task_group.tasks[0].view.subtitle.forEach(task => {
+            if (task.view && task.view.subtitle) {
+                // 保留原有的type属性
+                const originalType = task.view.subtitle.type;
+                
+                // 构建新的subtitle结构
+                task.view.subtitle = {
+                    type: originalType,
+                    prefix: {
+                        type: 1,
+                        plain_text: "已解锁"
+                    },
+                    type: 2,
+                    countdown_text: {
+                        countdown: {
+                            duration: 18,
+                            suffix: "天",
+                            unit: 2,
+                            format: "d"
+                        }
+                    },
+                    suffix: {
+                        type: 1,
+                        plain_text: " 再看2次提前解锁下一天"
+                    }
+                };
+            }
+        });
 
 body = JSON.stringify(obj);//重新打包回json字符串
 $done({body});//结束修改
