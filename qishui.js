@@ -18,7 +18,7 @@ obj.data.sections[1].task_group.tasks[0].assets[0].amount=20;
 //         "format": "d"
 //     }
 // }
-obj.data.sections[1].task_group.tasks[0].view.subtitle.forEach(task => {
+obj.data.sections[1].task_group.tasks.forEach(task => {
             if (task.view && task.view.subtitle) {
                 // 保留原有的type属性
                 const originalType = task.view.subtitle.type;
