@@ -33,7 +33,7 @@ obj.data.sections[1].task_group.tasks.forEach(task => {
                     type: 2,
                     countdown_text: {
                         countdown: {
-                            duration: 18,
+                            duration: 20,
                             suffix: "天",
                             unit: 2,
                             format: "d"
