@@ -6,7 +6,7 @@ obj.track.artists[0].user_info.is_vip = true;
 //obj.track.label_info.only_vip_download=true;
 obj.track.label_info.only_vip_playable = true;
 
-obj.audition_info.start_time_ms=0;
-obj.audition_info.duration_ms=obj.track.colors.duration;
+obj.track.audition_info.start_time_ms=0;
+obj.track.audition_info.duration_ms=obj.track.colors.duration;
 body = JSON.stringify(obj);//重新打包回json字符串
 $done({body});//结束修改
