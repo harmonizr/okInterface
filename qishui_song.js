@@ -14,5 +14,13 @@ obj.track.preview.start = 0;
 obj.track.audition_info.start_time_ms = 0;
 obj.track.audition_info.duration_ms= obj.track.colors.duration;
 
+//搜索
+ if (obj.hasOwnProperty('only_vip_playable')) 
+    {
+        obj.only_vip_playable = false;
+    }
+// 遍历对象的每个属性
+Object.values(obj).forEach(value => setOnlyVipPlayableToFalse(value));
+
 body = JSON.stringify(obj);//重新打包回json字符串
 $done({body});//结束修改
