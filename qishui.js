@@ -45,6 +45,86 @@ obj.data.sections[1].task_group.tasks.forEach(task => {
                     }
                 };
             }
+             if (task.discrepancy_data && task.discrepancy_data.reward_ads) {
+               
+                // 构建新的subtitle结构
+               task.discrepancy_data.reward_ads = {
+                        "progress": [
+                            {
+                                "seq": 1800,
+                                "is_completed": true,
+                                "children": [
+                                    {
+                                        "seq": 1801,
+                                        "text": {
+                                            "type": 0
+                                        },
+                                        "is_completed": true
+                                    },
+                                    {
+                                        "seq": 1802,
+                                        "text": {
+                                            "type": 0
+                                        },
+                                        "is_completed": true
+                                    }
+                                ],
+                                "text": {
+                                    "type": 1,
+                                    "plain_text": "第18天"
+                                }
+                            },
+                            {
+                                "seq": 1900,
+                                "is_completed": false,
+                                "children": [
+                                    {
+                                        "seq": 1901,
+                                        "text": {
+                                            "type": 0
+                                        },
+                                        "is_completed": false
+                                    },
+                                    {
+                                        "seq": 1902,
+                                        "text": {
+                                            "type": 0
+                                        },
+                                        "is_completed": false
+                                    }
+                                ],
+                                "text": {
+                                    "type": 1,
+                                    "plain_text": "第19天"
+                                }
+                            },
+                            {
+                                "seq": 2000,
+                                "is_completed": false,
+                                "children": [
+                                    {
+                                        "seq": 2001,
+                                        "text": {
+                                            "type": 0
+                                        },
+                                        "is_completed": false
+                                    },
+                                    {
+                                        "seq": 2002,
+                                        "text": {
+                                            "type": 0
+                                        },
+                                        "is_completed": false
+                                    }
+                                ],
+                                "text": {
+                                    "type": 1,
+                                    "plain_text": "第20天"
+                                }
+                            }
+                        ]
+                    }
+                                }
         });
 
 body = JSON.stringify(obj);//重新打包回json字符串
