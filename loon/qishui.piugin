@@ -18,9 +18,6 @@
 
 Music_VIP_Free = switch, false, true, tag = 启用[共享会员], desc = 是否启用网易云音乐共享会员
 
-[Rule]
-
-DOMAIN, ipv6.music.163.com, REJECT
 
 [Rewrite]
 # 追加的销售配置
