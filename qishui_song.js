@@ -6,7 +6,11 @@ var obj = JSON.parse(body);//JSON.parse()将json形式的body转变成对象处�
 //obj.track.label_info.only_vip_download=true;
 obj.track.label_info.only_vip_playable = true;
 
-obj.track.audition_info.start_time_ms=0;
-obj.track.audition_info.duration_ms=obj.track.colors.duration;
+obj.track.preview.duration = obj.track.colors.duration;
+obj.track.preview.start = 0;
+
+obj.track.audition_info.start_time_ms = 0;
+obj.track.audition_info.duration_ms= obj.track.colors.duration;
+
 body = JSON.stringify(obj);//重新打包回json字符串
 $done({body});//结束修改
