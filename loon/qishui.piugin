@@ -56,7 +56,7 @@ Music_VIP_Free = switch, false, true, tag = 启用[共享会员], desc = 是否�
 ^https:\/\/beta-luna\.douyin\.com\/luna\/more-panel\? response-body-json-jq '.blocks |= map(select(.type != "related_video"))'
 
 # 免费听歌推广
-^https:\/\/beta-luna\.douyin\.com\/luna\/commerce\/upsells\? reject-dict
+#^https:\/\/beta-luna\.douyin\.com\/luna\/commerce\/upsells\? reject-dict
 
 # 邀请开通会员弹窗
 ^https:\/\/beta-luna\.douyin\.com\/luna\/commerce\/v2\/commerce_info\? reject-dict
