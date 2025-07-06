@@ -44,7 +44,7 @@ Music_VIP_Free = switch, false, true, tag = 启用[共享会员], desc = 是否�
 ^https:\/\/beta-luna\.douyin\.com\/luna\/feed\/song-tab\? response-body-json-jq 'del(.items[] | select(.type == "video_track_mix"))'
 
 # 播放器界面 - 播放进度条提示语
-^https:\/\/beta-luna\.douyin\.com\/luna\/card\? response-body-json-del preview_guide
+#^https:\/\/beta-luna\.douyin\.com\/luna\/card\? response-body-json-del preview_guide
 
 # 播放器界面 - 你关注的人喜欢了
 ^https:\/\/beta-luna\.douyin\.com\/luna\/card\? response-body-json-jq 'del(.card_items[] | select(has("priority_display")))'
