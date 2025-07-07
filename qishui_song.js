@@ -11,7 +11,7 @@ if(obj.track.artists){
 //obj.track.label_info.only_vip_download=true;
 obj.track.label_info.only_vip_playable = false;
 
-//obj.track.preview.duration = obj.track.colors.duration;
+obj.track.preview.duration = obj.track.colors.duration;
 obj.track.preview.start = 0;
 
 obj.track.audition_info.start_time_ms = 0;
