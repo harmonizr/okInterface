@@ -3,7 +3,7 @@ var obj = JSON.parse(body);//JSON.parse()将json形式的body转变成对象处�
 if(obj.track.artists){
     for(let i in artists){
         obj.track.artists[i].user_info.is_vip = true;
-        obj.track.artists[].user_info.vip_stage = "free";
+        obj.track.artists[i].user_info.vip_stage = "free";
     }
 }
 //obj.track.artists[0].user_info.is_vip = true;
