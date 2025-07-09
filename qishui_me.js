@@ -3,6 +3,7 @@ var obj = JSON.parse(body);//JSON.parse()将json形式的body转变成对象处�
 obj.limited_free_param.rewind_prev_intercept_type="ad_vip_song_guide_new";
 obj.limited_free_param.expire_time=1752087576;
 obj.limited_free_param.limited_free=false;
-
+obj.limited_free_param.sign_version="2.0";
+obj.limited_free_param.sign="bd0389c1baa009de6d7b4561ff474494";
 body = JSON.stringify(obj);//重新打包回json字符串
 $done({body});//结束修改
