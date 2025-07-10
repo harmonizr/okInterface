@@ -24,6 +24,7 @@ obj.track.label_info.quality_map.medium.play_detail.need_vip = false;
 obj.track.label_info.quality_map.highest.play_detail.need_vip = false;
 obj.track.label_info.quality_map.higher.play_detail.need_vip = false;
 obj.track.label_info.quality_map.spatial.play_detail.need_vip = false;
+obj.track.label_info.quality_only_vip_can_play=[""];
 
 body = JSON.stringify(obj);//重新打包回json字符串
 $done({body});//结束修改
