@@ -17,5 +17,13 @@ obj.track.preview.start = 0;
 obj.track.audition_info.start_time_ms = 0;
 obj.track.audition_info.duration_ms= obj.track.colors.duration;
 
+
+//音质
+obj.track.label_info.quality_map.lossless.play_detail.need_vip = false;
+obj.track.label_info.quality_map.medium.play_detail.need_vip = false;
+obj.track.label_info.quality_map.highest.play_detail.need_vip = false;
+obj.track.label_info.quality_map.higher.play_detail.need_vip = false;
+obj.track.label_info.quality_map.spatial.play_detail.need_vip = false;
+
 body = JSON.stringify(obj);//重新打包回json字符串
 $done({body});//结束修改
