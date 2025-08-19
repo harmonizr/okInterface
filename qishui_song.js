@@ -7,7 +7,7 @@ console.log(obj)
 //         obj.track.artists[i].user_info.vip_stage = "free";
 //     }
 // }
-//obj.track.artists[0].user_info.is_vip = true;
+obj.track.artists[0].user_info.is_vip = true;
 
 // //obj.track.label_info.only_vip_download=true;
 // obj.track.label_info.only_vip_playable = false;
