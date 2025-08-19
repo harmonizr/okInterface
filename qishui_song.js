@@ -1,5 +1,6 @@
 var body = $response.body;//声明一个变量body并以响应消息体赋值
 var obj = JSON.parse(body);//JSON.parse()将json形式的body转变成对象处理
+console.log(obj)
 // if(obj.track.artists){
 //     for(let i in obj.track.artists){
 //         obj.track.artists[i].user_info.is_vip = true;
