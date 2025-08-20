@@ -50,7 +50,7 @@ Music_VIP_Free = switch, false, true, tag = 启用[共享会员], desc = 是否�
 ^https:\/\/beta-luna\.douyin\.com\/luna\/card\? response-body-json-jq 'del(.card_items[] | select(has("priority_display")))'
 
 # 播放器 - 视频广告
-^https:\/\/beta-luna\.douyin\.com\/luna\/media_ads\? reject-dict
+#^https:\/\/beta-luna\.douyin\.com\/luna\/media_ads\? reject-dict
 
 # 歌曲详情 - 热门视频
 ^https:\/\/beta-luna\.douyin\.com\/luna\/more-panel\? response-body-json-jq '.blocks |= map(select(.type != "related_video"))'
