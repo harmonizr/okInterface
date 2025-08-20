@@ -7,6 +7,7 @@ var obj = JSON.parse(body);//JSON.parse()将json形式的body转变成对象处�
 //         obj.track.artists[i].user_info.vip_stage = "free";
 //     }
 // }
+console.log(obj);
 obj.track.artists[0].user_info.is_vip = true;
 
 // //obj.track.label_info.only_vip_download=true;
