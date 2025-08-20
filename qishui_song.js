@@ -7,7 +7,7 @@ var body = $response.body;//声明一个变量body并以响应消息体赋值
 //         obj.track.artists[i].user_info.vip_stage = "free";
 //     }
 // }
-console.log(obj);
+console.log(body);
 //obj.track.artists[0].user_info.is_vip = true;
 
 // //obj.track.label_info.only_vip_download=true;
