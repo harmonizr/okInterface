@@ -21,7 +21,7 @@ Music_VIP_Free = switch, false, true, tag = 启用[共享会员], desc = 是否�
 
 [Rewrite]
 # 追加的销售配置
-^https:\/\/beta-luna\.douyin\.com\/luna\/commerce\/upsells_config\? reject-dict
+#^https:\/\/beta-luna\.douyin\.com\/luna\/commerce\/upsells_config\? reject-dict
 
 # 广告下发
 ^https:\/\/api\.qishui\.com\/luna\/ads\/ reject-dict
