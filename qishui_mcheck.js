@@ -3,13 +3,11 @@ var obj = JSON.parse(body);//JSON.parse()将json形式的body转变成对象处�
 if(obj.media_status){
     for(let i in obj.media_status){
         obj.media_status[i].label_info.quality_only_vip_can_play = [""];
-        obj.media_status[0].label_info.quality_map.lossless.play_detail.need_vip = false;    
+        obj.media_status[i].label_info.quality_map.lossless.play_detail.need_vip = false;    
         obj.media_status[i].label_info.only_vip_playable = false;
         let limited_free_info = obj.media_status[i].limited_free_info
         if(limited_free_info){
              limited_free_info.limited_free = false;
-             limited_free_info.expire_time = 3;
-
         }
     }
 }
