@@ -1,5 +1,5 @@
 var body = $response.body;//声明一个变量body并以响应消息体赋值
-console.log(body)
+//console.log(body)
 var obj = JSON.parse(body);//JSON.parse()将json形式的body转变成对象处理
 //console.log(obj)
 // if(obj.track.artists){
@@ -8,6 +8,10 @@ var obj = JSON.parse(body);//JSON.parse()将json形式的body转变成对象处�
 //         obj.track.artists[i].user_info.vip_stage = "free";
 //     }
 // }
+console.log(obj.track)
+console.log(obj.track.artists)
+console.log(obj.track.artists[0])
+
 obj.track.artists[0].user_info.is_vip = true;
 
 // //obj.track.label_info.only_vip_download=true;
