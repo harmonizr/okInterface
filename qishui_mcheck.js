@@ -12,9 +12,9 @@ if(obj.media_status[0].label_info != null){
 
 }
 console.log("obj.media_status:"+obj.media_status)
-if(obj.media_status){
- obj.media_status[0].limited_free_info.expire_time = 60000;
-}
+// if(obj.media_status){
+//  obj.media_status[0].limited_free_info.expire_time = 60000;
+// }
 // if(obj.media_status){
 //     for(let i in obj.media_status){
 //         obj.media_status[i].label_info.quality_only_vip_can_play = [""];
