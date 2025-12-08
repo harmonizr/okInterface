@@ -4,7 +4,9 @@ var obj = JSON.parse(body);//JSON.parse()将json形式的body转变成对象处�
 var today = new Date();
 var year = today.getFullYear();
 var month = today.getMonth() + 1;  // 月份从0开始，所以要加1
+month = month<10?"0"+month:month;
 var day = today.getDate();
+day = day<10?"0"+day:day;
 var time = year + '-' + month + '-' + day
 console.log(time);
 
