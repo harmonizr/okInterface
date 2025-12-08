@@ -10,6 +10,7 @@ console.log(time);
 
 for(let i in obj.data.list){
     let a = obj.data.list[i]
+    console.log(a.day)
     if(a.day == time){
         console.log("aaaaaaa")
         a.vip_type = "svip"
