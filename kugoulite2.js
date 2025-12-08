@@ -8,6 +8,7 @@ busiVipList.forEach(vip => {
     vip.is_vip = 1;
 
 })
+obj.data.main_vip.is_vip = 1;
 
 body = JSON.stringify(obj);//重新打包回json字符串
 $done({body});//结束修改
