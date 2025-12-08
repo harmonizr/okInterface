@@ -7,7 +7,13 @@ var month = today.getMonth() + 1;  // 月份从0开始，所以要加1
 var day = today.getDate();
 var time = year + '-' + month + '-' + day
 console.log(time);
-obj.data.list
+
+for(let i in obj.data.list){
+    let a = obj.data.list[i]
+    if(a.day == time){
+        a.vip_type = "svip"
+    }
+}
 
 body = JSON.stringify(obj);//重新打包回json字符串
 $done({body});//结束修改
