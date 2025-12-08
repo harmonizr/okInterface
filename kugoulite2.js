@@ -4,7 +4,9 @@ var obj = JSON.parse(body);//JSON.parse()将json形式的body转变成对象处�
 //obj.data.busi_vip_list[0].vip_end_time = "2025-12-31 12:32:53"
 var busiVipList = obj.data.busi_vip["2197992154"];
 busiVipList.forEach(vip => {
-    vip.vip_end_time = "2025-12-31 12:32:53"
+    vip.vip_end_time = "2025-12-31 12:32:53";
+    vip.is_vip = 1;
+
 })
 
 body = JSON.stringify(obj);//重新打包回json字符串
