@@ -53,5 +53,5 @@ var body = $response.body.replace(/"user_type":\d/g,'"user_type":1')
 .replace(/"m_is_old":\d/g,'"m_is_old":8')
 .replace(/("photo"\s*:\s*")[^"]*(")/g, '$1https://pavo.elongstatic.com/i/ori/1uG8Yb8CUWA.png$2') 
 .replace(/"nickname":".*?\"/g,'"nickname":"Rnik666🎖"');
-
+console.log("11111111")
 $done({ body });
