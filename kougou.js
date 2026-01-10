@@ -10,7 +10,7 @@ let body = $response.body;
 
 const vipDate = "2099-09-09 09:09:09";
 const beginDate = "2024-01-01 00:00:00";
-const vipToken = "1234567890abcdef";
+const vipToken = "0123456789abcdef";
 
 const vipFields = {
     is_vip: 1,
@@ -213,7 +213,7 @@ function main() {
 
         // 任务中心入口处理
         if (url.indexOf('task_center_entrance') !== -1) {
-            let customTitle = "联合国儿童基金会";
+            let customTitle = "联合国儿童基金会0110";
             let customLink = "https://t.me/Jsforbaby";
             if (data && data.data && data.data.ads) {
                 let ads = data.data.ads;
