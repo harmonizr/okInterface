@@ -36,7 +36,7 @@ http-response ^https:\/\/.*\.kugou\.com\/v5\/login_by_token script-path=https://
 
 http-response ^https?:\/\/(nacsing\.kugou\.com|acsing\.service\.kugou\.com|vipos\.kugou\.com|gateway\.kugou\.com|gamecenter\.kugou\.com|acsing\.tx\.kugou\.com)\/(sing7\/json\/v2\/user\/login|ccktv\/v1\/ktv_room\/room\/room_config|fxsing\/vip\/member\/info|sing7\/homepage\/json\/v3\/vip\/tip|v4\/price\/get_tips|vipenergy\/v2\/entrance\/vip_center_user_info|fxsing\/vip\/user\/info|sing7\/homepage\/json\/v3\/cdn\/kroom_tab_enter|v1\/home\/member_game|sing7\/homepage\/json\/v3\/cdn\/kroom_tab\/banners) script-path=https://raw.githubusercontent.com/BOBOLAOSHIV587/Rules/main/JS/KuGouMusic/JS/JS-1/KuGouSong.js, requires-body=true, timeout=20, tag=酷狗K歌
 
-http-response ^https?:\/\/gateway\.kugou\.com\/tracker\/v5\/url script-path=https://raw.githubusercontent.com/BOBOLAOSHIV587/Rules/main/JS/KuGouMusic/JS/JS-1/KuGouV5.js, requires-body=true, timeout=20, tag=酷狗播放v5
+//http-response ^https?:\/\/gateway\.kugou\.com\/tracker\/v5\/url script-path=https://raw.githubusercontent.com/BOBOLAOSHIV587/Rules/main/JS/KuGouMusic/JS/JS-1/KuGouV5.js, requires-body=true, timeout=20, tag=酷狗播放v5
 
 http-response ^https:\/\/.*\.kugou\.com\/v1\/login_by_quick_token script-path=https://raw.githubusercontent.com/BOBOLAOSHIV587/Rules/main/JS/KuGouMusic/JS/JS-1/KuGou.js, requires-body=true, timeout=20, tag=酷狗快速登录
 
