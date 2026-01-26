@@ -5,5 +5,6 @@ obj.datas.subverterVo.fzVipDeadline = 1830246630000;
 obj.datas.subverterVo.vipFlag = 1;
 obj.datas.subverterVo.fzVipLevel = 1;
 obj.datas.subverterVo.xxyyVipFlag = 1;
+obj.datas.vipMonthTimeFlag = false;
 body = JSON.stringify(obj);//重新打包回json字符串
 $done({body});//结束修改
