@@ -1,7 +1,15 @@
-const url = $request.url;
-if (!$response.body) $done({});
-let obj = JSON.parse($response.body);
-
+console.log($response)
+console.log($request)
+fetch(url)
+  .then(response => response.text())
+  .then(text => {
+    try {
+      const data = JSON.parse(text);
+      console.log(data);
+    } catch (e) {
+      console.error('解析失败:', e);
+    }
+});
 // var body = $response.body;//声明一个变量body并以响应消息体赋值
 // var obj = JSON.parse(body);//JSON.parse()将json形式的body转变成对象处理
 
