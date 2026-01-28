@@ -4,11 +4,11 @@ console.log($request.url)
 
 // 核心解析方法（带全调试，能看到每一步问题）
 async function getPlainToJson() {
-  const url = $request.url;  
-  console.log("👉 开始请求接口：", url);
+  //const url = $request.url;  
+  console.log("👉 开始请求接口：");
   try {
     // 步骤1：发起请求
-    const res = await fetch(url);
+    const res = await fetch("https://flipped.binfenyingyu.com/flipped/subverter/info");
     console.log("✅ 请求响应状态：", res.status, res.ok);
     
     // 步骤2：获取纯文本（关键：text/plain）
