@@ -1,11 +1,12 @@
-console.log($response)
-console.log($request)
+console.log($request.url)
+const url = $request.url;
+const obj = {};
 fetch(url)
   .then(response => response.text())
   .then(text => {
     try {
-      const data = JSON.parse(text);
-      console.log(data);
+      obj = JSON.parse(text);
+      console.log(obj);
     } catch (e) {
       console.error('解析失败:', e);
     }
