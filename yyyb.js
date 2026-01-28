@@ -62,7 +62,8 @@ var body = {
         "userIdentityType": 0
     }
 }
-var obj = JSON.parse(body);//JSON.parse()将json形式的body转变成对象处理
+//var obj = JSON.parse(body);//JSON.parse()将json形式的body转变成对象处理
+var obj = body;//JSON.parse()将json形式的body转变成对象处理
 
 obj.datas.xxyyVipLevel = 1;
 
