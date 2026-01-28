@@ -1,28 +1,54 @@
- console.log($request.url)
-const url = $request.url;
-// 完整可运行，替换url即可
-async function parsePlainToJson(url) {
-  try {
-    const res = await fetch(url);
-    const plainText = await res.text(); // 取text/plain响应体
-    const json = JSON.parse(plainText.trim()); // 去首尾空格，解析为JSON
-    return json;
-  } catch (err) {
-    console.error('解析失败：'+ err); // 捕获格式错/网络错
-    return {}; // 兜底返回空对象，避免页面报错
-  }
+// 文件名：decode-response.js
+// 匹配你要处理的特定请求
+
+(async function() {
+    // 获取响应体
+    let body = $response.body;
+    
+    // 检查是否有自定义加密
+    if ($response.headers['encryType'] === '1') {
+        // 这里需要根据实际加密算法处理
+        // 常见的可能是 Base64、AES、自定义算法等
+        // 示例：如果是 Base64
+        body = atob(body); // Base64 解码
+    }
+    
+    // 检查是否是 gzip 压缩
+    if ($response.headers['Content-Encoding'] === 'gzip') {
+        // Loon 通常会自动解压 gzip，但如果需要手动处理：
+        // 将十六进制字符串转换为字节数组
+        const bytes = hexToBytes(body);
+        // 使用 pako 或内置方法解压（需要导入 pako 库）
+        // body = ungzip(bytes);
+    }
+    
+    // 尝试解析为 JSON
+    try {
+        const jsonData = JSON.parse(body);
+        console.log("ddddd");
+        console.log(jsonData)
+        // 替换响应体为格式化 JSON
+        $done({
+            body: JSON.stringify(jsonData, null, 2),
+            headers: {
+                ...$response.headers,
+                'Content-Type': 'application/json; charset=UTF-8'
+            }
+        });
+    } catch (error) {
+        console.log('解析失败，原始响应:', body);
+        $done({});
+    }
+})();
+
+// 辅助函数：十六进制转字节数组
+function hexToBytes(hex) {
+    const bytes = [];
+    for (let i = 0; i < hex.length; i += 2) {
+        bytes.push(parseInt(hex.substr(i, 2), 16));
+    }
+    return new Uint8Array(bytes);
 }
-
-// 调用
-parsePlainToJson(url).then(json => {
-  console.log('解析后JSON：');
-  const obj = JSON.parse(json);
-    console.log( obj);
-    const body = JSON.stringify(obj);//重新打包回json字符串
-
- $done({body});//结束修改
-  // 后续业务逻辑
-});
 
 // var body = $response.body;//声明一个变量body并以响应消息体赋值
 // var obj = JSON.parse(body);//JSON.parse()将json形式的body转变成对象处理
