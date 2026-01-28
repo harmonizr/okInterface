@@ -1,9 +1,10 @@
 console.log($request.url)
-const url = $request.url;
+
 // 替换成你的真实接口地址
 
 // 核心解析方法（带全调试，能看到每一步问题）
 async function getPlainToJson() {
+  const url = $request.url;  
   console.log("👉 开始请求接口：", url);
   try {
     // 步骤1：发起请求
