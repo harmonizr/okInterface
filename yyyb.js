@@ -36,7 +36,7 @@
             }
         });
     } catch (error) {
-        console.log('解析失败，原始响应:', body);
+        console.log('解析失败，原始响应:'+ body);
         $done({});
     }
 })();
