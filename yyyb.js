@@ -1,7 +1,7 @@
 console.log($request.url)
 const url = $request.url;  
 async function getPlainToJson() {
-  console.log("👉 开始请求接口：", API_URL);
+  console.log("👉 开始请求接口：", url);
   // 1. 创建中断控制器，3秒后强制中断请求
   const controller = new AbortController();
   const timeoutTimer = setTimeout(() => {
