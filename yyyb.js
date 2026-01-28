@@ -16,7 +16,7 @@ async function parsePlainToJson(url) {
 
 // 调用
 parsePlainToJson(url).then(json => {
-  console.log('解析后JSON：'+ json);
+  console.log('解析后JSON：'+ JSON.parse(json));
   // 后续业务逻辑
 });
 
