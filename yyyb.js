@@ -1,3 +1,4 @@
+const url =$response.url;
 fetch(url)
   .then(response => response.text())
   .then(text => {
