@@ -1,19 +1,18 @@
- // Loon 脚本
-const body = $response.body;
+ const body = $response.body;
 console.log('原始数据:'+ body);
-console.log('数据长度:'+ body.length);
+console.log('数据长度:'+body.length);
 
 try {
-    // Base64 解码
-    const decoded = $text.base64Decode(body);
-    console.log('Base64 解码后:'+ decoded);
+    // 使用 $base64.decode 进行解码
+    const decoded = $base64.decode(body);
+    console.log('Base64 解码后:'+decoded);
     console.log('解码长度:'+ decoded.length);
     
     // 尝试解析为 JSON
     try {
         const jsonData = JSON.parse(decoded);
         console.log('✅ Base64 -> JSON 解析成功!');
-        console.log('JSON 数据:'+ jsonData);
+        console.log('JSON 数据:'+jsonData);
     } catch (jsonError) {
         console.log('解码后不是 JSON，可能是其他格式:'+ jsonError.message);
         
@@ -30,7 +29,7 @@ try {
     console.log('Base64 解码失败:'+ base64Error.message);
 }
 
-$done();  
+$done();
 
 
 
