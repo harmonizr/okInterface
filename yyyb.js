@@ -3,16 +3,19 @@ var obj = JSON.parse(body);//JSON.parse()将json形式的body转变成对象处�
 
 obj.datas.xxyyVipLevel = 1;
 
-obj.datas.dpVipDeadline = 1769498970000;
+obj.datas.fzVipDeadline = 1769498970000;
 obj.datas.vipDeadline = 1769498970000;
-obj.datas.flippedVipDeadline = 1769498970000;
 obj.datas.xxyyVipDeadline = 1769498970000;
+
+obj.datas.dpVipDeadline = 1769498970000;
+obj.datas.flippedVipDeadline = 1769498970000;
 obj.datas.zcnVipDeadline = 1769498970000;
 obj.datas.ybVipDeadline = 1769498970000;
 
-obj.datas.zcnVipFlag = 1;
 obj.datas.xxyyVipFlag = 1;
 obj.datas.vipFlag = 1;
+
+obj.datas.zcnVipFlag = 1;
 obj.datas.foreverVipFlag = 1;
 obj.datas.flippedForeverVipFlag = 1;
 
