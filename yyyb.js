@@ -3,7 +3,7 @@ const body = $response.body;
 
 console.log('基于 accessToken 的 AES 解密');
 console.log('原始 Base64 长度: ' + body.length);
-console.log('access_token: ' +$request.body);
+console.log($request);
 
 try {
     // 1. 获取 accessToken（从不同位置尝试）
