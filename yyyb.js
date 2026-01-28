@@ -2,10 +2,7 @@ console.log($request)
 const API_URL = $request.url;  
 // 替换成你的真实接口地址
 // 接口需要的参数（无参数就传{}，按后端要求写）
-const POST_DATA = {
-  // name: 'test',
-  // id: 123
-};
+const POST_DATA = $request;
 
 // 页面加载元素（有转圈DOM就保留，没有就注释这两行）
 const loading = document.getElementById('loading'); 
