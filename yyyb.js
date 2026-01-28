@@ -6,7 +6,6 @@ async function parsePlainToJson(url) {
     const res = await fetch(url);
     const plainText = await res.text(); // 取text/plain响应体
     const json = JSON.parse(plainText.trim()); // 去首尾空格，解析为JSON
-    console.log(json)
     return json;
   } catch (err) {
     console.error('解析失败：'+ err); // 捕获格式错/网络错
@@ -16,7 +15,9 @@ async function parsePlainToJson(url) {
 
 // 调用
 parsePlainToJson(url).then(json => {
-  console.log('解析后JSON：'+ JSON.parse(json));
+  console.log('解析后JSON：');
+    console.log( JSON.parse(json));
+
   // 后续业务逻辑
 });
 
