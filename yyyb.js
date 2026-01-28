@@ -1,32 +1,69 @@
- const body = $response.body;
-console.log('原始数据:'+ body);
-console.log('数据长度:'+body.length);
+ // 直接测试你提供的数据
+const testData = "XbmowmS5UVdAYgX4BLaKkYDMyLvSD1/EuiEfmHUZ//BtsIlUDOQ/NrtAEz22OUiAO0iCxUBVZ3yD2ed";
 
+console.log('=== Base64 测试 ===');
+console.log('测试数据: ' + testData);
+console.log('长度: ' + testData.length + ' (应该是 4 的倍数)');
+
+// 检查是否是有效的 Base64
+function isValidBase64(str) {
+    const regex = /^[A-Za-z0-9+/]*={0,2}$/;
+    return regex.test(str.replace(/\s/g, '')) && str.length % 4 === 0;
+}
+
+console.log('是否有效 Base64: ' + isValidBase64(testData));
+
+// 尝试解码
 try {
-    // 使用 $base64.decode 进行解码
-    const decoded = $base64.decode(body);
-    console.log('Base64 解码后:'+decoded);
-    console.log('解码长度:'+ decoded.length);
+    let decoded;
     
-    // 尝试解析为 JSON
-    try {
-        const jsonData = JSON.parse(decoded);
-        console.log('✅ Base64 -> JSON 解析成功!');
-        console.log('JSON 数据:'+jsonData);
-    } catch (jsonError) {
-        console.log('解码后不是 JSON，可能是其他格式:'+ jsonError.message);
-        
-        // 查看解码后的前100个字符
-        console.log('解码内容预览:'+ decoded.substring(0, Math.min(100, decoded.length)));
-        
-        // 检查是否是二进制数据
-        const isBinary = Array.from(decoded).some(c => c.charCodeAt(0) < 32 && c.charCodeAt(0) !== 10 && c.charCodeAt(0) !== 13);
-        if (isBinary) {
-            console.log('⚠️ 解码后包含二进制数据，可能需要进一步处理');
+    if (typeof atob !== 'undefined') {
+        console.log('使用 atob()');
+        decoded = atob(testData);
+    } else {
+        // 自定义解码
+        function simpleBase64Decode(str) {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
+            let result = '';
+            let i = 0;
+            
+            str = str.replace(/[^A-Za-z0-9+/]/g, '');
+            
+            while (i < str.length) {
+                const enc1 = chars.indexOf(str.charAt(i++));
+                const enc2 = chars.indexOf(str.charAt(i++));
+                const enc3 = chars.indexOf(str.charAt(i++));
+                const enc4 = chars.indexOf(str.charAt(i++));
+                
+                const byte1 = (enc1 << 2) | (enc2 >> 4);
+                const byte2 = ((enc2 & 15) << 4) | (enc3 >> 2);
+                const byte3 = ((enc3 & 3) << 6) | enc4;
+                
+                result += String.fromCharCode(byte1);
+                if (enc3 !== 64) result += String.fromCharCode(byte2);
+                if (enc4 !== 64) result += String.fromCharCode(byte3);
+            }
+            
+            return result;
         }
+        
+        console.log('使用自定义解码函数');
+        decoded = simpleBase64Decode(testData);
     }
-} catch (base64Error) {
-    console.log('Base64 解码失败:'+ base64Error.message);
+    
+    console.log('✅ 解码成功');
+    console.log('解码后长度: ' + decoded.length);
+    console.log('解码内容: ' + decoded);
+    
+    // 查看十六进制表示
+    let hexStr = '';
+    for (let i = 0; i < Math.min(decoded.length, 50); i++) {
+        hexStr += ('00' + decoded.charCodeAt(i).toString(16)).slice(-2) + ' ';
+    }
+    console.log('十六进制: ' + hexStr);
+    
+} catch (error) {
+    console.log('❌ 解码失败: ' + error.message);
 }
 
 $done();
