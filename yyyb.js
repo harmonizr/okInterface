@@ -16,7 +16,7 @@ async function parsePlainToJson(url) {
 
 // 调用
 parsePlainToJson(url).then(json => {
-  console.log('解析后JSON：', json);
+  console.log('解析后JSON：', json.datas);
   // 后续业务逻辑
 });
 // var body = $response.body;//声明一个变量body并以响应消息体赋值
