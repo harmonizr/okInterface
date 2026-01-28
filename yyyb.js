@@ -1,12 +1,23 @@
 console.log($request.url)
 const url = $request.url;
-// 通用请求场景（fetch示例）
-fetch(url)
-  .then(res => res.text()) // 先获取text/plain格式的文本
-  .then(text => JSON.parse(text)) // 解析为JSON对象
-  .then(json => {
-    console.log('解析后的JSON：', json);
-    // 后续操作json数据
+// 完整可运行，替换url即可
+async function parsePlainToJson(url) {
+  try {
+    const res = await fetch(url);
+    const plainText = await res.text(); // 取text/plain响应体
+    const json = JSON.parse(plainText.trim()); // 去首尾空格，解析为JSON
+    console.log(json)
+    return json;
+  } catch (err) {
+    console.error('解析失败：', err); // 捕获格式错/网络错
+    return {}; // 兜底返回空对象，避免页面报错
+  }
+}
+
+// 调用
+parsePlainToJson(url).then(json => {
+  console.log('解析后JSON：', json);
+  // 后续业务逻辑
 });
 // var body = $response.body;//声明一个变量body并以响应消息体赋值
 // var obj = JSON.parse(body);//JSON.parse()将json形式的body转变成对象处理
