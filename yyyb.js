@@ -1,7 +1,7 @@
 
 
-var body = $response.body;//声明一个变量body并以响应消息体赋值
-var obj = JSON.parse(body);//JSON.parse()将json形式的body转变成对象处理
+// var body = $response.body;//声明一个变量body并以响应消息体赋值
+// var obj = JSON.parse(body);//JSON.parse()将json形式的body转变成对象处理
 var body = {
     "status": 1001,
     "message": "操作成功",
