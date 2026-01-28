@@ -1,7 +1,7 @@
 console.log($request.url)
 const url = $request.url;
 // 通用请求场景（fetch示例）
-fetch('你的接口地址')
+fetch(url)
   .then(res => res.text()) // 先获取text/plain格式的文本
   .then(text => JSON.parse(text)) // 解析为JSON对象
   .then(json => {
