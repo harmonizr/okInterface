@@ -1,4 +1,4 @@
-console.log($request.url)
+console.log($request)
 const API_URL = $request.url;  
 // 替换成你的真实接口地址
 // 接口需要的参数（无参数就传{}，按后端要求写）
