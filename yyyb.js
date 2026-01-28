@@ -1,67 +1,39 @@
+      // Loon 脚本
+const body = $response.body;
+console.log('原始数据:', body);
+console.log('数据长度:', body.length);
 
+try {
+    // Base64 解码
+    const decoded = $text.base64Decode(body);
+    console.log('Base64 解码后:', decoded);
+    console.log('解码长度:', decoded.length);
+    
+    // 尝试解析为 JSON
+    try {
+        const jsonData = JSON.parse(decoded);
+        console.log('✅ Base64 -> JSON 解析成功!');
+        console.log('JSON 数据:', jsonData);
+    } catch (jsonError) {
+        console.log('解码后不是 JSON，可能是其他格式:', jsonError.message);
+        
+        // 查看解码后的前100个字符
+        console.log('解码内容预览:', decoded.substring(0, Math.min(100, decoded.length)));
+        
+        // 检查是否是二进制数据
+        const isBinary = Array.from(decoded).some(c => c.charCodeAt(0) < 32 && c.charCodeAt(0) !== 10 && c.charCodeAt(0) !== 13);
+        if (isBinary) {
+            console.log('⚠️ 解码后包含二进制数据，可能需要进一步处理');
+        }
+    }
+} catch (base64Error) {
+    console.log('Base64 解码失败:', base64Error.message);
+}
+
+$done();
 // var body = $response.body;//声明一个变量body并以响应消息体赋值
 // var obj = JSON.parse(body);//JSON.parse()将json形式的body转变成对象处理
-var body = {
-    "status": 1001,
-    "message": "操作成功",
-    "sign": "XXXXXXXX",
-    "accessToken": "2016408398014459904",
-    "timestamp": 1769584199803,
-    "datas": {
-        "xxyyVipLevel": 0,
-        "appRemind": 1,
-        "invited": 0,
-        "userGrade": 0,
-        "id": 4301911618,
-        "userLevel": 0,
-        "isSub": 0,
-        "bindAppleFlag": 0,
-        "dpVipDeadline": 1769584086000,
-        "foreverVipFlag": 0,
-        "subverterIdentityTitle": "",
-        "day5VipFlag": 0,
-        "vipDeadline": 1769584086000,
-        "className": "",
-        "skipGuideFlag": 1,
-        "nickname": "游客3214",
-        "hasPurpose": 0,
-        "vipLevel": 0,
-        "bindWxFlag": 0,
-        "flippedUserLevel": "A0",
-        "stage": "大学生",
-        "userPurpose": "",
-        "vipType": "",
-        "flippedVipDeadline": 1769584086000,
-        "xxyyVipDeadline": 1769584086000,
-        "zcnVipDeadline": 1769584086000,
-        "subCount": 0,
-        "subverterLevelTitle": "未知",
-        "zcnVipFlag": 0,
-        "flippedVipLevel": 0,
-        "userNo": "700499070",
-        "isNew": true,
-        "popIndex": false,
-        "xxyyVipFlag": 0,
-        "reduceCoupon": true,
-        "headPortrait": "https://img.binfenyingyu.com/app/flipped/app-flipped-avatar-default-male.png",
-        "day2VipFlag": 0,
-        "hasPwd": 0,
-        "fzVipActive": 0,
-        "mobile": "",
-        "flippedVipFlag": 0,
-        "wxRemind": 0,
-        "hasInterest": 0,
-        "newUserFlag": 0,
-        "createTime": 1769584086000,
-        "ybVipDeadline": 1769584086000,
-        "classNumber": 0,
-        "zcnVipLevel": 0,
-        "flippedForeverVipFlag": 0,
-        "vipFlag": 0,
-        "mainUserNo": "",
-        "userIdentityType": 0
-    }
-}
+
 //var obj = JSON.parse(body);//JSON.parse()将json形式的body转变成对象处理
 var obj = body;//JSON.parse()将json形式的body转变成对象处理
 
