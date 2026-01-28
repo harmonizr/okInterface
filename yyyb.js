@@ -3,11 +3,11 @@ const body = $response.body;
 
 console.log('基于 accessToken 的 AES 解密');
 console.log('原始 Base64 长度: ' + body.length);
-console.log($request);
+console.log($response);
 
 try {
     // 1. 获取 accessToken（从不同位置尝试）
-    let accessToken =  $response.accessToken;
+    let accessToken =  "2015722495361167360";
     
     // 方法1：从请求头获取
     const authHeader = $request.headers['Authorization'] || $request.headers['authorization'];
