@@ -1,34 +1,12 @@
 console.log($request.url)
 const url = $request.url;
-async function fetchData() {
-  try {
-    const response = await fetch(url);
-    
-    if (!response.ok) {
-      throw new Error(`HTTP 错误: ${response.status}`);
-    }
-    
-    const text = await response.text();
-    const data = JSON.parse(text); // 在这里定义 data
-    
-    // 现在可以安全使用 data
-    console.log('获取的数据:', data);
-    renderData(data);
-    
-    return data; // 返回以便其他函数使用
-    
-  } catch (error) {
-    console.error('获取数据失败:', error);
-    return null;
-  }
-}
-
-// 使用方式
-fetchData().then(data => {
-  if (data) {
-    // 这里可以安全使用 data
-    console.log('处理数据:', data);
-  }
+// 通用请求场景（fetch示例）
+fetch('你的接口地址')
+  .then(res => res.text()) // 先获取text/plain格式的文本
+  .then(text => JSON.parse(text)) // 解析为JSON对象
+  .then(json => {
+    console.log('解析后的JSON：', json);
+    // 后续操作json数据
 });
 // var body = $response.body;//声明一个变量body并以响应消息体赋值
 // var obj = JSON.parse(body);//JSON.parse()将json形式的body转变成对象处理
