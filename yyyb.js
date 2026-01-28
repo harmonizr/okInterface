@@ -1,78 +1,73 @@
- // 完整的 Base64 解码和解析脚本
+ // 保存完整数据以便用外部工具分析
 const body = $response.body;
-console.log('原始响应体长度: ' + body.length + ' 字符');
 
-// 检查是否是有效的 Base64
-function isValidBase64(str) {
-    // 移除可能的空白字符
-    str = str.replace(/\s/g, '');
-    return /^[A-Za-z0-9+/]*={0,2}$/.test(str) && str.length % 4 === 0;
-}
+console.log('保存完整响应数据...');
+console.log('原始长度: ' + body.length + ' 字符');
 
-console.log('是否为有效 Base64: ' + isValidBase64(body));
+// 保存 Base64 数据
+$persistentStore.write(body, 'full_response_base64');
+console.log('Base64 数据已保存: full_response_base64');
 
+// 尝试解码并保存二进制数据
 try {
-    // 解码 Base64
     const decoded = atob(body);
-    console.log('Base64 解码成功');
-    console.log('解码后长度: ' + decoded.length + ' 字节');
+    console.log('解码成功，二进制长度: ' + decoded.length + ' 字节');
     
-    // 查看前 200 个字符（看看是什么格式）
-    const preview = decoded.substring(0, Math.min(200, decoded.length));
-    console.log('解码内容预览: ' + preview);
+    // 保存十六进制表示（适合分析）
+    let hexStr = '';
+    for (let i = 0; i < decoded.length; i++) {
+        hexStr += ('00' + decoded.charCodeAt(i).toString(16)).slice(-2);
+    }
     
-    // 显示十六进制表示的前 100 字节
-    console.log('十六进制预览:');
-    let hexPreview = '';
+    $persistentStore.write(hexStr, 'full_response_hex');
+    console.log('十六进制数据已保存: full_response_hex (长度: ' + hexStr.length + ' 字符)');
+    
+    // 保存前100字节的详细分析
+    let analysis = '=== 响应数据分析 ===\n';
+    analysis += 'Base64 长度: ' + body.length + '\n';
+    analysis += '解码后长度: ' + decoded.length + ' 字节\n\n';
+    analysis += '前100字节十六进制:\n';
+    
     for (let i = 0; i < Math.min(100, decoded.length); i++) {
+        if (i % 16 === 0) analysis += '\n' + i.toString().padStart(4, '0') + ': ';
         const hex = decoded.charCodeAt(i).toString(16).padStart(2, '0');
-        hexPreview += hex + ' ';
-        if ((i + 1) % 16 === 0) hexPreview += '\n';
-    }
-    console.log(hexPreview);
-    
-    // 尝试解析为 JSON（可能失败）
-    try {
-        const jsonData = JSON.parse(decoded);
-        console.log('✅ 直接 JSON 解析成功');
-        console.log('JSON 结构: ' + JSON.stringify(jsonData).substring(0, 200));
-        
-        // 返回格式化 JSON
-        $done({
-            headers: {
-                ...$response.headers,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(jsonData, null, 2)
-        });
-        return;
-    } catch (jsonError) {
-        console.log('❌ 不是 JSON 格式: ' + jsonError.message);
+        analysis += hex + ' ';
     }
     
-    // 尝试检测数据类型
-    if (decoded.startsWith('{') || decoded.startsWith('[')) {
-        console.log('数据以 { 或 [ 开头，但 JSON 解析失败，可能是格式错误');
-    } else if (decoded.charCodeAt(0) === 0x1F && decoded.charCodeAt(1) === 0x8B) {
-        console.log('✅ 检测到 Gzip 压缩数据 (魔数 1F 8B)');
-        // 可能需要解压
-    } else if (decoded.charCodeAt(0) === 0x78 && decoded.charCodeAt(1) === 0x9C) {
-        console.log('✅ 检测到 Zlib 压缩数据 (魔数 78 9C)');
-        // 可能需要解压
-    } else {
-        console.log('可能是加密的二进制数据或其他格式');
+    analysis += '\n\n前100字节ASCII:';
+    for (let i = 0; i < Math.min(100, decoded.length); i++) {
+        if (i % 16 === 0) analysis += '\n' + i.toString().padStart(4, '0') + ': ';
+        const code = decoded.charCodeAt(i);
+        analysis += (code >= 32 && code <= 126) ? decoded.charAt(i) : '.';
+        analysis += ' ';
     }
     
-    // 保存数据供后续分析
-    $persistentStore.write(decoded, 'full_decoded_data');
-    console.log('完整解码数据已保存到持久化存储: full_decoded_data');
+    $persistentStore.write(analysis, 'response_analysis');
+    console.log('分析报告已保存: response_analysis');
+    
+    // 判断可能的类型
+    console.log('\n=== 类型判断 ===');
+    if (decoded.length % 16 === 0) {
+        console.log('🔐 可能是 AES 加密（长度是16的倍数）');
+    }
+    if (decoded.charCodeAt(0) === 0x1F && decoded.charCodeAt(1) === 0x8B) {
+        console.log('🗜️  可能是 Gzip 压缩');
+    }
+    if (decoded.charAt(0) === '{' || decoded.charAt(0) === '[') {
+        console.log('📄 可能是 JSON（但需要解密/解压）');
+    }
     
 } catch (error) {
-    console.log('❌ Base64 解码失败: ' + error.message);
+    console.log('解码失败: ' + error.message);
 }
 
-$done();
+console.log('\n建议：');
+console.log('1. 将这些数据导入电脑分析');
+console.log('2. 使用工具如 CyberChef (gchq.github.io/CyberChef)');
+console.log('3. 尝试 Base64 -> 各种解密/解压');
+console.log('4. 查看应用源码找加密算法');
 
+$done();
 
 
 // var body = $response.body;//声明一个变量body并以响应消息体赋值
