@@ -1,4 +1,6 @@
       // Loon 脚本
+ console.log('原始数据jj:',  $response);
+     
 const body = $response.body;
 console.log('原始数据:', body);
 console.log('数据长度:', body.length);
