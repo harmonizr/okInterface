@@ -1,4 +1,6 @@
       // Loon 脚本
+     console.log($request);
+  
  console.log($response);
  const body = $response.body;
  console.log(body);
