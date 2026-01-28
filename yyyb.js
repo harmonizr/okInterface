@@ -1,9 +1,10 @@
 const url =$response.url;
+var obj = {};
 fetch(url)
   .then(response => response.text())
   .then(text => {
     try {
-      const obj = JSON.parse(text);
+      obj = JSON.parse(text);
       console.log(obj);
     } catch (e) {
       console.error('解析失败:', e);
