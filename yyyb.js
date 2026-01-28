@@ -57,8 +57,8 @@ async function main() {
     
     // 分离IV和密文
     const { iv, cipher } = splitIVAndCipher(encryptedBase64);
-    console.log('IV (hex):', $data.fromBytes(iv).toHex());
-    console.log('密文长度:', cipher.length, '字节');
+    console.log('IV (hex):'+ $data.fromBytes(iv).toHex());
+    console.log('密文长度:'+ cipher.length, '字节');
     
     // 尝试每个密钥
     for (const keyStr of commonKeys) {
@@ -137,14 +137,14 @@ async function main() {
         cipherLength: cipher.length
     };
     
-    console.log('分析信息:', JSON.stringify(analysis, null, 2));
+    console.log('分析信息:'+ JSON.stringify(analysis, null, 2));
     
     $done({});
 }
 
 // 运行主函数
 main().catch(error => {
-    console.log('脚本执行错误:', error);
+    console.log('脚本执行错误:'+error);
     $done({});
 });
 
