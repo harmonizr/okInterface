@@ -1,7 +1,7 @@
       // Loon 脚本
- console.log('原始数据jj:',  $response);
+ console.log($response);
  const body = $response.body;
- console.log('原始数据gg:', body);
+ console.log(body);
 
  //body = JSON.stringify(obj);//重新打包回json字符串
 $done({body});//结束修改
