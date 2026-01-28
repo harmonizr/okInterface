@@ -1,231 +1,163 @@
-// 文件名：decrypt-response.js
-// 用于 Loon 的 AES-CBC 解密脚本
+// 文件名：decrypt-with-$crypto.js
+// 使用 Loon 内置的 $crypto 对象解密
 
-// 辅助函数：Base64 解码
-function base64Decode(str) {
+// 分析数据并尝试解密
+function analyzeAndDecrypt() {
+    const encryptedBase64 = $response.body;
+    
+    console.log('=== 开始解密 ===');
+    console.log('加密数据长度:'+encryptedBase64.length);
+    
     try {
-        // 移除可能的换行符
-        const cleanStr = str.replace(/\n/g, '').replace(/\r/g, '');
-        return atob(cleanStr);
-    } catch (e) {
-        console.log('Base64 解码失败:'+ e);
-        return null;
-    }
-}
-
-// 辅助函数：十六进制字符串转字节数组
-function hexToBytes(hex) {
-    const bytes = [];
-    for (let i = 0; i < hex.length; i += 2) {
-        bytes.push(parseInt(hex.substr(i, 2), 16));
-    }
-    return new Uint8Array(bytes);
-}
-
-// 辅助函数：字节数组转十六进制字符串
-function bytesToHex(bytes) {
-    return Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('');
-}
-
-// 辅助函数：字符串转字节数组
-function stringToBytes(str) {
-    const bytes = new Uint8Array(str.length);
-    for (let i = 0; i < str.length; i++) {
-        bytes[i] = str.charCodeAt(i);
-    }
-    return bytes;
-}
-
-// 辅助函数：字节数组转字符串
-function bytesToString(bytes) {
-    return String.fromCharCode.apply(null, bytes);
-}
-
-// 解密函数（使用 Web Crypto API）
-async function decryptAES_CBC(encryptedBytes, keyBytes, ivBytes) {
-    try {
-        // 导入密钥
-        const cryptoKey = await crypto.subtle.importKey(
-            'raw',
-            keyBytes,
-            { name: 'AES-CBC' },
-            false,
-            ['decrypt']
-        );
+        // 1. Base64 解码
+        const decodedStr = atob(encryptedBase64);
+        console.log('Base64解码后长度:'+ decodedStr.length, '字节');
         
-        // 解密
-        const decrypted = await crypto.subtle.decrypt(
-            {
-                name: 'AES-CBC',
-                iv: ivBytes
-            },
-            cryptoKey,
-            encryptedBytes
-        );
+        // 2. 分离 IV 和密文（前16字节是IV）
+        const ivHex = [];
+        for (let i = 0; i < 16; i++) {
+            ivHex.push(decodedStr.charCodeAt(i).toString(16).padStart(2, '0'));
+        }
+        const iv = ivHex.join('');
+        console.log('IV (hex):'+ iv);
         
-        return new Uint8Array(decrypted);
-    } catch (error) {
-        console.log('解密失败:'+ error);
-        return null;
-    }
-}
-
-// 尝试解压 Gzip
-function tryGunzip(bytes) {
-    try {
-        // 检查是否是 gzip（前两个字节：1F 8B）
-        if (bytes.length >= 2 && bytes[0] === 0x1F && bytes[1] === 0x8B) {
-            // 需要 pako 库，如果没有加载则返回原数据
-            if (typeof pako !== 'undefined') {
-                return pako.inflate(bytes, { to: 'string' });
+        // 3. 提取密文部分
+        const ciphertext = decodedStr.substring(16);
+        console.log('密文长度:'+ ciphertext.length, '字节');
+        
+        // 4. 常见密钥列表
+        const commonKeys = [
+            // 16字节 AES-128 密钥
+            "0123456789ABCDEF",
+            "1234567890123456",
+            "ABCDEFGHIJKLMNOP",
+            "abcdefghijklmnop",
+            "0000000000000000",
+            "1111111111111111",
+            
+            // 可能的 App 密钥
+            "mobile_client_key",
+            "android_app_key1",
+            "ios_app_key_2024",
+            "client_secret_16",
+            
+            // 基于分析的密钥猜测
+            "5db9a8c264b95157",  // IV 的前半部分
+            "406205f804b68a91",  // IV 的后半部分
+            "5db9a8c264b95157 406205f804b68a91", // 完整IV
+            "b68a915db9a8c264",  // IV 的变体
+        ];
+        
+        // 5. 尝试使用每个密钥解密
+        for (const key of commonKeys) {
+            console.log(`尝试密钥: ${key}`);
+            
+            try {
+                // 使用 Loon 的 $crypto 解密
+                // 注意：Loon 的 $crypto.AES.decrypt 可能需要特定格式
+                const decrypted = $crypto.AES.decrypt({
+                    data: ciphertext,
+                    key: key,
+                    iv: iv,
+                    mode: 'cbc',
+                    padding: 'pkcs7'
+                });
+                
+                if (decrypted && decrypted.length > 0) {
+                    console.log(`解密成功！密钥: ${key}`);
+                    console.log(`解密结果长度: ${decrypted.length}`);
+                    
+                    // 尝试转换为字符串
+                    let resultStr;
+                    try {
+                        // 如果是字节数组，转换为字符串
+                        if (typeof decrypted === 'object' && decrypted.byteLength) {
+                            resultStr = String.fromCharCode.apply(null, new Uint8Array(decrypted));
+                        } else {
+                            resultStr = decrypted.toString();
+                        }
+                        
+                        console.log(`前100字符: ${resultStr.substring(0, 100)}`);
+                        
+                        // 检查是否是 JSON
+                        if (resultStr.includes('{') && resultStr.includes('}')) {
+                            try {
+                                const jsonData = JSON.parse(resultStr);
+                                return {
+                                    success: true,
+                                    key: key,
+                                    data: JSON.stringify(jsonData, null, 2)
+                                };
+                            } catch (e) {
+                                return {
+                                    success: true,
+                                    key: key,
+                                    data: resultStr
+                                };
+                            }
+                        }
+                        
+                        return {
+                            success: true,
+                            key: key,
+                            data: resultStr
+                        };
+                        
+                    } catch (e) {
+                        console.log('转换字符串失败:'+ e);
+                    }
+                }
+            } catch (error) {
+                // 继续尝试下一个密钥
+                console.log(`密钥 ${key} 失败: ${error.message}`);
             }
         }
-        // 如果不是 gzip 或 pako 不可用，直接转字符串
-        return bytesToString(bytes);
-    } catch (e) {
-        return bytesToString(bytes);
+        
+        return { success: false, error: '所有密钥尝试失败' };
+        
+    } catch (error) {
+        console.log('处理过程出错:', error);
+        return { success: false, error: error.message };
     }
 }
 
 // 主函数
-async function main() {
-    // 获取响应数据
-    const encryptedBase64 = $response.body;
+function main() {
+    const result = analyzeAndDecrypt();
     
-    // Base64 解码
-    const decodedStr = base64Decode(encryptedBase64);
-    if (!decodedStr) {
-        console.log('Base64 解码失败');
-        return $done({});
+    if (result.success) {
+        console.log(`✅ 解密成功！使用的密钥: ${result.key}`);
+        
+        // 返回解密后的响应
+        $done({
+            body: result.data,
+            headers: {
+                ...$response.headers,
+                'Content-Type': 'application/json; charset=UTF-8'
+            }
+        });
+    } else {
+        console.log('❌ 解密失败:'+ result.error);
+        
+        // 返回分析信息
+        $done({
+            body: JSON.stringify({
+                error: '解密失败',
+                message: result.error,
+                original_length: $response.body.length
+            }, null, 2),
+            headers: {
+                ...$response.headers,
+                'Content-Type': 'application/json'
+            }
+        });
     }
-    
-    // 转为字节数组
-    const allBytes = stringToBytes(decodedStr);
-    
-    // 分离 IV 和密文
-    const ivBytes = allBytes.slice(0, 16);      // 前16字节是IV
-    const cipherBytes = allBytes.slice(16);     // 剩余是密文
-    
-    console.log('IV (hex):'+ bytesToHex(ivBytes));
-    console.log('密文长度:'+ cipherBytes.length, '字节');
-    
-    // 常见密钥列表
-    const commonKeys = [
-        // AES-128 密钥（16字节）
-        "0123456789ABCDEF",
-        "1234567890123456",
-        "ABCDEFGHIJKLMNOP",
-        "abcdefghijklmnop",
-        "0000000000000000",
-        "1111111111111111",
-        "2222222222222222",
-        
-        // 可能的 App 密钥
-        "mobile_client_key",
-        "android_app_key1",
-        "ios_app_key_2024",
-        "client_secret_16",
-        
-        // 其他
-        "qwertyuiopasdfgh",
-        "asdfghjklzxcvbnm",
-        "zxcvbnmasdfghjkl",
-        "password12345678",
-        "encryptionkey01",
-        "decryptionkey01"
-    ];
-    
-    // 尝试每个密钥
-    for (const keyStr of commonKeys) {
-        // 确保密钥是16字节
-        let finalKey = keyStr;
-        if (keyStr.length > 16) finalKey = keyStr.substring(0, 16);
-        if (keyStr.length < 16) finalKey = keyStr.padEnd(16, '0');
-        
-        const keyBytes = stringToBytes(finalKey);
-        
-        console.log(`尝试密钥: ${finalKey}`);
-        
-        try {
-            // 解密
-            const decryptedBytes = await decryptAES_CBC(cipherBytes, keyBytes, ivBytes);
-            if (!decryptedBytes || decryptedBytes.length === 0) {
-                continue;
-            }
-            
-            // 尝试解压
-            const decryptedText = tryGunzip(decryptedBytes);
-            
-            // 检查是否是 JSON
-            if (decryptedText.includes('{') && decryptedText.includes('}')) {
-                try {
-                    // 尝试提取 JSON 部分
-                    const jsonStart = decryptedText.indexOf('{');
-                    const jsonEnd = decryptedText.lastIndexOf('}') + 1;
-                    const jsonStr = decryptedText.substring(jsonStart, jsonEnd);
-                    const jsonData = JSON.parse(jsonStr);
-                    
-                    console.log(`✅ 解密成功！密钥: ${finalKey}`);
-                    
-                    // 返回 JSON 格式的响应
-                    return $done({
-                        body: JSON.stringify(jsonData, null, 2),
-                        headers: {
-                            ...$response.headers,
-                            'Content-Type': 'application/json; charset=UTF-8'
-                        }
-                    });
-                } catch (e) {
-                    // 不是有效的 JSON，但仍然返回解密结果
-                    console.log('不是有效的 JSON，但已解密');
-                }
-            }
-            
-            // 如果解密出有意义的数据（长度合理）
-            if (decryptedText.length > 10 && decryptedText.length < 10000) {
-                console.log(`✅ 解密成功！密钥: ${finalKey}`);
-                console.log(`前200字符: ${decryptedText.substring(0, 200)}`);
-                
-                return $done({
-                    body: decryptedText,
-                    headers: $response.headers
-                });
-            }
-            
-        } catch (error) {
-            // 继续尝试下一个密钥
-            console.log(`密钥 ${finalKey} 失败:`+ error.message);
-            continue;
-        }
-    }
-    
-    // 如果所有密钥都失败
-    console.log('所有常见密钥都失败了');
-    
-    // 保存原始信息供分析
-    const analysisInfo = {
-        iv: bytesToHex(ivBytes),
-        cipherLength: cipherBytes.length,
-        totalLength: allBytes.length,
-        first16BytesOfCipher: bytesToHex(cipherBytes.slice(0, 16))
-    };
-    
-    console.log('分析信息:'+ JSON.stringify(analysisInfo, null, 2));
-    
-    // 返回原始响应（不修改）
-    return $done({});
 }
 
-// 执行主函数
-try {
-    main().catch(error => {
-        console.log('脚本执行错误:'+ error);
-        $done({});
-    });
-} catch (error) {
-    console.log('脚本错误:'+ error);
-    $done({});
-}
+// 执行
+main();
+
+
 // var body = $response.body;//声明一个变量body并以响应消息体赋值
 // var obj = JSON.parse(body);//JSON.parse()将json形式的body转变成对象处理
 
