@@ -16,8 +16,11 @@ async function parsePlainToJson(url) {
 // 调用
 parsePlainToJson(url).then(json => {
   console.log('解析后JSON：');
-    console.log( JSON.parse(json));
+  const obj = JSON.parse(json);
+    console.log( obj);
+    const body = JSON.stringify(obj);//重新打包回json字符串
 
+ $done({body});//结束修改
   // 后续业务逻辑
 });
 
