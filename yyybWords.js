@@ -86,7 +86,7 @@ async function loadUtils() {
   return new Promise((resolve, reject) => {
     env.get({ url: utilsUrl }, (err, resp, data) => {
       if (err) {
-        env.logErr(err);
+        env.logErr("1"+err);
         reject(err);
         return;
       }
@@ -209,7 +209,8 @@ function Env(t, e) {
           timeout: r
         };
         this.post(n, (t, e, a) => s(a))
-      }).catch(t => this.logErr(t));
+      }).catch(console.log(2),
+          t => this.logErr(t));
     }
     loaddata() {
       if (!this.isNode()) return {};
@@ -329,6 +330,7 @@ function Env(t, e) {
                 s && this.ckjar.setCookieSync(s, null), e.cookieJar = this.ckjar;
               }
             } catch (t) {
+                console.log(3),
               this.logErr(t);
             }
           }).then(t => {
