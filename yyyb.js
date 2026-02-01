@@ -24,5 +24,14 @@ obj.datas.flippedVipFlag = 1;
 
 
 
+obj.datas.vipLevel = 1;
+obj.datas.vipType = "SVIP";
+obj.datas.flippedVipLevel = 1;
+obj.datas.zcnVipLevel = 1;
+
+
+
+
+
 body = JSON.stringify(obj);//重新打包回json字符串
 $done({body});//结束修改
