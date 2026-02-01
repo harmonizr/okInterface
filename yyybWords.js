@@ -27,10 +27,12 @@ if (!url.includes("wordIds")) {
       throw new ReferenceError("Utils 或 createCryptoJS 方法未正确加载");
     }
     const crypto = utils.createCryptoJS();
+    console.log(1111)
     const jsonBody = JSON.parse(body);
+    console.log(jsonBody)
 
     // 仅处理包含 datast 加密字段的响应
-    if (jsonBody.datast) {
+    if (jsonBody.datas) {
       // DES 密钥/IV：均为 QueryVipUser Base64 解码
       const key = crypto.enc.Base64.parse("wordIds");
       const iv = crypto.enc.Base64.parse("wordIds");
