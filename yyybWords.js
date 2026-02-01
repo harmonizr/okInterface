@@ -28,7 +28,7 @@ if (!url.includes("wordIds")) {
     }
     const crypto = utils.createCryptoJS();
     console.log(1111)
-    const jsonBody = JSON.parse(body);
+    const jsonBody = {};
     console.log(jsonBody)
 
     // 仅处理包含 datast 加密字段的响应
