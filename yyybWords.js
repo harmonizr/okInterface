@@ -37,10 +37,10 @@ if (!url.includes("wordIds")) {
       // 解密 datast 字段
       const decryptStr = DES_Decrypt(jsonBody.datast, key, iv, crypto);
       const decryptJson = JSON.parse(decryptStr);
-      console.log(decryptJson)
+    //   console.log(decryptJson)
       
-      // 篡改 VIP 信息：永久有效期 + 解锁VIP
-      decryptJson.datas.freeCount = 1;
+    //   // 篡改 VIP 信息：永久有效期 + 解锁VIP
+    //   decryptJson.datas.freeCount = 1;
       
       // 重新加密并替换原字段
       jsonBody.datast = DES_Encrypt(JSON.stringify(decryptJson), key, iv, crypto);
