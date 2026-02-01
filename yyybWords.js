@@ -39,8 +39,7 @@ if (!url.includes("wordIds")) {
       const decryptJson = JSON.parse(decryptStr);
       
       // 篡改 VIP 信息：永久有效期 + 解锁VIP
-      decryptJson.expireDays = 360000;
-      decryptJson.isVip = true;
+      decryptJson.datas.freeCount = 1;
       
       // 重新加密并替换原字段
       jsonBody.datast = DES_Encrypt(JSON.stringify(decryptJson), key, iv, crypto);
