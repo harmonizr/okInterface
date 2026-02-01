@@ -20,6 +20,7 @@ obj.datas.vipFlag = 1;
 obj.datas.zcnVipFlag = 1;
 obj.datas.foreverVipFlag = 1;
 obj.datas.flippedForeverVipFlag = 1;
+obj.datas.flippedVipFlag = 1;
 
 
 
