@@ -262,7 +262,7 @@
                                                                                                 
         {
         "name": "QQ群：950080131",
-        "jar": "https://gitee.com/nm_nm/interface/raw/master/spider0206.jar;md5;b70b5e20e0f97605e512476417bd12c9",
+        //"jar": "https://gitee.com/nm_nm/interface/raw/master/spider0206.jar;md5;b70b5e20e0f97605e512476417bd12c9",
         "type": 1,
         "url": "http://nm.4688888.xyz/nm_free.php?url=",
         "ext": {
@@ -296,7 +296,7 @@
             "jar": "https://gitee.com/nm_nm/interface/raw/master/spider0206.jar;md5;b70b5e20e0f97605e512476417bd12c9",
 
 			"url": "https://yparse.ik9.cc/index.php?url=",
-			"type": 0,
+			"type": 1,
 			"ext": {
 				"flag": [ 
 					"qiyi",
@@ -322,7 +322,7 @@
 				]
 			},
 			"header": {
-				"User-Agent": "Mozilla/5.0"
+				"User-Agent": "okhttp/4.9.1"
 			}
 		},
          {
