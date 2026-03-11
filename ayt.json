@@ -1,5 +1,5 @@
 {
-    "spider": "./jar/柒豪.jar;md5;8adb5356ec27e9113a166749fee46b7d",
+    "spider": "https://gitee.com/nm_nm/interface/raw/master/spider0206.jar;md5;b70b5e20e0f97605e512476417bd12c9",
     "warningText":"",
     "logo": "./png/Image_152647033423173.jpg",
     "sites": [
