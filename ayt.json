@@ -67,22 +67,7 @@
     
      
     ],
-    "parses": [
-        //潇洒
-        {
-            "name": "推荐",
-            "jar": "https://gitee.com/nm_nm/interface/raw/master/spider0206.jar;md5;b70b5e20e0f97605e512476417bd12c9",
-
-            "type": 0,
-            "url": "https://jxjson.icu/neibu.php?url=",
-            "ext": {
-                    "flag": ["qq","腾讯","qiyi", "爱奇艺","奇艺","youku","优酷","sohu","搜狐","letv", "乐视","mgtv","芒果","tnmb",  "seven","bilibili","1905"],
-                    "header": {
-                                            "User-Agent": "okhttp/4.9.1"
-                    }
-            }
-        },
-                                                                                                
+    "parses": [                                                                                               
         {
         "name": "QQ群：950080131",
         "jar": "https://gitee.com/nm_nm/interface/raw/master/spider0206.jar;md5;b70b5e20e0f97605e512476417bd12c9",
@@ -113,7 +98,20 @@
             }
             }
         },
-      
+          //潇洒
+        {
+            "name": "推荐",
+            "jar": "https://gitee.com/nm_nm/interface/raw/master/spider0206.jar;md5;b70b5e20e0f97605e512476417bd12c9",
+
+            "type": 0,
+            "url": "https://jxjson.icu/neibu.php?url=",
+            "ext": {
+                    "flag": ["qq","腾讯","qiyi", "爱奇艺","奇艺","youku","优酷","sohu","搜狐","letv", "乐视","mgtv","芒果","tnmb",  "seven","bilibili","1905"],
+                    "header": {
+                                            "User-Agent": "okhttp/4.9.1"
+                    }
+            }
+        },
 		{
 			"name": "ik9",
             "jar": "https://gitee.com/nm_nm/interface/raw/master/spider0206.jar;md5;b70b5e20e0f97605e512476417bd12c9",
@@ -145,7 +143,7 @@
 				]
 			},
 			"header": {
-				"User-Agent": "okhttp/4.9.1"
+				"User-Agent": "Mozilla/5.0"
 			}
 		},
          {
