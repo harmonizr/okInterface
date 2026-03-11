@@ -9,7 +9,10 @@
             "name": "豆瓣",
             "type": 3,
             "api": "csp_Douban",
-            "searchable": 0
+            "indexs": 1,
+            "searchable": 0,
+            "filterable": 1,
+            "ext": "https://tc-new.z.wiki/autoupload/iYHTWVx6T8RrCmqdGD6MOdiO_OyvX7mIgxFBfDMDErs/20260309/BdRa/douban.json"
         },    
      
         {
