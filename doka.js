@@ -6,7 +6,7 @@ obj.data.is_vip = true;
 obj.data.product_id = "com.ydgn.dokacamera.yearly";
 obj.data.expire_date = "2030-02-21 21:54:36";
 obj.data.trial_period = true;
-obj.data.is_vip = true;
+obj.data.auto_renew_status = true;
 
 // obj.data.expire_time = "2030-02-21 21:54:36";
 // obj.data.remaining_count = 999;
