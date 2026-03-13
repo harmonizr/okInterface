@@ -4,7 +4,7 @@ var obj = JSON.parse(body);//JSON.parse()将json形式的body转变成对象处�
 obj.data.status = "yearly_user";  
 obj.data.is_vip = true;
 obj.data.product_id = "com.ydgn.dokacamera.yearly";
-obj.data.expire_date = "2030-02-21 21:54:36";
+obj.data.expire_date = "2027-03-13T13:54:36Z";
 obj.data.trial_period = true;
 obj.data.auto_renew_status = true;
 
