@@ -121,10 +121,8 @@ http-response ^https?:\/\/(?:ipv4|interface\d?)\.music\.163\.com\/eapi\/link\/ho
 http-response ^https?:\/\/(?:ipv4|interface\d?)\.music\.163\.com\/eapi\/link\/page\/discovery\/resource\/show script-path = https://raw.githubusercontent.com/Keywos/rule/main/script/wy/js/wyres.js, requires-body = true, binary-body-mode = true, timeout = 20, tag = [网易云音乐]发现页
 
 # 播放音效
-#http-response ^https?:\/\/(?:ipv4|interface\d?)\.music\.163\.com\/eapi\/song\/play\/more\/list\/v\d script-path = https://he2o.vercel.app/Resource/-Rewrite/anyehttp/wyy-s.js, requires-body = true, binary-body-mode = true, timeout = 20, tag = [网易云音乐]播放音效
+http-response ^https?:\/\/(?:ipv4|interface\d?)\.music\.163\.com\/eapi\/song\/play\/more\/list\/v\d script-path = https://raw.githubusercontent.com/Keywos/rule/main/script/wy/js/wyres.js, requires-body = true, binary-body-mode = true, timeout = 20, tag = [网易云音乐]播放音效
 
-# 播放音效
-http-response ^https?:\/\/interface\d?\.music\.163\.com\/eapi\/vipauth\/app\/auth\/(soundquality\/)?query script-path = https://he2o.vercel.app/Resource/-Rewrite/anyehttp/wyy-s.js, requires-body = true, binary-body-mode = true, timeout = 20, tag = [网易云音乐]播放音效
 
 # 我的页面
 #http-response ^https?:\/\/(?:ipv4|interface\d?)\.music\.163\.com\/eapi\/link\/position\/show\/resource script-path = https://raw.githubusercontent.com/Keywos/rule/main/script/wy/js/wyres.js, requires-body = true, binary-body-mode = true, timeout = 20, tag = [网易云音乐]我的页面
