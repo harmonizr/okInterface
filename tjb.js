@@ -1,7 +1,7 @@
 console.log( $request)
 var header = $request.headers;//声明一个变量header并以响应消息体赋值
 //var obj = JSON.parse(header);//JSON.parse()将json形式的header转变成对象处理
-console.log(obj)
+//console.log(obj)
 
 const u = crypto.randomUUID();
 
