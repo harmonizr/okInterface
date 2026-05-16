@@ -3,12 +3,21 @@ var header = $request.headers;//声明一个变量header并以响应消息体赋
 //var obj = JSON.parse(header);//JSON.parse()将json形式的header转变成对象处理
 //console.log(obj)
 
-const u = crypto.randomUUID();
+// const u = crypto.randomUUID();
 
-header[x-copygo-client-key] = u;
-header[x-copygo-display-name] = "v_" + u.split("-")[0];
-header[user-agent] = "Mozilla/5.0 (iPhone; CPU iPhone OS " + (16+Math.floor(Math.random()*3)) + "_" + Math.floor(Math.random()*9) + " like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1";
+// header[x-copygo-client-key] = u;
+// header[x-copygo-display-name] = "v_" + u.split("-")[0];
+// header[user-agent] = "Mozilla/5.0 (iPhone; CPU iPhone OS " + (16+Math.floor(Math.random()*3)) + "_" + Math.floor(Math.random()*9) + " like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1";
 
+// 生成UUID
+let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{let r=Math.random()*16|0;return c=='x'?r.toString(16):(r&0x3|0x8).toString(16)});
+
+// 三个参数直接定义好
+header[x-copygo-client-key]  = uuid;
+header[x-copygo-display-name]  = "v_" + uuid.split('-')[0];
+header[user-agent] =  ["Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1","Mozilla/5.0 (Linux; Android 14; SM‑S9110) AppleWebKit/537.36 Chrome/129.0.0.0 Mobile","Mozilla/5.0 (Linux; Android 13; MI‑14) AppleWebKit/537.36 Chrome/128.0.0.0 Mobile"][Math.floor(Math.random()*3)];
+
+console.log(x_copygo_client_key, x_copygo_display_name, user_agent);
 const params = {
   "x-copygo-client-key": u,
   "x-copygo-display-name": "v_" + u.split("-")[0],
