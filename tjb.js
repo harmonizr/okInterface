@@ -5,9 +5,9 @@ var header = $request.headers;//声明一个变量header并以响应消息体赋
 
 const u = crypto.randomUUID();
 
-obj[x-copygo-client-key] = u;
-obj[x-copygo-display-name] = "v_" + u.split("-")[0];
-obj[user-agent] = "Mozilla/5.0 (iPhone; CPU iPhone OS " + (16+Math.floor(Math.random()*3)) + "_" + Math.floor(Math.random()*9) + " like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1";
+header[x-copygo-client-key] = u;
+header[x-copygo-display-name] = "v_" + u.split("-")[0];
+header[user-agent] = "Mozilla/5.0 (iPhone; CPU iPhone OS " + (16+Math.floor(Math.random()*3)) + "_" + Math.floor(Math.random()*9) + " like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1";
 
 const params = {
   "x-copygo-client-key": u,
