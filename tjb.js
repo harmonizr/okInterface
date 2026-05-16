@@ -16,9 +16,9 @@ for(let i=0;i<36;i++){
 }
 
 // 三个参数直接定义好
-header[x-copygo-client-key]  = uuid;
-header[x-copygo-display-name]  = "v_" + uuid.split('-')[0];
-header[user-agent] =  ["Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1","Mozilla/5.0 (Linux; Android 14; SM‑S9110) AppleWebKit/537.36 Chrome/129.0.0.0 Mobile","Mozilla/5.0 (Linux; Android 13; MI‑14) AppleWebKit/537.36 Chrome/128.0.0.0 Mobile"][Math.floor(Math.random()*3)];
+// header[x-copygo-client-key]  = uuid;
+// header[x-copygo-display-name]  = "v_" + uuid.split('-')[0];
+// header[user-agent] =  ["Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1","Mozilla/5.0 (Linux; Android 14; SM‑S9110) AppleWebKit/537.36 Chrome/129.0.0.0 Mobile","Mozilla/5.0 (Linux; Android 13; MI‑14) AppleWebKit/537.36 Chrome/128.0.0.0 Mobile"][Math.floor(Math.random()*3)];
 
 
 //header = JSON.stringify(obj);//重新打包回json字符串
