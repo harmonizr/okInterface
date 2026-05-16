@@ -10,7 +10,7 @@ var header = $request.headers;//声明一个变量header并以响应消息体赋
 // header[user-agent] = "Mozilla/5.0 (iPhone; CPU iPhone OS " + (16+Math.floor(Math.random()*3)) + "_" + Math.floor(Math.random()*9) + " like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1";
 
 // 生成UUID
-let uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{let r=Math.random()*16|0;return c=='x'?r.toString(16):(r&0x3|0x8).toString(16)});
+let uuid = (()=>{let s='';for(let i=0;i<36;i++){if([8,13,18,23].includes(i))s+='-';else if(i===14)s+='4';else{let r=Math.random()*16|0;s+=((i===19)?(r&3|8):r).toString(16)}}return s})();
 
 // 三个参数直接定义好
 header[x-copygo-client-key]  = uuid;
