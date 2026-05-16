@@ -4,9 +4,10 @@ var obj = JSON.parse(header);//JSON.parse()将json形式的header转变成对象
 console.log(obj)
 
 const u = crypto.randomUUID();
-obj.x-copygo-client-key = u;
-obj.x-copygo-display-name = "v_" + u.split("-")[0];
-obj.user-agen = "Mozilla/5.0 (iPhone; CPU iPhone OS " + (16+Math.floor(Math.random()*3)) + "_" + Math.floor(Math.random()*9) + " like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1";
+
+obj[x-copygo-client-key] = u;
+obj[x-copygo-display-name] = "v_" + u.split("-")[0];
+obj[user-agent] = "Mozilla/5.0 (iPhone; CPU iPhone OS " + (16+Math.floor(Math.random()*3)) + "_" + Math.floor(Math.random()*9) + " like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1";
 
 const params = {
   "x-copygo-client-key": u,
