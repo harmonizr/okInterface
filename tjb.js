@@ -14,11 +14,18 @@ for(let i=0;i<36;i++){
   else if(i===19) uuid+=chars[Math.floor(Math.random()*4)+8];
   else uuid+=chars[Math.floor(Math.random()*16)];
 }
+const langList = [
+  "zh-CN,zh;q=0.9,en;q=0.8",
+  "zh-CN,zh;q=0.8",
+  "zh-CN,zh,en-US;q=0.9,en;q=0.8",
+  "zh-CN,zh;q=0.95"
+];
+const randomLang = langList[Math.floor(Math.random() * langList.length)];
 
 // 三个参数直接定义好
 headers["x-copygo-client-key"]  = uuid;
 headers["x-copygo-display-name"]  = "v_" + uuid.split('-')[0];
 headers["user-agent"] =  ["Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1","Mozilla/5.0 (Linux; Android 14; SM‑S9110) AppleWebKit/537.36 Chrome/129.0.0.0 Mobile","Mozilla/5.0 (Linux; Android 13; MI‑14) AppleWebKit/537.36 Chrome/128.0.0.0 Mobile"][Math.floor(Math.random()*3)];
+headers["accept-language"] = randomLang
 //console.log(header)
 $done({headers});//结束修改
-console.log($request)
