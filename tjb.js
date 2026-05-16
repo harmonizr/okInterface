@@ -23,3 +23,4 @@ console.log(header)
 
 //header = JSON.stringify(obj);//重新打包回json字符串
 $done({header});//结束修改
+console.log($request)
