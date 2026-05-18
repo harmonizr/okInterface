@@ -40,8 +40,7 @@ for(let i=0;i<36;i++){
 
 const uaList = [
   "Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1",
-  "Mozilla/5.0 (iPhone; CPU iPhone OS 16_7 like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1",
-  "Mozilla/5.0 (Linux; Android 13; SM‑G998B) AppleWebKit/537.36 Chrome/128.0.0.0 Mobile Safari/537.36"
+  "Mozilla/5.0 (iPhone; CPU iPhone OS 16_7 like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1"
 ];
 const randomUA = uaList[Math.floor(Math.random()*uaList.length)];
 
