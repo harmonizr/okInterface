@@ -33,7 +33,7 @@ try{
         'accept':'application/json',
     };
     let body = {
-        raw_text: $argument.postBody,
+        raw_text: $argument.tjbUrl,
         agreed: true,
         extra_email: "",
         max_use_times: 1
@@ -62,7 +62,7 @@ try{
             $done();
         } catch (innerErr) {
             // 任何回调内错误
-            console.log("脚本异常", "", innerErr.message)
+            console.log("脚本异常"+innerErr.message)
             $notification.post("脚本异常", "", innerErr.message);
             $done({ disable: true });
         }
@@ -81,7 +81,7 @@ try{
     });
 } catch (outerErr) {
   // 代码本身语法/变量/任何全局报错
-  console.log("脚本崩溃", "", outerErr.message)
+  console.log("脚本崩溃"+outerErr.message)
   $notification.post("脚本崩溃", "", outerErr.message);
   $done({ disable: true });
 }
