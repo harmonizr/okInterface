@@ -32,6 +32,9 @@ try{
         'accept-encoding':'gzip, deflate, br, zstd',
         'accept':'application/json',
     };
+    console.log($argument)
+    console.log($argument.isRandom==false)
+
     let body = {
         raw_text: $argument.tjbUrl,
         agreed: true,
