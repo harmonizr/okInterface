@@ -32,7 +32,7 @@ let headers = {
     'accept-encoding':'gzip, deflate, br, zstd',
     'accept':'application/json',
 };
-
+console.log($argument)
 let body = "{\"raw_text\":"+$argument.postBody+",\"agreed\":true,\"extra_email\":\"\",\"max_use_times\":1}";
 var params = {
     url:url,
