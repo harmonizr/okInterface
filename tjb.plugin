@@ -7,4 +7,4 @@ interval=input,"5",tag=执行间隔(分钟),desc=你想要几分钟执行一次
 postBody=input,"{\"msg\":\"测试\"}",tag=POST内容,desc=发送的数据
 
 [Script]
-cron {interval} script-path=https://example.com.run.js,timeout = 300,tag=淘金币,argument=[{postBody}]
+cron {interval} script-path=https://raw.giteeusercontent.com/user_hzr/okinterface/raw/master/tjb.js,timeout = 300,tag=淘金币,argument=[{postBody}]
