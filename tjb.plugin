@@ -1,9 +1,9 @@
-#!name=自定义间隔定时脚本
-#!desc=面板设置几分钟执行一次
+#!name=淘金币助力
+#!desc=面板设置几分钟执行一次和助力链接
 
 [Argument]
 # 这里就是你截图里的输入框，直接在Loon控制面板修改
-interval=input,"5",tag=执行间隔(分钟),desc=你想要几分钟执行一次
+interval=input,"*/3 * * * *",tag=执行间隔(分钟),desc=你想要几分钟执行一次
 postBody=input,"{\"msg\":\"测试\"}",tag=POST内容,desc=发送的数据
 
 [Script]
