@@ -55,13 +55,14 @@ try{
             const res = JSON.parse(resBody);
             // 非成功码一律判定失败
             if (res.code !== 200) throw new Error(`服务端错误 ${res.code}: ${res.message}`);
-             console.log("Response Status: " + resp.status);
+            console.log("Response Status: " + resp.status);
             //console.log("Response Headers: " + JSON.stringify(response.headers));
             console.log("Response Body: " + resBody);
             // 成功，静默结束
             $done();
         } catch (innerErr) {
             // 任何回调内错误
+            console.log("脚本异常", "", innerErr.message)
             $notification.post("脚本异常", "", innerErr.message);
             $done({ disable: true });
         }
@@ -80,6 +81,7 @@ try{
     });
 } catch (outerErr) {
   // 代码本身语法/变量/任何全局报错
+  console.log("脚本崩溃", "", outerErr.message)
   $notification.post("脚本崩溃", "", outerErr.message);
   $done({ disable: true });
 }
