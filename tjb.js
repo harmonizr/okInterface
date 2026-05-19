@@ -50,7 +50,7 @@ $httpClient.post(params, function(errormsg,response,data) {
   
     } else {
         console.log("Response Status: " + response.status);
-        console.log("Response Headers: " + JSON.stringify(response.headers));
+        //console.log("Response Headers: " + JSON.stringify(response.headers));
         console.log("Response Body: " + data);
     }
     $done();
