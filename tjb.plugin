@@ -1,28 +1,18 @@
+#!name=定时POST请求
+#!desc=面板自定义参数，定时发送POST
+
 [Argument]
-# 格式：参数名=类型,"默认值",tag=界面显示名,desc=说明
 interval=input,"5",tag=执行间隔(分钟),desc=多久发送一次请求
 url=input,"https://xxx.com",tag=请求地址,desc=要提交的网址
 body=input,"{\"msg\":\"自定义数据\"}",tag=POST发送内容,desc=发送的JSON内容
 
 [Script]
-type=cron
-cron=* * * * *
-script-type=javascript
-script=!async()=>{
-  // 直接读取[Argument]里、你在Loon控制面板填的参数
-  const interval = Number($argument.interval) || 5;
-  const url = $argument.url;
-  const body = $argument.body || "";
-
-  const lastRun = Number($persistentStore.read("lastRun")) || 0;
-  const now = Date.now();
-  if (now - lastRun < interval * 60 * 1000) return;
-  $persistentStore.write(now, "lastRun");
-
-  $httpClient.request({
-    url:url,
-    method:"POST",
-    headers:{"Content-Type":"application/json"},
-    body:body
-  },(err)=>console.log(err?"失败":"成功"));
-}
+cron "* * * * *" script=!async()=>{
+const interval=Number($argument.interval)||5;
+const url=$argument.url;
+const body=$argument.body||"";
+let last=+$persistentStore.read("lastRun")||0,now=Date.now();
+if(now-last<interval*60*1000)return;
+$persistentStore.write(now,"lastRun");
+$httpClient.request({url:url,method:"POST",headers:{"Content-Type":"application/json"},body:body},e=>console.log(e?"失败":"成功"));
+},argument=*
