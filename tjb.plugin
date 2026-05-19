@@ -2,12 +2,12 @@
 #!desc=面板设置几分钟执行一次和助力链接
 
 [Argument]
-# 这里就是你截图里的输入框，直接在Loon控制面板修改
 interval=input,"*/3 * * * *",tag=执行间隔(分钟),desc=你想要几分钟执行一次
 isRandom = switch, false, true, tag = 是否交替执行链接
+isOne = switch, true, false, tag = 执行一次时(1or2)
 
 tjbUrl=input,"{\"msg\":\"测试\"}",tag=淘金币链接,desc=发送的数据
 tjbUrl2=input,"{\"msg\":\"测试\"}",tag=淘金币链接,desc=发送的数据
 
 [Script]
-cron {interval} script-path=https://raw.giteeusercontent.com/user_hzr/okinterface/raw/master/tjb.js,timeout = 300,tag=淘金币,argument=[{tjbUrl},{tjbUrl2},{isRandom}]
+cron {interval} script-path=https://raw.giteeusercontent.com/user_hzr/okinterface/raw/master/tjb.js,timeout = 300,tag=淘金币,argument=[{tjbUrl},{tjbUrl2},{isRandom},{isOne}]
