@@ -1,18 +1,30 @@
-#!name=定时POST请求
-#!desc=面板自定义参数，定时发送请求
+#!name=自定义间隔定时脚本
+#!desc=面板设置几分钟执行一次
 
 [Argument]
-interval=input,"5",tag=执行间隔(分钟),desc=多久发送一次请求
-url=input,"https://xxx.com",tag=请求地址,desc=要提交的网址
-body=input,"{\"msg\":\"自定义数据\"}",tag=POST发送内容,desc=发送的JSON内容
+# 这里就是你截图里的输入框，直接在Loon控制面板修改
+intervalMin=input,"5",tag=执行间隔(分钟),desc=你想要几分钟执行一次
+requestUrl=input,"https://xxx.com",tag=请求地址,desc=目标接口
+postBody=input,"{\"msg\":\"测试\"}",tag=POST内容,desc=发送的数据
 
-# 下面这整行就是【Script脚本】，Loon里定时脚本就这么写，不用[Script]标签
+# 下面这整行就是脚本（Script），Loon定时脚本固定这么写，不用[Script]标签
 cron "* * * * *" script=!async()=>{
-const interval=Number($argument.interval)||5;
-const url=$argument.url;
-const body=$argument.body||"";
-let last=+$persistentStore.read("lastRun")||0,now=Date.now();
-if(now-last<interval*60*1000)return;
-$persistentStore.write(now,"lastRun");
-$httpClient.request({url:url,method:"POST",headers:{"Content-Type":"application/json"},body:body},e=>console.log(e?"失败":"成功"));
-},argument=*,enable=true
+// 读取你在面板填的间隔
+const runMin = Number($argument.intervalMin) || 5;
+const url = $argument.requestUrl;
+const body = $argument.postBody;
+
+// 读取上次执行时间
+const lastRunTime = Number($persistentStore.read("lastRunTime")) || 0;
+const now = Date.now();
+// 判断是否到了间隔时间
+if(now - lastRunTime < runMin * 60 * 1000) return;
+
+// 到时间了，执行你的请求
+$persistentStore.write(now, "lastRunTime");
+$httpClient.post({
+  url: url,
+  headers: {"Content-Type":"application/json"},
+  body: body
+}, (e)=>console.log(e?"执行失败":"执行成功"));
+},argument=*,enable=true,tag=定时POST请求
