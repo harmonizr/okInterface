@@ -33,10 +33,16 @@ try{
         'accept':'application/json',
     };
     console.log($argument)
-    console.log($argument.isRandom==false)
-
+    console.log($argument.isRandom==false);
+    let tjbUrl = $argument.tjbUrl;
+    //一般情况下两个链接都填上，用这个标志判断是否两个交替执行
+    if($argument.isRandom==true){
+        const tjbUrlList = [$argument.tjbUrl,$argument.tjbUrl2];
+        let i = Number($persistentStore.read("i"))||0
+        tjbUrl = tjbUrlList[i%2]
+    }
     let body = {
-        raw_text: $argument.tjbUrl,
+        raw_text: tjbUrl,
         agreed: true,
         extra_email: "",
         max_use_times: 1
@@ -62,9 +68,15 @@ try{
             //console.log("Response Headers: " + JSON.stringify(response.headers));
             console.log("Response Body: " + resBody);
             // 成功，静默结束
+            if($argument.isRandom==true){
+                $persistentStore.write(i+1,"i")
+            }
             $done();
         } catch (innerErr) {
             // 任何回调内错误
+            if($argument.isRandom==true){
+                $persistentStore.write(1,"stop")
+            }
             console.log("脚本异常"+innerErr.message)
             $notification.post("脚本异常", "", innerErr.message);
             $done({ disable: true });
@@ -83,10 +95,13 @@ try{
         // $done();
     });
 } catch (outerErr) {
+    if($argument.isRandom==true){
+        $persistentStore.write(1,"stop")
+    }
   // 代码本身语法/变量/任何全局报错
-  console.log("脚本崩溃"+outerErr.message)
-  $notification.post("脚本崩溃", "", outerErr.message);
-  $done({ disable: true });
+    console.log("脚本崩溃"+outerErr.message)
+    $notification.post("脚本崩溃", "", outerErr.message);
+    $done({ disable: true });
 }
 
 
