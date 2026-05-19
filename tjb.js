@@ -55,7 +55,9 @@ try{
             const res = JSON.parse(resBody);
             // 非成功码一律判定失败
             if (res.code !== 200) throw new Error(`服务端错误 ${res.code}: ${res.message}`);
-
+             console.log("Response Status: " + response.status);
+            //console.log("Response Headers: " + JSON.stringify(response.headers));
+            console.log("Response Body: " + data);
             // 成功，静默结束
             $done();
         } catch (innerErr) {
