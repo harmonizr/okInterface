@@ -33,7 +33,7 @@ try{
         'accept':'application/json',
     };
     let body = {
-        raw_text: $argument.postBody,message
+        raw_text: $argument.postBody,
         agreed: true,
         extra_email: "",
         max_use_times: 1
