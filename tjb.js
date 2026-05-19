@@ -33,7 +33,7 @@ let headers = {
     'accept':'application/json',
 };
 
-let body = "{\"raw_text\":\"09₤OoEi5HqYqEK£ https://m.tb.cn/h.R2V74oJ  CZ009 最高赚188加抵金\",\"agreed\":true,\"extra_email\":\"\",\"max_use_times\":1}";
+let body = "{\"raw_text\":"+$argument.postBody+",\"agreed\":true,\"extra_email\":\"\",\"max_use_times\":1}";
 var params = {
     url:url,
     timeout:5000,
