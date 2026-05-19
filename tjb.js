@@ -35,7 +35,7 @@ try{
     console.log($argument)
     console.log($argument.isRandom==false);
     let tjbUrl = $argument.tjbUrl;
-    if($argument=="链接2"){
+    if($argument.isOne=="链接2"){
         tjbUrl = $argument.tjbUrl2;
     }
     //一般情况下两个链接都填上，用这个标志判断是否两个交替执行
