@@ -4,7 +4,10 @@
 [Argument]
 # 这里就是你截图里的输入框，直接在Loon控制面板修改
 interval=input,"*/3 * * * *",tag=执行间隔(分钟),desc=你想要几分钟执行一次
-postBody=input,"{\"msg\":\"测试\"}",tag=淘金币链接,desc=发送的数据
+isRandom = switch, false, true, tag = 是否随机链接, desc = 是否隐藏底部发现标签
+
+tjbUrl=input,"{\"msg\":\"测试\"}",tag=淘金币链接,desc=发送的数据
+tjbUrl2=input,"{\"msg\":\"测试\"}",tag=淘金币链接,desc=发送的数据
 
 [Script]
-cron {interval} script-path=https://raw.giteeusercontent.com/user_hzr/okinterface/raw/master/tjb.js,timeout = 300,tag=淘金币,argument=[{postBody}]
+cron {interval} script-path=https://raw.giteeusercontent.com/user_hzr/okinterface/raw/master/tjb.js,timeout = 300,tag=淘金币,argument=[{tjbUrl},{tjbUrl2},{isRandom}]
