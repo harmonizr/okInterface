@@ -45,6 +45,9 @@ var params = {
 $httpClient.post(params, function(errormsg,response,data) {
     if (errormsg) {
         console.log(errormsg);
+        $notify("执行失败", "", errormsg);
+        $done({disable:true});
+  
     } else {
         console.log("Response Status: " + response.status);
         console.log("Response Headers: " + JSON.stringify(response.headers));
