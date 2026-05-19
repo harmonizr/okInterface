@@ -7,24 +7,5 @@ intervalMin=input,"5",tag=执行间隔(分钟),desc=你想要几分钟执行一�
 requestUrl=input,"https://xxx.com",tag=请求地址,desc=目标接口
 postBody=input,"{\"msg\":\"测试\"}",tag=POST内容,desc=发送的数据
 
-# 下面这整行就是脚本（Script），Loon定时脚本固定这么写，不用[Script]标签
-cron "* * * * *" script=!async()=>{
-// 读取你在面板填的间隔
-const runMin = Number($argument.intervalMin) || 5;
-const url = $argument.requestUrl;
-const body = $argument.postBody;
-
-// 读取上次执行时间
-const lastRunTime = Number($persistentStore.read("lastRunTime")) || 0;
-const now = Date.now();
-// 判断是否到了间隔时间
-if(now - lastRunTime < runMin * 60 * 1000) return;
-
-// 到时间了，执行你的请求
-$persistentStore.write(now, "lastRunTime");
-$httpClient.post({
-  url: url,
-  headers: {"Content-Type":"application/json"},
-  body: body
-}, (e)=>console.log(e?"执行失败":"执行成功"));
-},argument=*,enable=true,tag=定时POST请求
+[Script]
+cron "* * * * *" script-path=https://gist.githubusercontent.com/Alex0510/8b958bcf53ed1271e03bb5130b2206ec/raw/kugou_vip.js, tag=酷狗领取VIP
