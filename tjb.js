@@ -36,9 +36,9 @@ try{
     console.log($argument.isRandom==false);
     let tjbUrl = $argument.tjbUrl;
     //一般情况下两个链接都填上，用这个标志判断是否两个交替执行
+    let i = Number($persistentStore.read("i"))||0
     if($argument.isRandom==true){
         const tjbUrlList = [$argument.tjbUrl,$argument.tjbUrl2];
-        let i = Number($persistentStore.read("i"))||0
         tjbUrl = tjbUrlList[i%2]
     }
     let body = {
