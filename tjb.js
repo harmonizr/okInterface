@@ -46,7 +46,7 @@ try{
         body:body,
     };
 
-    $httpClient.post(params, function(errormsg,response,data) {
+    $httpClient.post(params, function(e,resp,resBody) {
         try {
             // 网络异常
             if (e) throw new Error(`网络错误:${e.message}`);
