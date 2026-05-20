@@ -89,7 +89,6 @@
         }
 
         const pageToken = tokenJson.data.token;
-        console.log("pageToken"+ pageToken)
 
         // 准备主请求
         const params = {
@@ -120,8 +119,7 @@
 
         const mainResp = await postRequest(params);
         const mainJson = JSON.parse(mainResp.body);
-        console.log("mainResp"+JSON.stringify(mainResp));
-        console.log("mainJson"+JSON.stringify(mainJson));
+
 
         if (mainJson.code !== 200) {
             throw new Error(`提交失败: ${mainJson.message}`);
