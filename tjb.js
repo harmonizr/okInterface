@@ -105,7 +105,14 @@
                 'user-agent': randomUA,
                 'accept-encoding': 'gzip, deflate, br, zstd',
                 'accept': 'application/json',
-                'x-copygo-page_token': pageToken
+                'x-copygo-page_token': pageToken,
+
+                'sec-fetch-site':'same-origin',
+                'sec-fetch-mode':'cors',
+                'content-length':'138',
+                'referer':'https://cv.intgold.cn/b/tjb',
+                'accept':'application/json',
+                'sec-fetch-dest':'empty'
             },
             body: JSON.stringify(body)
         };
