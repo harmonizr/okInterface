@@ -70,34 +70,43 @@ try{
         alpn:'h2',
         body:getTokebody,
     };
-    let page_token = "";
     (async() =>{
-         await $httpClient.post(getTokeparams, function(e,res,resBody) {
-            if (e) throw new Error(`网络错误:${e.message}`);
+         await $httpClient.post(getTokeparams, function(e,resp,resBody) {
+             try {
+                 if (e) throw new Error(`网络错误:${e.message}`);
 
-            // 解析返回
-            const res = JSON.parse(resBody);
-            // 非成功码一律判定失败
-            if (res.code !== 200) throw new Error(`服务端错误 ${res.code}: ${res.message}`);
-            console.log("Response Status: " + resp.status);
-            console.log("Response Body: " + resBody);
-            console.log("page_token: " + resBody.data.token);
-            let headers = {
-                'priority':'u=3, i',
-                'origin':'https://cv.intgold.cn',
-                'content-type':'application/json',
-                'accept-language':randomLang,
-                'x-copygo-display-name':"v_" + uuid.split("-")[0],
-                'content-length':'137',
-                'x-copygo-client-key':uuid,
-                'user-agent':randomUA,
-                'accept-encoding':'gzip, deflate, br, zstd',
-                'accept':'application/json',
-                'x-copygo-page_token':resBody.data.token
-            };
-            params.headers = headers;
+                // 解析返回
+                const res = JSON.parse(resBody);
+                // 非成功码一律判定失败
+                if (res.code !== 200) throw new Error(`服务端错误 ${res.code}: ${res.message}`);
+                console.log("Response Status: " + resp.status);
+                console.log("Response Body: " + resBody);
+                console.log("page_token: " + resBody.data.token);
+                let headers = {
+                    'priority':'u=3, i',
+                    'origin':'https://cv.intgold.cn',
+                    'content-type':'application/json',
+                    'accept-language':randomLang,
+                    'x-copygo-display-name':"v_" + uuid.split("-")[0],
+                    'content-length':'137',
+                    'x-copygo-client-key':uuid,
+                    'user-agent':randomUA,
+                    'accept-encoding':'gzip, deflate, br, zstd',
+                    'accept':'application/json',
+                    'x-copygo-page_token':resBody.data.token
+                };
+                params.headers = headers;
 
-            $done();
+                $done();
+            } catch (innerErr) {
+                // 任何回调内错误
+                if($argument.isRandom==true){
+                    $persistentStore.write(1,"stop")
+                }
+                console.log("脚本异常"+innerErr.message)
+                $notification.post("脚本异常", "", innerErr.message);
+                $done({ disable: true });
+            }
         });
 
         await $httpClient.post(params, function(e,resp,resBody) {
