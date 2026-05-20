@@ -70,12 +70,12 @@
                 'content-type': 'application/json',
                 'accept': 'application/json',
                 'sec-fetch-dest': 'empty',
-                'user-agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Mobile/15E148 Safari/604.1',
+                'user-agent': randomUA,
                 'referer': 'https://cv.intgold.cn/b/tjb',
                 'origin': 'https://cv.intgold.cn',
                 'sec-fetch-mode': 'cors',
                 'accept-encoding': 'gzip, deflate, br, zstd',
-                'accept-language': 'zh-CN,zh-Hans;q=0.9',
+                'accept-language': randomLang,
                 'priority': 'u=3, i',
             },
             body: "{}"
@@ -89,6 +89,7 @@
         }
 
         const pageToken = tokenJson.data.token;
+        console.log("pageToken"+pageToken)
 
         // 准备主请求
         const params = {
@@ -116,7 +117,7 @@
             throw new Error(`提交失败: ${mainJson.message}`);
         }
 
-        console.log("请求成功:", mainResp.body);
+        console.log("请求成功:"+mainResp.body);
 
         // 随机模式计数器更新
         if ($argument.isRandom === true) {
@@ -126,7 +127,7 @@
         $done(); // 只调用一次，结束脚本
 
     } catch (err) {
-        console.log("脚本异常:", err.message);
+        console.log("脚本异常:"+err.message);
         if ($argument.isRandom === true) {
             $persistentStore.write(1, "stop");
         }
