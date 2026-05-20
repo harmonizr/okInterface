@@ -93,6 +93,7 @@
 
         // 准备主请求
         const params = {
+            alpn:'h2',
             url: url,
             timeout: 5000,
             headers: {
