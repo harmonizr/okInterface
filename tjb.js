@@ -106,7 +106,7 @@
                 'user-agent': randomUA,
                 'accept-encoding': 'gzip, deflate, br, zstd',
                 'accept': 'application/json',
-                'x-copygo-page_token': pageToken,
+                'x-copygo-page-token': pageToken,
 
                 'sec-fetch-site':'same-origin',
                 'sec-fetch-mode':'cors',
