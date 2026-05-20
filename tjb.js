@@ -89,7 +89,7 @@
         }
 
         const pageToken = tokenJson.data.token;
-        console.log("pageToken"+pageToken)
+        console.log("pageToken"+ JSON.parse(pageToken))
 
         // 准备主请求
         const params = {
