@@ -120,7 +120,7 @@
 
         const mainResp = await postRequest(params);
         const mainJson = JSON.parse(mainResp.body);
-        console.log("mainJson"+mainJson);
+        console.log("mainJson"+JSON.stringify(mainJson));
         if (mainJson.code !== 200) {
             throw new Error(`提交失败: ${mainJson.message}`);
         }
