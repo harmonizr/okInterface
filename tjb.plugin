@@ -5,9 +5,10 @@
 interval=input,"*/3 * * * *",tag=执行间隔(分钟),desc=你想要几分钟执行一次
 isRandom = switch, false, true, tag = 是否交替执行链接
 isOne = select, "链接1", "链接2", tag = 执行一次时(1or2)
+isDesc = switch, false, true, tag = 是否备注
 desc=input,"r20",tag=备注
 tjbUrl=input,"{\"msg\":\"测试\"}",tag=淘金币链接,desc=发送的数据
 tjbUrl2=input,"{\"msg\":\"测试\"}",tag=淘金币链接,desc=发送的数据
 
 [Script]
-cron {interval} script-path=https://raw.giteeusercontent.com/user_hzr/okinterface/raw/master/tjb.js,timeout = 300,tag=淘金币,argument=[{tjbUrl},{tjbUrl2},{isRandom},{isOne},{desc}]
+cron {interval} script-path=https://raw.giteeusercontent.com/user_hzr/okinterface/raw/master/tjb.js,timeout = 300,tag=淘金币,argument=[{tjbUrl},{tjbUrl2},{isRandom},{isOne},{desc},{isDesc}]
