@@ -20,20 +20,7 @@ try{
 
     const langList = ["zh-CN,zh;q=0.9","zh-CN,zh;q=0.85","zh-CN,zh;q=0.8"];
     const randomLang = langList[Math.floor(Math.random()*langList.length)];
-    let headers = {
-        'priority':'u=3, i',
-        'origin':'https://cv.intgold.cn',
-        'content-type':'application/json',
-        'accept-language':randomLang,
-        'x-copygo-display-name':"v_" + uuid.split("-")[0],
-        'content-length':'137',
-        'x-copygo-client-key':uuid,
-        'user-agent':randomUA,
-        'accept-encoding':'gzip, deflate, br, zstd',
-        'accept':'application/json',
-    };
-    console.log($argument)
-    console.log($argument.isRandom==false);
+
     let tjbUrl = $argument.tjbUrl;
     if($argument.isOne=="链接2"){
         tjbUrl = $argument.tjbUrl2;
@@ -53,14 +40,39 @@ try{
     var params = {
         url:url,
         timeout:5000,
-        headers:headers,
         alpn:'h2',
         body:body,
     };
+    
 
-    $httpClient.post(params, function(e,resp,resBody) {
-        try {
-            // 网络异常
+
+    let getTokeUrl = "https://cv.intgold.cn/api/web-security/page-token";
+    let getTokeheaders = {
+        'content-type':'application/json',
+        'accept':'application/json',
+        'sec-fetch-dest':'empty',
+        'user-agent':'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Mobile/15E148 Safari/604.1',
+        'referer':'https://cv.intgold.cn/b/tjb',
+        'origin':'https://cv.intgold.cn',
+        'content-length':'2',
+        'sec-fetch-mode':'cors',
+        'accept-encoding':'gzip, deflate, br, zstd',
+        'accept-language':'zh-CN,zh-Hans;q=0.9',
+        'priority':'u=3, i',
+        'sec-fetch-site':'same-origin',
+    };
+
+    let getTokebody = "{}";
+    var getTokeparams = {
+        url:getTokeUrl,
+        timeout:5000,
+        headers:getTokeheaders,
+        alpn:'h2',
+        body:getTokebody,
+    };
+    let page_token = "";
+    (async() =>{
+         await $httpClient.post(getTokeparams, function(e,res,resBody) {
             if (e) throw new Error(`网络错误:${e.message}`);
 
             // 解析返回
@@ -68,35 +80,56 @@ try{
             // 非成功码一律判定失败
             if (res.code !== 200) throw new Error(`服务端错误 ${res.code}: ${res.message}`);
             console.log("Response Status: " + resp.status);
-            //console.log("Response Headers: " + JSON.stringify(response.headers));
             console.log("Response Body: " + resBody);
-            // 成功，静默结束
-            if($argument.isRandom==true){
-                $persistentStore.write(i+1,"i")
-            }
+            console.log("page_token: " + resBody.data.token);
+            let headers = {
+                'priority':'u=3, i',
+                'origin':'https://cv.intgold.cn',
+                'content-type':'application/json',
+                'accept-language':randomLang,
+                'x-copygo-display-name':"v_" + uuid.split("-")[0],
+                'content-length':'137',
+                'x-copygo-client-key':uuid,
+                'user-agent':randomUA,
+                'accept-encoding':'gzip, deflate, br, zstd',
+                'accept':'application/json',
+                'x-copygo-page_token':resBody.data.token
+            };
+            params.headers = headers;
+
             $done();
-        } catch (innerErr) {
-            // 任何回调内错误
-            if($argument.isRandom==true){
-                $persistentStore.write(1,"stop")
+        });
+
+        await $httpClient.post(params, function(e,resp,resBody) {
+            try {
+                // 网络异常
+                if (e) throw new Error(`网络错误:${e.message}`);
+
+                // 解析返回
+                const res = JSON.parse(resBody);
+                // 非成功码一律判定失败
+                if (res.code !== 200) throw new Error(`服务端错误 ${res.code}: ${res.message}`);
+                console.log("Response Status: " + resp.status);
+                console.log("Response Body: " + resBody);
+                // 成功，静默结束
+                if($argument.isRandom==true){
+                    $persistentStore.write(i+1,"i")
+                }
+                $done();
+            } catch (innerErr) {
+                // 任何回调内错误
+                if($argument.isRandom==true){
+                    $persistentStore.write(1,"stop")
+                }
+                console.log("脚本异常"+innerErr.message)
+                $notification.post("脚本异常", "", innerErr.message);
+                $done({ disable: true });
             }
-            console.log("脚本异常"+innerErr.message)
-            $notification.post("脚本异常", "", innerErr.message);
-            $done({ disable: true });
-        }
-  
-        // if (errormsg) {
-        //     console.log(errormsg);
-        //     $notify("执行失败", "", errormsg);
-        //     $done({disable:true});
     
-        // } else {
-        //     console.log("Response Status: " + response.status);
-        //     //console.log("Response Headers: " + JSON.stringify(response.headers));
-        //     console.log("Response Body: " + data);
-        // }
-        // $done();
-    });
+        });
+
+    })
+   
 } catch (outerErr) {
     if($argument.isRandom==true){
         $persistentStore.write(1,"stop")
@@ -106,41 +139,3 @@ try{
     $notification.post("脚本崩溃", "", outerErr.message);
     $done({ disable: true });
 }
-
-
-
-
-// let chars = "0123456789abcdef";
-// let uuid = "";
-// for(let i=0;i<36;i++){
-//   if(i===8||i===13||i===18||i===23) uuid+="-";
-//   else if(i===14) uuid+="4";
-//   else if(i===19) uuid+=chars[Math.floor(Math.random()*4)+8];
-//   else uuid+=chars[Math.floor(Math.random()*16)];
-// }
-
-// const uaList = [
-//   "Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1",
-//   "Mozilla/5.0 (iPhone; CPU iPhone OS 16_7 like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1"
-// ];
-// const randomUA = uaList[Math.floor(Math.random()*uaList.length)];
-
-// const langList = ["zh-CN,zh;q=0.9","zh-CN,zh;q=0.85","zh-CN,zh;q=0.8"];
-// const randomLang = langList[Math.floor(Math.random()*langList.length)];
-
-// // 彻底清指纹，必做
-// delete $request.headers.cookie;
-// delete $request.headers["sec-ch-ua"];
-// delete $request.headers["sec-ch-ua-mobile"];
-// delete $request.headers["sec-ch-ua-platform"];
-// delete $request.headers["sec-fetch-site"];
-// delete $request.headers["sec-fetch-mode"];
-// delete $request.headers["sec-fetch-dest"];
-// delete $request.headers.referer;
-
-// $request.headers["user-agent"] = randomUA;
-// $request.headers["x-copygo-client-key"] = uuid;
-// $request.headers["x-copygo-display-name"] = "v_" + uuid.split("-")[0];
-// $request.headers["accept-language"] = randomLang;
-
-// $done({headers:$request.headers});
