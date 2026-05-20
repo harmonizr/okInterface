@@ -47,6 +47,7 @@
         const body = {
             raw_text: tjbUrl,
             agreed: true,
+            short_desc:$argument.desc+i,
             extra_email: "",
             max_use_times: 1
         };
