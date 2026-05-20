@@ -43,11 +43,14 @@
             const tjbUrlList = [$argument.tjbUrl, $argument.tjbUrl2];
             tjbUrl = tjbUrlList[i % 2];
         }
-
+        let short_desc = "";
+        if($argument.isDesc == true){
+            short_desc = $argument.desc+i;
+        }
         const body = {
             raw_text: tjbUrl,
             agreed: true,
-            short_desc:$argument.desc+i,
+            short_desc:short_desc,
             extra_email: "",
             max_use_times: 1
         };
