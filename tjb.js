@@ -44,6 +44,7 @@
             tjbUrl = tjbUrlList[i % 2];
         }
         let short_desc = "";
+        console.log("short_desc.....")
         if($argument.isDesc == true){
             short_desc = $argument.desc+i;
         }
@@ -93,6 +94,7 @@
         }
 
         const pageToken = tokenJson.data.token;
+        console.log("start main.....")
 
         // 准备主请求
         const params = {
