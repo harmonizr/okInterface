@@ -55,6 +55,7 @@
             extra_email: "",
             max_use_times: 1
         };
+        console.log("short_descend.....")
 
         // 封装 $httpClient.post 为 Promise
         function postRequest(params) {
@@ -65,6 +66,7 @@
                 });
             });
         }
+        console.log("start pageToken.....")
 
         // 获取 page_token
         const getTokeUrl = "https://cv.intgold.cn/api/web-security/page-token";
