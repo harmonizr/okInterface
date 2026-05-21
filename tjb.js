@@ -87,7 +87,7 @@
             },
             body: "{}"
         };
-        console.log("getTokeParams"+getTokeParams)
+        console.log("getTokeParams"+JSON.stringify(getTokeParams))
         const tokenResp = await postRequest(getTokeParams);
         const tokenJson = JSON.parse(tokenResp.body);
 
