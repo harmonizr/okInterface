@@ -120,7 +120,8 @@
                 'content-length':'138',
                 'referer':'https://cv.intgold.cn/b/tjb',
                 'accept':'application/json',
-                'sec-fetch-dest':'empty'
+                'sec-fetch-dest':'empty',
+                'cookie':'cg_user=eyJhbGciOiJIUzI1NiJ9.eyJ1aWQiOjcxNiwic3JjIjoiV0VDSEFUX09QRU5fSEFORE9GRiIsInR5cCI6ImNvcHlnb191c2VyIiwiaWF0IjoxNzc5Njc3NTE1LCJleHAiOjE3ODIyNjk1MTV9.__7cwm1zEkiEPkKWHNnHWB_bHe-9evJM7Xy13l-7A-q'
             },
             body: JSON.stringify(body)
         };
