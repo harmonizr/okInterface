@@ -4,7 +4,7 @@ var obj = JSON.parse(body);//JSON.parse()将json形式的body转变成对象处�
 
 obj.phoneBound = false;
 obj.loggedIn = true;
-obj.nickname = "闪友5asdxs";
+obj.userId = 746;
 obj.identityTypes = ["WECHAT_MINI"];
 obj.avatarUrl = null;
 
