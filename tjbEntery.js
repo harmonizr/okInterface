@@ -31,7 +31,7 @@ let datas = {
     },
     "isRevived": true
   };
-obj[data] = datas;
+obj["data"] = datas;
 
 body = JSON.stringify(obj);//重新打包回json字符串
 $done({body});//结束修改
