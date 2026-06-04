@@ -1,6 +1,10 @@
-{
-  "message": "操作成功",
-  "data": {
+var body = $response.body;//声明一个变量body并以响应消息体赋值
+
+var obj = JSON.parse(body);//JSON.parse()将json形式的body转变成对象处理
+
+obj.message = "操作成功";
+obj.code = 200;
+let data = {
     "shortId": "xoo7V2Yb6xzm",
     "entry": {
       "createdAt": 1779682340563,
@@ -8,24 +12,26 @@
         "extra_code": "HU293"
       },
       "usedCount": 0,
-      "rawText": "68₤rOdc5wZXeX2《 https://m.tb.cn/h.R3DeJ3R  HU293 最高赚188加抵金",
+      "rawText": "09《c12pg0RJw43₤ https://m.tb.cn/h.R7cRrzz  CZ009 最高赚188加抵金",
       "markedInvalidCount": 0,
       "titleDisplay": null,
       "deeplinkRendered": {
-        "ios": "tbopen://m.taobao.com/tbopen/index.html?action=ali.open.nav&module=h5&h5Url=https%3A%2F%2Fm.tb.cn%2Fh.R3DeJ3R",
-        "h5": "https://m.tb.cn/h.R3DeJ3R",
-        "android": "tbopen://m.taobao.com/tbopen/index.html?action=ali.open.nav&module=h5&h5Url=https%3A%2F%2Fm.tb.cn%2Fh.R3DeJ3R"
+        "ios": "tbopen://m.taobao.com/tbopen/index.html?action=ali.open.nav&module=h5&h5Url=https%3A%2F%2Fm.tb.cn%2Fh.R7cRrzz",
+        "h5": "https://m.tb.cn/h.R7cRrzz",
+        "android": "tbopen://m.taobao.com/tbopen/index.html?action=ali.open.nav&module=h5&h5Url=https%3A%2F%2Fm.tb.cn%2Fh.R7cRrzz"
       },
       "shortId": "xoo7V2Yb6xzm",
       "expiresAt": 1779941540563,
-      "shareUrl": "https://m.tb.cn/h.R3DeJ3R",
+      "shareUrl": "https://m.tb.cn/h.R7cRrzz",
       "markedFullCount": 0,
       "maxUseTimes": 1,
-      "coreToken": "R3DeJ3R",
+      "coreToken": "R7cRrzz",
       "status": "active",
-      "publisherDisplayName": "v_9af0be2d"
+      "publisherDisplayName": "v_9wf0be2d"
     },
     "isRevived": true
-  },
-  "code": 200
-}
+  };
+obj[data] = data;
+
+body = JSON.stringify(obj);//重新打包回json字符串
+$done({body});//结束修改
