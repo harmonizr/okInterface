@@ -7,7 +7,7 @@ obj.code = 200;
 let data = {
     "shortId": "xoo7V2Yb6xzm",
     "entry": {
-      "createdAt": 1779682340563,
+      "createdAt": 1780580010000,
       "extras": {
         "extra_code": "HU293"
       },
@@ -21,7 +21,7 @@ let data = {
         "android": "tbopen://m.taobao.com/tbopen/index.html?action=ali.open.nav&module=h5&h5Url=https%3A%2F%2Fm.tb.cn%2Fh.R7cRrzz"
       },
       "shortId": "xoo7V2Yb6xzm",
-      "expiresAt": 1779941540563,
+      "expiresAt": 1780580010000,
       "shareUrl": "https://m.tb.cn/h.R7cRrzz",
       "markedFullCount": 0,
       "maxUseTimes": 1,
