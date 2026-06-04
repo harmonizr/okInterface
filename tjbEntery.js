@@ -4,7 +4,7 @@ var obj = JSON.parse(body);//JSON.parse()将json形式的body转变成对象处�
 
 obj.message = "操作成功";
 obj.code = 200;
-let data = {
+let datas = {
     "shortId": "xoo7V2Yb6xzm",
     "entry": {
       "createdAt": 1780580010000,
@@ -31,7 +31,7 @@ let data = {
     },
     "isRevived": true
   };
-obj[data] = data;
+obj[data] = datas;
 
 body = JSON.stringify(obj);//重新打包回json字符串
 $done({body});//结束修改
