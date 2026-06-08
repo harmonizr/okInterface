@@ -98,9 +98,10 @@
         const helpJson = JSON.parse(helpResp.body);
         console.log(suffix)
         console.log(helpResp)
+        console.log(helpJson)
 
         if (helpJson.success !== true) {
-            throw new Error(`提交失败: ${helpJson}`);
+            throw new Error(`提交失败: ${helpJson.message}`);
         }
 
         console.log("请求成功:"+helpResp.body);
@@ -147,10 +148,7 @@
 
     } catch (err) {
         console.log("脚本异常:"+err.message);
-        if ($argument.isRandom === true) {
-            $persistentStore.write(1, "stop");
-        }
         $notification.post("脚本异常", "", err.message);
-        $done({ disable: true });
+        $done();
     }
 })();
