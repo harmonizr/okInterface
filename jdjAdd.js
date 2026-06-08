@@ -1,10 +1,9 @@
 (async () => {
     try {
-        //  const uaList = [
-        //     "Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1",
-        //     "Mozilla/5.0 (iPhone; CPU iPhone OS 16_7 like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1"
-        // ];
-        const uaList = ["Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Mobile/15E148 Safari/604.1"];
+         const uaList = [
+            "Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1",
+            "Mozilla/5.0 (iPhone; CPU iPhone OS 16_7 like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1"
+        ];
         const randomUA = uaList[Math.floor(Math.random() * uaList.length)];
 
           // 字符集：大小写字母 + 数字
@@ -31,59 +30,39 @@
         }
         console.log("start init.....")
 
-        // let url = "https://acbull.site/api/jdj/init";
-        // let headers = {
-        //     'user-agent': randomUA,
-        //     'sec-fetch-dest':'empty',
-        //     'accept-language':'zh-CN,zh-Hans;q=0.9',
-        //     'sec-fetch-mode':'cors',
-        //     'x-network-id': suffix,
-        //     'priority':'u=3, i',
-        //     'accept':'*/*',
-        //     //'referer':'https://acbull.site/jdj/',
-        //     'accept-encoding':'gzip, deflate, br, zstd',
-        //     'sec-fetch-site':'same-origin',
-        // };
-
-        // var initParams = {
-        //     url:url,
-        //     timeout:5000,
-        //     headers:headers,
-        //     alpn:'h2',
-        // };
         let url = "https://acbull.site/api/jdj/init";
-let headers = {
-    'user-agent':'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Mobile/15E148 Safari/604.1',
-    'accept-language':'zh-CN,zh-Hans;q=0.9',
-    'sec-fetch-site':'same-origin',
-    'priority':'u=3, i',
-    'sec-fetch-mode':'cors',
-    'x-network-id':'nid_qwq348yoyb54mgyb',
-    'accept-encoding':'gzip, deflate, br, zstd',
-    'accept':'*/*',
-    'sec-fetch-dest':'empty',
-    'referer':'https://acbull.site/jdj/',
-};
+        let headers = {
+            'user-agent': randomUA,
+            'sec-fetch-dest':'empty',
+            'accept-language':'zh-CN,zh-Hans;q=0.9',
+            'sec-fetch-mode':'cors',
+            'x-network-id': suffix,
+            'priority':'u=3, i',
+            'accept':'*/*',
+            //'referer':'https://acbull.site/jdj/',
+            'accept-encoding':'gzip, deflate, br, zstd',
+            'sec-fetch-site':'same-origin',
+        };
 
-var initParams = {
-    url:url,
-    timeout:5000,
-    headers:headers,
-    alpn:'h2',
-};
+        var initParams = {
+            url:url,
+            timeout:5000,
+            headers:headers,
+            alpn:'h2',
+        };
 
 
                console.log("4444")
-$httpClient.get(initParams, function(errormsg,response,data) {
-    if (errormsg) {
-        console.log(errormsg);
-    } else {
-        console.log("Response Status: " + response.status);
-        console.log("Response Headers: " + JSON.stringify(response.headers));
-        console.log("Response Body: " + data);
-    }
-    $done();
-});
+        $httpClient.get(initParams, function(errormsg,response,data) {
+            if (errormsg) {
+                console.log(errormsg);
+            } else {
+                console.log("Response Status: "+response.status);
+                console.log("Response Headers: "+JSON.stringify(response.headers));
+                console.log("Response Body: "+data);
+            }
+            $done();
+        });
         // const initResp = await postRequest(initParams);
         // const initJson = initResp.body;
         // console.log("55555"+initJson)
