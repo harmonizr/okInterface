@@ -136,13 +136,17 @@
             alpn:'h2',
             body:inviteBody,
         };
+              console.log("1111........")
+
         const inviteResp = await postRequest(inviteParams);
         const inviteJson = JSON.parse(inviteResp.body);
 
+              console.log("22222........")
 
         if (inviteJson.code !== 200) {
             throw new Error(`提交失败: ${inviteJson.message}`);
         }
+              console.log("33333........")
 
         console.log("请求成功:"+inviteResp.body);
 
