@@ -6,7 +6,7 @@ obj.data.userQuota.remaining = 7;
 obj.data.userQuota.todayHelped = 3;
 
 obj.data.checkSubmit.compensationActive = true;
-obj.data.checkSubmit.earned = 1;
+obj.data.checkSubmit.earned = 6;
 
 body = JSON.stringify(obj);//重新打包回json字符串
 $done({body});//结束修改
