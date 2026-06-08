@@ -97,6 +97,7 @@
         const helpResp = await postRequest(helpParams);
         const helpJson = JSON.parse(helpResp.body);
         console.log(suffix)
+        console.log(helpResp)
 
         if (helpJson.success !== true) {
             throw new Error(`提交失败: ${helpJson}`);
