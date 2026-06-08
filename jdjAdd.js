@@ -31,26 +31,47 @@
         }
         console.log("start init.....")
 
-        let url = "https://acbull.site/api/jdj/init";
-        let headers = {
-            'user-agent': randomUA,
-            'sec-fetch-dest':'empty',
-            'accept-language':'zh-CN,zh-Hans;q=0.9',
-            'sec-fetch-mode':'cors',
-            'x-network-id': suffix,
-            'priority':'u=3, i',
-            'accept':'*/*',
-            //'referer':'https://acbull.site/jdj/',
-            'accept-encoding':'gzip, deflate, br, zstd',
-            'sec-fetch-site':'same-origin',
-        };
+        // let url = "https://acbull.site/api/jdj/init";
+        // let headers = {
+        //     'user-agent': randomUA,
+        //     'sec-fetch-dest':'empty',
+        //     'accept-language':'zh-CN,zh-Hans;q=0.9',
+        //     'sec-fetch-mode':'cors',
+        //     'x-network-id': suffix,
+        //     'priority':'u=3, i',
+        //     'accept':'*/*',
+        //     //'referer':'https://acbull.site/jdj/',
+        //     'accept-encoding':'gzip, deflate, br, zstd',
+        //     'sec-fetch-site':'same-origin',
+        // };
 
-        var initParams = {
-            url:url,
-            timeout:5000,
-            headers:headers,
-            alpn:'h2',
-        };
+        // var initParams = {
+        //     url:url,
+        //     timeout:5000,
+        //     headers:headers,
+        //     alpn:'h2',
+        // };
+        let url = "https://acbull.site/api/jdj/init";
+let headers = {
+    'user-agent':'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Mobile/15E148 Safari/604.1',
+    'accept-language':'zh-CN,zh-Hans;q=0.9',
+    'sec-fetch-site':'same-origin',
+    'priority':'u=3, i',
+    'sec-fetch-mode':'cors',
+    'x-network-id':'nid_qwq348yoyb54mgyb',
+    'accept-encoding':'gzip, deflate, br, zstd',
+    'accept':'*/*',
+    'sec-fetch-dest':'empty',
+    'referer':'https://acbull.site/jdj/',
+};
+
+var initParams = {
+    url:url,
+    timeout:5000,
+    headers:headers,
+    alpn:'h2',
+};
+
                console.log("4444")
 
         const initResp = await postRequest(initParams);
