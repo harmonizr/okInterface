@@ -66,7 +66,7 @@
         //         id = initJson.data.list[i].id
         //     }
         // }
-        let id = "jdj_mq4p72ecx9n7";
+        let id = $argument.helpId;
         console.log("start help.....")
 
       let helpUrl = "https://acbull.site/api/jdj/invite-links/"+id+"/used";
@@ -124,8 +124,11 @@
             'content-type':'application/json',
             'sec-fetch-dest':'empty',
         };
+         let inviteBody = {
+            link: $argument.tjbUrl,
+            maxHelp:10
+        };
 
-        let inviteBody = "{\"link\":\"28₴sVR1gcbvzFL₴ https://m.tb.cn/h.RRAnVtp  HU926 最高赚188加抵金 5\",\"maxHelp\":10}";
         var inviteParams = {
             url:inviteUrl,
             timeout:5000,
