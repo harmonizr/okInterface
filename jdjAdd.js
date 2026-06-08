@@ -139,6 +139,8 @@
               console.log("1111........")
 
         const inviteResp = await postRequest(inviteParams);
+                      console.log("11222........")
+
         const inviteJson = JSON.parse(inviteResp.body);
 
               console.log("22222........")
