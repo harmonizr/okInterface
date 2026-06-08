@@ -30,43 +30,43 @@
         }
         console.log("start init.....")
 
-        // let url = "https://acbull.site/api/jdj/init";
-        // let headers = {
-        //     'user-agent': randomUA,
-        //     'sec-fetch-dest':'empty',
-        //     'accept-language':'zh-CN,zh-Hans;q=0.9',
-        //     'sec-fetch-mode':'cors',
-        //     'x-network-id': suffix,
-        //     'priority':'u=3, i',
-        //     'accept':'*/*',
-        //     //'referer':'https://acbull.site/jdj/',
-        //     'accept-encoding':'gzip, deflate, br, zstd',
-        //     'sec-fetch-site':'same-origin',
-        // };
+        let url = "https://acbull.site/api/jdj/init";
+        let headers = {
+            'user-agent': randomUA,
+            'sec-fetch-dest':'empty',
+            'accept-language':'zh-CN,zh-Hans;q=0.9',
+            'sec-fetch-mode':'cors',
+            'x-network-id': suffix,
+            'priority':'u=3, i',
+            'accept':'*/*',
+            //'referer':'https://acbull.site/jdj/',
+            'accept-encoding':'gzip, deflate, br, zstd',
+            'sec-fetch-site':'same-origin',
+        };
 
-        // var initParams = {
-        //     url:url,
-        //     timeout:5000,
-        //     headers:headers,
-        //     alpn:'h2',
-        // };
-        //        console.log("4444")
+        var initParams = {
+            url:url,
+            timeout:5000,
+            headers:headers,
+            alpn:'h2',
+        };
+               console.log("4444")
 
-        // const initResp = await postRequest(initParams);
-        // const initJson = initResp.body;
-        // console.log("55555"+initJson)
+        const initResp = await postRequest(initParams);
+        const initJson = initResp.body;
+        console.log("55555"+initJson)
 
-        // if (initJson.code !== 200) {
-        //     throw new Error(`获取 init 失败: ${initJson.message}`);
-        // }
-        // console.log("66666")
-        // let id = initJson.data.list[0].id;
-        // for(let i in initJson.data.list){
-        //     if(initJson.data.list[i].publisherNoHelpCount>0){
-        //         id = initJson.data.list[i].id
-        //     }
-        // }
-        let id = $argument.helpId;
+        if (initJson.code !== 200) {
+            throw new Error(`获取 init 失败: ${initJson.message}`);
+        }
+        console.log("66666")
+        let id = initJson.data.list[0].id;
+        for(let i in initJson.data.list){
+            if(initJson.data.list[i].publisherNoHelpCount>0){
+                id = initJson.data.list[i].id
+            }
+        }
+        //let id = $argument.helpId;
         console.log("start help.....")
 
       let helpUrl = "https://acbull.site/api/jdj/invite-links/"+id+"/used";
