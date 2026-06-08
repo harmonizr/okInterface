@@ -70,6 +70,7 @@
         console.log("start help.....")
 
       let helpUrl = "https://acbull.site/api/jdj/invite-links/"+id+"/used";
+      console.log(helpUrl)
       let helpHeaders = {
         'accept-encoding':'gzip, deflate, br, zstd',
         'accept':'*/*',
@@ -95,7 +96,7 @@
 
         const helpResp = await postRequest(helpParams);
         const helpJson = JSON.parse(helpResp.body);
-
+        console.log(helpJson)
 
         if (helpJson.code !== 200) {
             throw new Error(`提交失败: ${helpJson.message}`);
