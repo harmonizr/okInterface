@@ -52,7 +52,7 @@
         };
        
         const initResp = await postRequest(initParams);
-        const initJson = JSON.parse(tokenResp.body);
+        const initJson = JSON.parse(initResp.body);
 
         if (initJson.code !== 200) {
             throw new Error(`获取 init 失败: ${initJson.message}`);
