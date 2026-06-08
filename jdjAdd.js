@@ -53,12 +53,13 @@
                console.log("4444")
 
         const initResp = await postRequest(initParams);
-        const initJson = JSON.parse(initResp.body);
+        const initJson = initResp.body;
+        console.log("55555"+initJson)
 
         if (initJson.code !== 200) {
             throw new Error(`获取 init 失败: ${initJson.message}`);
         }
-        console.log("55555")
+        console.log("66666")
         let id = initJson.data.list[0].id;
         for(let i in initJson.data.list){
             if(initJson.data.list[i].publisherNoHelpCount>0){
