@@ -39,7 +39,7 @@
             'x-network-id': suffix,
             'priority':'u=3, i',
             'accept':'*/*',
-            'referer':'https://acbull.site/jdj/',
+            //'referer':'https://acbull.site/jdj/',
             'accept-encoding':'gzip, deflate, br, zstd',
             'sec-fetch-site':'same-origin',
         };
