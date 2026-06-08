@@ -54,6 +54,8 @@
 
                console.log("4444")
         $httpClient.get(initParams, function(errormsg,response,data) {
+                           console.log("5555")
+
             if (errormsg) {
                 console.log(errormsg);
             } else {
