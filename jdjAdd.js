@@ -178,11 +178,11 @@
              
         const inviteResp = await postRequest(inviteParams);
          
-                      console.log("11222........")
+                      console.log("11222........"+inviteResp)
 
         const inviteJson = JSON.parse(inviteResp.body);
 
-              console.log("22222........")
+              console.log("22222........"+inviteJson)
 
         if (inviteJson.code !== 200) {
             throw new Error(`提交失败: ${inviteJson.message}`);
