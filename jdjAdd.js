@@ -86,6 +86,9 @@
         console.log("66666")
         let id = initJson.data.list[0].id;
         for(let i in initJson.data.list){
+            if(initJson.data.list[i].full == true){
+                continue;
+            }
             if(initJson.data.list[i].publisherNoHelpCount>0){
                 id = initJson.data.list[i].id
             }
