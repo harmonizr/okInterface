@@ -53,32 +53,21 @@
 
 
                console.log("4444")
-        $httpClient.get(initParams, function(errormsg,response,data) {
-                           console.log("5555")
+      
+        const initResp = await postRequest(initParams);
+        //const initJson = initResp.body;
+        console.log("55555"+initResp)
 
-            if (errormsg) {
-                console.log(errormsg);
-            } else {
-                console.log("Response Status: "+response.status);
-                console.log("Response Headers: "+JSON.stringify(response.headers));
-                console.log("Response Body: "+data);
+        if (initJson.code !== 200) {
+            throw new Error(`获取 init 失败: ${initJson.message}`);
+        }
+        console.log("66666")
+        let id = initJson.data.list[0].id;
+        for(let i in initJson.data.list){
+            if(initJson.data.list[i].publisherNoHelpCount>0){
+                id = initJson.data.list[i].id
             }
-            $done();
-        });
-        // const initResp = await postRequest(initParams);
-        // const initJson = initResp.body;
-        // console.log("55555"+initJson)
-
-        // if (initJson.code !== 200) {
-        //     throw new Error(`获取 init 失败: ${initJson.message}`);
-        // }
-        // console.log("66666")
-        // let id = initJson.data.list[0].id;
-        // for(let i in initJson.data.list){
-        //     if(initJson.data.list[i].publisherNoHelpCount>0){
-        //         id = initJson.data.list[i].id
-        //     }
-        // }
+        }
         //let id = $argument.helpId;
         console.log("start help.....")
 
