@@ -94,52 +94,54 @@
             }
         }
         //let id = $argument.helpId;
-      console.log("start help.....")
-      let helpUrl = "https://acbull.site/api/jdj/invite-links/"+id+"/used";
-      console.log(helpUrl)
-      let helpHeaders = {
-        'accept-encoding':'gzip, deflate, br, zstd',
-        'accept':'*/*',
-        'sec-fetch-mode':'cors',
-        'sec-fetch-site':'same-origin',
-        'sec-fetch-dest':'empty',
-        'x-network-id': suffix,
-        'content-length':'0',
-        'origin':'https://acbull.site',
-        'user-agent':randomUA,
-        'referer':'https://acbull.site/jdj/',
-        'priority':'u=3, i',
-        'accept-language':'zh-CN,zh-Hans;q=0.9',
-     };
-
-     var helpParams = {
-        url:helpUrl,
-        timeout:5000,
-        headers:helpHeaders,
-        alpn:'h2',
-     };
-
-
-        const helpResp = await postRequest(helpParams);
-        const helpJson = JSON.parse(helpResp.body);
-        console.log(suffix)
-        if(flag ==true){
-            console.log("助力正常链接....")
+        if(initJson.data.checkSubmit.compensationActive == true){
+            console.log("无限补偿中........")
         }else{
-            console.log("助力不良链接....")
+            console.log("start help.....")
+            let helpUrl = "https://acbull.site/api/jdj/invite-links/"+id+"/used";
+            console.log(helpUrl)
+            let helpHeaders = {
+                'accept-encoding':'gzip, deflate, br, zstd',
+                'accept':'*/*',
+                'sec-fetch-mode':'cors',
+                'sec-fetch-site':'same-origin',
+                'sec-fetch-dest':'empty',
+                'x-network-id': suffix,
+                'content-length':'0',
+                'origin':'https://acbull.site',
+                'user-agent':randomUA,
+                'referer':'https://acbull.site/jdj/',
+                'priority':'u=3, i',
+                'accept-language':'zh-CN,zh-Hans;q=0.9',
+            };
+
+            var helpParams = {
+                url:helpUrl,
+                timeout:5000,
+                headers:helpHeaders,
+                alpn:'h2',
+            };
+
+
+            const helpResp = await postRequest(helpParams);
+            const helpJson = JSON.parse(helpResp.body);
+            console.log(suffix)
+            if(flag ==true){
+                console.log("助力正常链接....")
+            }else{
+                console.log("助力不良链接....")
+            }
+            console.log(name)
+            console.log(helpJson)
+
+            if (helpJson.success !== true) {
+                throw new Error(`提交失败: ${helpJson.message}`);
+            }
+
+            console.log("请求成功:"+helpResp.body);
         }
-        console.log(name)
-        console.log(helpJson)
-
-        if (helpJson.success !== true) {
-            throw new Error(`提交失败: ${helpJson.message}`);
-        }
-
-        console.log("请求成功:"+helpResp.body);
-
-      
-      console.log("invite........")
-      let inviteUrl = "https://acbull.site/api/jdj/invite-links";
+        console.log("invite........")
+        let inviteUrl = "https://acbull.site/api/jdj/invite-links";
 
         let inviteHeaders = {
             'accept':'*/*',
