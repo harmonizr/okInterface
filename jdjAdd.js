@@ -28,6 +28,25 @@
                 });
             });
         }
+        function getRequest(params) {
+            return new Promise((resolve, reject) => {
+                $httpClient.get(params, (err, resp, body) => {
+                    if (err) return reject(err);
+                    resolve({ resp, body });
+                });
+            });
+        }
+        // function getRequest(url) {
+        //     return new Promise((resolve, reject) => {
+        //         // GET 请求
+        //         $httpClient.get(url, (resp, body) => {
+        //             resolve({ resp, body });
+        //         }).on('error', err => {
+        //             reject(err);
+        //         });
+        //     });
+        // }
+
         console.log("start init.....")
         let firstUrl = "https://acbull.site/api/jdj/init";
 
@@ -62,12 +81,12 @@
 
 
         console.log("4444")
-        const firstResp = await postRequest(firstParams);
-               console.log("55555"+JSON.stringify(firstResp))
+        // const firstResp = await postRequest(firstParams);
+        //        console.log("55555"+JSON.stringify(firstResp))
 
         //if(initResp.resp)
        
-        const initResp = await postRequest(initParams);
+        const initResp = await getRequest(initParams);
                   console.log("55555"+initResp.Headers)
 
          console.log("55555"+JSON.stringify(initResp))
