@@ -105,12 +105,13 @@
             if(initJson.data.list[i].publisherNoHelpCount>0){
                 id = initJson.data.list[i].id;
                 name = initJson.data.list[i].publisherDisplayName;
-                flag = false;
+                Flag = false;
             }
         }
         //let id = $argument.helpId;
         if(initJson.data.checkSubmit.compensationActive == true){
             console.log("无限补偿中........")
+            console.log(suffix)
         }else{
             console.log("start help.....")
             let helpUrl = "https://acbull.site/api/jdj/invite-links/"+id+"/used";
@@ -141,7 +142,7 @@
             const helpResp = await postRequest(helpParams);
             const helpJson = JSON.parse(helpResp.body);
             console.log(suffix)
-            if(flag ==true){
+            if(Flag ==true){
                 console.log("助力正常链接....")
             }else{
                 console.log("助力不良链接....")
