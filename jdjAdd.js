@@ -4,8 +4,8 @@
         let randomUA = "";
         let suffix = "";
 
-        //大于三次重置i为0，换个uid,小于三次，从$persistentStore.read拿之前的
-        if(i>=3){
+        //大于设置的次数重置i为0，换个uid,小于设置的次数，从$persistentStore.read拿之前的
+        if(i>=$argument.times){
             i=0;
         }
         if(i==0){
