@@ -238,7 +238,9 @@
 
             console.log("请求成功:"+inviteResp.body);
            //无限补偿要重置账号，一个账号只能提交一次
-            $persistentStore.write(0, "i");
+           if(initJson.data.checkSubmit.compensationActive == true){
+                $persistentStore.write(0, "i");
+           }
 
             $done(); // 只调用一次，结束脚本
         }else{
