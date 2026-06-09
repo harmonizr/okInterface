@@ -69,14 +69,10 @@
             headers:headers,
             alpn:'h2',
         };
-
-
-        console.log("4444")
   
-       
         const initResp = await getRequest(initParams);
 
-        console.log("55555"+JSON.stringify(initResp))
+        //console.log("initResp..."+JSON.stringify(initResp))
         const initJson = JSON.parse(initResp.body);
        
 
@@ -176,18 +172,14 @@
              
         const inviteResp = await postRequest(inviteParams);
          
-        console.log("11222........")
+        console.log("inviteResp........")
         console.log(JSON.stringify(inviteResp))
         const inviteJson = JSON.parse(inviteResp.body);
-
-        console.log("22222........")
-        console.log(inviteJson)
 
 
         if (inviteResp.resp.status !== 200) {
             throw new Error(`提交失败: ${inviteJson.message}`);
         }
-              console.log("33333........")
 
         console.log("请求成功:"+inviteResp.body);
 
