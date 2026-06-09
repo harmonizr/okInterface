@@ -55,8 +55,8 @@
                console.log("4444")
       
         const initResp = await postRequest(initParams);
-         console.log("55555"+initResp)
-          console.log("55555"+initResp.headers)
+         console.log("55555"+JSON.parse(initResp))
+          console.log("55555"+initResp.Headers)
         const initJson = initResp.body;
        
 
