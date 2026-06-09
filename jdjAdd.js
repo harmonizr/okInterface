@@ -155,7 +155,7 @@
             'referer':'https://acbull.site/jdj/',
             'sec-fetch-mode':'cors',
             'origin':'https://acbull.site',
-            'x-network-id':"nid_rh5zixo6xzlx9z3v",
+            'x-network-id':"nid_ajtzykqqyiftiocj",
             'content-type':'application/json',
             'sec-fetch-dest':'empty',
         };
