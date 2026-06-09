@@ -70,10 +70,10 @@
                 body:JSON.stringify(body),
             };
             const getNameResp = await getRequest(params);
-            const getNameJson = JSON.parse(getNameResp.body);
-            if (getNameResp.resp.status !== 200) {
-                throw new Error(`获取 name 失败: ${getNameJson.message}`);
-            }
+            // const getNameJson = JSON.parse(getNameResp.body);
+            // if (getNameResp.resp.status !== 200) {
+            //     throw new Error(`获取 name 失败: ${getNameJson.message}`);
+            // }
             console.log("请求name成功:"+getNameResp.body);
 
 
@@ -83,7 +83,7 @@
             randomUA = $persistentStore.read("randomUA");
 
         }
-
+        return;
         console.log("start init.....")
         let firstUrl = "https://acbull.site/api/jdj/init";
 
