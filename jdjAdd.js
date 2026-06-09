@@ -149,7 +149,7 @@
             'sec-fetch-site':'same-origin',
             'accept-encoding':'gzip, deflate, br, zstd',
             'priority':'u=3, i',
-            'content-length':'101',
+            //'content-length':'101',
             'user-agent':randomUA,
             'accept-language':'zh-CN,zh-Hans;q=0.9',
             'referer':'https://acbull.site/jdj/',
@@ -195,8 +195,8 @@
         $done(); // 只调用一次，结束脚本
 
     } catch (err) {
-        console.log("脚本异常:"+err.message);
-        $notification.post("脚本异常", "", err.message);
+        console.log("脚本异常:"+err);
+        $notification.post("脚本异常", "", JSON.stringify(err));
         $done();
     }
 })();
