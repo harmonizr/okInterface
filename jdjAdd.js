@@ -186,6 +186,9 @@
             }
 
             console.log("请求成功:"+helpResp.body);
+            $persistentStore.write(i + 1, "i");
+            $persistentStore.write(randomUA, "randomUA");
+            $persistentStore.write(suffix, "suffix");
         }
 
         if(i==0||initJson.data.checkSubmit.compensationActive == true){
@@ -234,12 +237,14 @@
             }
 
             console.log("请求成功:"+inviteResp.body);
-
+            if(initJson.data.checkSubmit.compensationActive == true){
+                $persistentStore.write(i + 1, "i");
+                $persistentStore.write(randomUA, "randomUA");
+                $persistentStore.write(suffix, "suffix");
+            }
             $done(); // 只调用一次，结束脚本
         }else{
-            $persistentStore.write(i + 1, "i");
-            $persistentStore.write(randomUA, "randomUA");
-            $persistentStore.write(suffix, "suffix");
+           
             $done(); // 只调用一次，结束脚本
         }
 
