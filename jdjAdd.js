@@ -174,13 +174,9 @@
         };
               console.log("1111........")
               console.log(inviteParams)
-              try{
+             
         const inviteResp = await postRequest(inviteParams);
-         } catch (err) {
-        console.log("脚本异常llll:"+err.message);
-        $notification.post("脚本异常lll", "", err.message);
-        $done();
-    }
+         
                       console.log("11222........")
 
         const inviteJson = JSON.parse(inviteResp.body);
