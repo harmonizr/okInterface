@@ -66,9 +66,10 @@
                 url:url,
                 timeout:5000,
                 headers:headers,
-                alpn:'h2',
+                //alpn:'h2',
                 body:JSON.stringify(body),
             };
+            console.log(params)
             const getNameResp = await postRequest(params);
             const getNameJson = JSON.parse(getNameResp.body);
             if (getNameResp.resp.status !== 200) {
