@@ -142,6 +142,9 @@
         //let id = $argument.helpId;
         if(initJson.data.checkSubmit.compensationActive == true){
             console.log("无限补偿中........")
+             //就是先助力了，i+1了，再补偿的话i！=0了，suffix会用旧的，所以重新赋值
+            suffix = $persistentStore.read("suffix");
+            randomUA = $persistentStore.read("randomUA");
             console.log(suffix)
         }else{
             console.log("start help.....")
