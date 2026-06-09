@@ -179,7 +179,7 @@
         const inviteResp = await postRequest(inviteParams);
          
                       console.log("11222........")
-                      console.log(stringify(inviteResp))
+                      console.log(JSON.stringify(inviteResp))
         const inviteJson = JSON.parse(inviteResp.body);
 
         console.log("22222........")
