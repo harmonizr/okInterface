@@ -1,22 +1,33 @@
 (async () => {
     try {
-         const uaList = [
-            "Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1",
-            "Mozilla/5.0 (iPhone; CPU iPhone OS 16_7 like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1"
-        ];
-        const randomUA = uaList[Math.floor(Math.random() * uaList.length)];
-
-          // 字符集：大小写字母 + 数字
-        const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-        // 后缀长度（和你示例一致：16位）
-        const suffixLen = 16;
-        let suffix = '';
-        
-        for (let i = 0; i < suffixLen; i++) {
-            const randomIdx = Math.floor(Math.random() * chars.length);
-            suffix += chars[randomIdx];
+        let i = Number($persistentStore.read("i")) || 0;
+        //大于三次重置i为0，换个uid,小于三次，从$persistentStore.read拿之前的
+        if(i>=3){
+            i=0;
         }
-        suffix = "nid_"+suffix;
+        if(i==0){
+            const uaList = [
+                "Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1",
+                "Mozilla/5.0 (iPhone; CPU iPhone OS 16_7 like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1"
+            ];
+            const randomUA = uaList[Math.floor(Math.random() * uaList.length)];
+
+            // 字符集：大小写字母 + 数字
+            const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+            // 后缀长度（和你示例一致：16位）
+            const suffixLen = 16;
+            let suffix = '';
+            
+            for (let i = 0; i < suffixLen; i++) {
+                const randomIdx = Math.floor(Math.random() * chars.length);
+                suffix += chars[randomIdx];
+            }
+            suffix = "nid_"+suffix;
+        }else{
+            suffix = $persistentStore.read("suffix");
+            randomUA = $persistentStore.read("randomUA");
+
+        }
   
 
         // 封装 $httpClient.post 为 Promise
@@ -186,6 +197,9 @@
 
         console.log("请求成功:"+inviteResp.body);
 
+        $persistentStore.write(i + 1, "i");
+        $persistentStore.write(randomUA, "randomUA");
+        $persistentStore.write(suffix, "suffix");
 
         $done(); // 只调用一次，结束脚本
 
