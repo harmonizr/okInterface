@@ -32,7 +32,7 @@
             randomUA = $persistentStore.read("randomUA");
 
         }
-        return;
+        
 
         // 封装 $httpClient.post 为 Promise
         function postRequest(params) {
