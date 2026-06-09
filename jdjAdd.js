@@ -69,11 +69,11 @@
                 alpn:'h2',
                 body:JSON.stringify(body),
             };
-            const getNameResp = await getRequest(params);
-            // const getNameJson = JSON.parse(getNameResp.body);
-            // if (getNameResp.resp.status !== 200) {
-            //     throw new Error(`获取 name 失败: ${getNameJson.message}`);
-            // }
+            const getNameResp = await postRequest(params);
+            const getNameJson = JSON.parse(getNameResp.body);
+            if (getNameResp.resp.status !== 200) {
+                throw new Error(`获取 name 失败: ${getNameJson.message}`);
+            }
             console.log("请求name成功:"+getNameResp.body);
 
 
