@@ -169,7 +169,8 @@
             url:inviteUrl,
             timeout:5000,
             headers:inviteHeaders,
-            alpn:'h2',
+            
+            //alpn:'h2',
             body:JSON.stringify(inviteBody),
         };
               console.log("1111........")
