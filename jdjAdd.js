@@ -36,16 +36,7 @@
                 });
             });
         }
-        // function getRequest(url) {
-        //     return new Promise((resolve, reject) => {
-        //         // GET 请求
-        //         $httpClient.get(url, (resp, body) => {
-        //             resolve({ resp, body });
-        //         }).on('error', err => {
-        //             reject(err);
-        //         });
-        //     });
-        // }
+     
 
         console.log("start init.....")
         let firstUrl = "https://acbull.site/api/jdj/init";
@@ -89,7 +80,7 @@
         const initJson = initResp.body;
        
 
-        if (initJson.status !== 200) {
+        if (initResp.status !== 200) {
             throw new Error(`获取 init 失败: ${initJson.message}`);
         }
         console.log("66666")
