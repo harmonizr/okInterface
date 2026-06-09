@@ -81,19 +81,15 @@
 
 
         console.log("4444")
-        // const firstResp = await postRequest(firstParams);
-        //        console.log("55555"+JSON.stringify(firstResp))
-
-        //if(initResp.resp)
+  
        
         const initResp = await getRequest(initParams);
-                  console.log("55555"+initResp.Headers)
 
-         console.log("55555"+JSON.stringify(initResp))
+        console.log("55555"+JSON.stringify(initResp))
         const initJson = initResp.body;
        
 
-        if (initJson.code !== 200) {
+        if (initJson.status !== 200) {
             throw new Error(`获取 init 失败: ${initJson.message}`);
         }
         console.log("66666")
