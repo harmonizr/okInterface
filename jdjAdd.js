@@ -148,7 +148,7 @@
             'sec-fetch-site':'same-origin',
             'accept-encoding':'gzip, deflate, br, zstd',
             'priority':'u=3, i',
-            'content-length':'100',
+            'content-length':'101',
             'user-agent':randomUA,
             'accept-language':'zh-CN,zh-Hans;q=0.9',
             'referer':'https://acbull.site/jdj/',
@@ -159,11 +159,10 @@
             'sec-fetch-dest':'empty',
         };
         console.log($argument.tjbUrl)
-        //  let inviteBody = {
-        //     link: $argument.tjbUrl,
-        //     maxHelp:10
-        // };
-        let inviteBody = "{\"link\":\"69₴yzlXgXeYdYS🗝 https://m.tb.cn/h.Rk1QbNV  CZ007 最高赚188加抵金 1\",\"maxHelp\":10}"
+        let inviteBody = {
+            link: $argument.tjbUrl,
+            maxHelp:10
+        };
 
         var inviteParams = {
             url:inviteUrl,
