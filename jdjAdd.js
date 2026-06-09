@@ -155,57 +155,58 @@
 
             console.log("请求成功:"+helpResp.body);
         }
-        console.log("invite........")
-        let inviteUrl = "https://acbull.site/api/jdj/invite-links";
-
-        let inviteHeaders = {
-            'accept':'*/*',
-            'sec-fetch-site':'same-origin',
-            'accept-encoding':'gzip, deflate, br, zstd',
-            'priority':'u=3, i',
-            //'content-length':'101',
-            'user-agent':randomUA,
-            'accept-language':'zh-CN,zh-Hans;q=0.9',
-            'referer':'https://acbull.site/jdj/',
-            'sec-fetch-mode':'cors',
-            'origin':'https://acbull.site',
-            'x-network-id':suffix,
-            'content-type':'application/json',
-            'sec-fetch-dest':'empty',
-        };
-        console.log($argument.tjbUrl)
-        let inviteBody = {
-            link: $argument.tjbUrl,
-            maxHelp:10
-        };
-
-        var inviteParams = {
-            url:inviteUrl,
-            timeout:5000,
-            headers:inviteHeaders,
-            
-            //alpn:'h2',
-            body:JSON.stringify(inviteBody),
-        };
-             
-        const inviteResp = await postRequest(inviteParams);
-         
-        console.log("inviteResp........")
-        console.log(JSON.stringify(inviteResp))
-        const inviteJson = JSON.parse(inviteResp.body);
-
-
-        if (inviteResp.resp.status !== 200) {
-            throw new Error(`提交失败: ${inviteJson.message}`);
-        }
-
-        console.log("请求成功:"+inviteResp.body);
-
         $persistentStore.write(i + 1, "i");
         $persistentStore.write(randomUA, "randomUA");
         $persistentStore.write(suffix, "suffix");
+        if(i==0){
+            console.log("invite........")
+            let inviteUrl = "https://acbull.site/api/jdj/invite-links";
 
-        $done(); // 只调用一次，结束脚本
+            let inviteHeaders = {
+                'accept':'*/*',
+                'sec-fetch-site':'same-origin',
+                'accept-encoding':'gzip, deflate, br, zstd',
+                'priority':'u=3, i',
+                //'content-length':'101',
+                'user-agent':randomUA,
+                'accept-language':'zh-CN,zh-Hans;q=0.9',
+                'referer':'https://acbull.site/jdj/',
+                'sec-fetch-mode':'cors',
+                'origin':'https://acbull.site',
+                'x-network-id':suffix,
+                'content-type':'application/json',
+                'sec-fetch-dest':'empty',
+            };
+            console.log($argument.tjbUrl)
+            let inviteBody = {
+                link: $argument.tjbUrl,
+                maxHelp:10
+            };
+
+            var inviteParams = {
+                url:inviteUrl,
+                timeout:5000,
+                headers:inviteHeaders,
+                
+                //alpn:'h2',
+                body:JSON.stringify(inviteBody),
+            };
+                
+            const inviteResp = await postRequest(inviteParams);
+            
+            console.log("inviteResp........")
+            console.log(JSON.stringify(inviteResp))
+            const inviteJson = JSON.parse(inviteResp.body);
+
+
+            if (inviteResp.resp.status !== 200) {
+                throw new Error(`提交失败: ${inviteJson.message}`);
+            }
+
+            console.log("请求成功:"+inviteResp.body);
+
+            $done(); // 只调用一次，结束脚本
+        }
 
     } catch (err) {
         console.log("脚本异常:"+err);
