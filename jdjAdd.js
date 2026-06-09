@@ -79,21 +79,22 @@
         if (initResp.resp.status !== 200) {
             throw new Error(`获取 init 失败: ${initJson.message}`);
         }
-        console.log("66666")
         let Flag =  true;
 
         let id = initJson.data.list[0].id;
+        let name = initJson.data.list[0].publisherDisplayName;
         for(let i in initJson.data.list){
             if(initJson.data.list[i].full == true){
                 continue;
             }
             if(initJson.data.list[i].publisherNoHelpCount>0){
                 id = initJson.data.list[i].id;
+                name = initJson.data.list[i].publisherDisplayName;
                 flag = false;
             }
         }
         //let id = $argument.helpId;
-        console.log("start help.....")
+      console.log("start help.....")
       let helpUrl = "https://acbull.site/api/jdj/invite-links/"+id+"/used";
       console.log(helpUrl)
       let helpHeaders = {
@@ -127,7 +128,7 @@
         }else{
             console.log("助力不良链接....")
         }
-        console.log(helpResp)
+        console.log(name)
         console.log(helpJson)
 
         if (helpJson.success !== true) {
