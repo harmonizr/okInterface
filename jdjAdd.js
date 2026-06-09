@@ -143,21 +143,36 @@
       
       console.log("invite........")
       let inviteUrl = "https://acbull.site/api/jdj/invite-links";
-        let inviteHeaders = {
-            'accept':'*/*',
-            'sec-fetch-site':'same-origin',
+      let inviteHeaders = {
             'accept-encoding':'gzip, deflate, br, zstd',
-            'priority':'u=3, i',
-            //'content-length':'101',
-            'user-agent':randomUA,
-            'accept-language':'zh-CN,zh-Hans;q=0.9',
-            'referer':'https://acbull.site/jdj/',
+            'content-length':'101',
+            'accept':'*/*',
             'sec-fetch-mode':'cors',
-            'origin':'https://acbull.site',
-            'x-network-id':suffix,
-            'content-type':'application/json',
             'sec-fetch-dest':'empty',
+            'content-type':'application/json',
+            'accept-language':'zh-CN,zh-Hans;q=0.9',
+            'x-network-id':suffix,
+            'referer':'https://acbull.site/jdj/',
+            'sec-fetch-site':'same-origin',
+            'priority':'u=3, i',
+            'user-agent':'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Mobile/15E148 Safari/604.1',
+            'origin':'https://acbull.site',
         };
+        // let inviteHeaders = {
+        //     //'accept':'*/*',
+        //     //'sec-fetch-site':'same-origin',
+        //     'accept-encoding':'gzip, deflate, br, zstd',
+        //     'priority':'u=3, i',
+        //     //'content-length':'101',
+        //     'user-agent':randomUA,
+        //     'accept-language':'zh-CN,zh-Hans;q=0.9',
+        //     'referer':'https://acbull.site/jdj/',
+        //     'sec-fetch-mode':'cors',
+        //     'origin':'https://acbull.site',
+        //     'x-network-id':suffix,
+        //     'content-type':'application/json',
+        //     'sec-fetch-dest':'empty',
+        // };
         console.log($argument.tjbUrl)
         let inviteBody = {
             link: $argument.tjbUrl,
