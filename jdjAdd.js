@@ -48,7 +48,7 @@
             let headers = {
                 'origin':'https://acbull.site',
                 'user-agent':randomUA,
-                'content-length':'20',
+                //'content-length':'20',
                 'referer':'https://acbull.site/jdj/',
                 'accept':'*/*',
                 'sec-fetch-dest':'empty',
