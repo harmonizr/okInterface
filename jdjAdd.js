@@ -237,11 +237,7 @@
             }
 
             console.log("请求成功:"+inviteResp.body);
-            if(initJson.data.checkSubmit.compensationActive == true){
-                $persistentStore.write(i + 1, "i");
-                $persistentStore.write(randomUA, "randomUA");
-                $persistentStore.write(suffix, "suffix");
-            }
+           //无限补偿要重置账号，一个账号只能提交一次
             $done(); // 只调用一次，结束脚本
         }else{
            
