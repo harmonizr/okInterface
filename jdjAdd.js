@@ -1,6 +1,9 @@
 (async () => {
     try {
         let i = Number($persistentStore.read("i")) || 0;
+        const randomUA = "";
+        const suffix = "";
+
         //大于三次重置i为0，换个uid,小于三次，从$persistentStore.read拿之前的
         if(i>=3){
             i=0;
