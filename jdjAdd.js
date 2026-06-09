@@ -39,7 +39,7 @@
             'x-network-id': suffix,
             'priority':'u=3, i',
             'accept':'*/*',
-            //'referer':'https://acbull.site/jdj/',
+            'referer':'https://acbull.site/jdj/',
             'accept-encoding':'gzip, deflate, br, zstd',
             'sec-fetch-site':'same-origin',
         };
@@ -55,8 +55,10 @@
                console.log("4444")
       
         const initResp = await postRequest(initParams);
-        //const initJson = initResp.body;
-        console.log("55555"+initResp)
+         console.log("55555"+initResp)
+          console.log("55555"+initResp.headers)
+        const initJson = initResp.body;
+       
 
         if (initJson.code !== 200) {
             throw new Error(`获取 init 失败: ${initJson.message}`);
