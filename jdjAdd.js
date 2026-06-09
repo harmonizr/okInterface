@@ -84,18 +84,20 @@
             throw new Error(`获取 init 失败: ${initJson.message}`);
         }
         console.log("66666")
+        let Flag =  true;
+
         let id = initJson.data.list[0].id;
         for(let i in initJson.data.list){
             if(initJson.data.list[i].full == true){
                 continue;
             }
             if(initJson.data.list[i].publisherNoHelpCount>0){
-                id = initJson.data.list[i].id
+                id = initJson.data.list[i].id;
+                flag = false;
             }
         }
         //let id = $argument.helpId;
         console.log("start help.....")
-
       let helpUrl = "https://acbull.site/api/jdj/invite-links/"+id+"/used";
       console.log(helpUrl)
       let helpHeaders = {
@@ -124,6 +126,11 @@
         const helpResp = await postRequest(helpParams);
         const helpJson = JSON.parse(helpResp.body);
         console.log(suffix)
+        if(flag ==true){
+            console.log("助力正常链接....")
+        }else{
+            console.log("助力不良链接....")
+        }
         console.log(helpResp)
         console.log(helpJson)
 
@@ -151,6 +158,7 @@
             'content-type':'application/json',
             'sec-fetch-dest':'empty',
         };
+        console.log($argument.tjbUrl)
          let inviteBody = {
             link: $argument.tjbUrl,
             maxHelp:10
@@ -164,7 +172,7 @@
             body:inviteBody,
         };
               console.log("1111........")
-
+              console.log(inviteParams)
         const inviteResp = await postRequest(inviteParams);
                       console.log("11222........")
 
