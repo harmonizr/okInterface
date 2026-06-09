@@ -159,10 +159,11 @@
             'sec-fetch-dest':'empty',
         };
         console.log($argument.tjbUrl)
-         let inviteBody = {
-            link: $argument.tjbUrl,
-            maxHelp:10
-        };
+        //  let inviteBody = {
+        //     link: $argument.tjbUrl,
+        //     maxHelp:10
+        // };
+        let inviteBody = "{\"link\":\"69₴yzlXgXeYdYS🗝 https://m.tb.cn/h.Rk1QbNV  CZ007 最高赚188加抵金 1\",\"maxHelp\":10}"
 
         var inviteParams = {
             url:inviteUrl,
