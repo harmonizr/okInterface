@@ -9,17 +9,17 @@
             i=0;
         }
         if(i==0){
+            console.log("i==0....")
             const uaList = [
                 "Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1",
                 "Mozilla/5.0 (iPhone; CPU iPhone OS 16_7 like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1"
             ];
-            const randomUA = uaList[Math.floor(Math.random() * uaList.length)];
+            randomUA = uaList[Math.floor(Math.random() * uaList.length)];
 
             // 字符集：大小写字母 + 数字
             const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
             // 后缀长度（和你示例一致：16位）
             const suffixLen = 16;
-            let suffix = '';
             
             for (let i = 0; i < suffixLen; i++) {
                 const randomIdx = Math.floor(Math.random() * chars.length);
@@ -27,11 +27,12 @@
             }
             suffix = "nid_"+suffix;
         }else{
+            console.log("i!=0....")
             suffix = $persistentStore.read("suffix");
             randomUA = $persistentStore.read("randomUA");
 
         }
-  
+        return;
 
         // 封装 $httpClient.post 为 Promise
         function postRequest(params) {
