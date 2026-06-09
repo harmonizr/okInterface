@@ -83,165 +83,165 @@
             randomUA = $persistentStore.read("randomUA");
 
         }
-        return;
-        console.log("start init.....")
-        let firstUrl = "https://acbull.site/api/jdj/init";
+        // return;
+        // console.log("start init.....")
+        // let firstUrl = "https://acbull.site/api/jdj/init";
 
 
-        let url = "https://acbull.site/api/jdj/init";
-        let headers = {
-            'user-agent': randomUA,
-            'sec-fetch-dest':'empty',
-            'accept-language':'zh-CN,zh-Hans;q=0.9',
-            'sec-fetch-mode':'cors',
-            'x-network-id': suffix,
-            'priority':'u=3, i',
-            'accept':'*/*',
-            'referer':'https://acbull.site/jdj/',
-            'accept-encoding':'gzip, deflate, br, zstd',
-            'sec-fetch-site':'same-origin',
-        };
+        // let url = "https://acbull.site/api/jdj/init";
+        // let headers = {
+        //     'user-agent': randomUA,
+        //     'sec-fetch-dest':'empty',
+        //     'accept-language':'zh-CN,zh-Hans;q=0.9',
+        //     'sec-fetch-mode':'cors',
+        //     'x-network-id': suffix,
+        //     'priority':'u=3, i',
+        //     'accept':'*/*',
+        //     'referer':'https://acbull.site/jdj/',
+        //     'accept-encoding':'gzip, deflate, br, zstd',
+        //     'sec-fetch-site':'same-origin',
+        // };
 
-        var initParams = {
-            url:url,
-            timeout:5000,
-            headers:headers,
-            alpn:'h2',
-        };
+        // var initParams = {
+        //     url:url,
+        //     timeout:5000,
+        //     headers:headers,
+        //     alpn:'h2',
+        // };
 
-        var firstParams = {
-            url:firstUrl,
-            timeout:5000,
-            headers:headers,
-            alpn:'h2',
-        };
+        // var firstParams = {
+        //     url:firstUrl,
+        //     timeout:5000,
+        //     headers:headers,
+        //     alpn:'h2',
+        // };
   
-        const initResp = await getRequest(initParams);
+        // const initResp = await getRequest(initParams);
 
-        //console.log("initResp..."+JSON.stringify(initResp))
-        const initJson = JSON.parse(initResp.body);
+        // //console.log("initResp..."+JSON.stringify(initResp))
+        // const initJson = JSON.parse(initResp.body);
        
 
-        if (initResp.resp.status !== 200) {
-            throw new Error(`获取 init 失败: ${initJson.message}`);
-        }
-        let Flag =  true;
+        // if (initResp.resp.status !== 200) {
+        //     throw new Error(`获取 init 失败: ${initJson.message}`);
+        // }
+        // let Flag =  true;
 
-        let id = initJson.data.list[0].id;
-        let name = initJson.data.list[0].publisherDisplayName;
-        for(let i in initJson.data.list){
-            if(initJson.data.list[i].full == true){
-                continue;
-            }
-            if(initJson.data.list[i].publisherNoHelpCount>0){
-                id = initJson.data.list[i].id;
-                name = initJson.data.list[i].publisherDisplayName;
-                Flag = false;
-            }
-        }
-        //let id = $argument.helpId;
-        if(initJson.data.checkSubmit.compensationActive == true){
-            console.log("无限补偿中........")
-            console.log(suffix)
-        }else{
-            console.log("start help.....")
-            let helpUrl = "https://acbull.site/api/jdj/invite-links/"+id+"/used";
-            console.log(helpUrl)
-            let helpHeaders = {
-                'accept-encoding':'gzip, deflate, br, zstd',
-                'accept':'*/*',
-                'sec-fetch-mode':'cors',
-                'sec-fetch-site':'same-origin',
-                'sec-fetch-dest':'empty',
-                'x-network-id': suffix,
-                'content-length':'0',
-                'origin':'https://acbull.site',
-                'user-agent':randomUA,
-                'referer':'https://acbull.site/jdj/',
-                'priority':'u=3, i',
-                'accept-language':'zh-CN,zh-Hans;q=0.9',
-            };
+        // let id = initJson.data.list[0].id;
+        // let name = initJson.data.list[0].publisherDisplayName;
+        // for(let i in initJson.data.list){
+        //     if(initJson.data.list[i].full == true){
+        //         continue;
+        //     }
+        //     if(initJson.data.list[i].publisherNoHelpCount>0){
+        //         id = initJson.data.list[i].id;
+        //         name = initJson.data.list[i].publisherDisplayName;
+        //         Flag = false;
+        //     }
+        // }
+        // //let id = $argument.helpId;
+        // if(initJson.data.checkSubmit.compensationActive == true){
+        //     console.log("无限补偿中........")
+        //     console.log(suffix)
+        // }else{
+        //     console.log("start help.....")
+        //     let helpUrl = "https://acbull.site/api/jdj/invite-links/"+id+"/used";
+        //     console.log(helpUrl)
+        //     let helpHeaders = {
+        //         'accept-encoding':'gzip, deflate, br, zstd',
+        //         'accept':'*/*',
+        //         'sec-fetch-mode':'cors',
+        //         'sec-fetch-site':'same-origin',
+        //         'sec-fetch-dest':'empty',
+        //         'x-network-id': suffix,
+        //         'content-length':'0',
+        //         'origin':'https://acbull.site',
+        //         'user-agent':randomUA,
+        //         'referer':'https://acbull.site/jdj/',
+        //         'priority':'u=3, i',
+        //         'accept-language':'zh-CN,zh-Hans;q=0.9',
+        //     };
 
-            var helpParams = {
-                url:helpUrl,
-                timeout:5000,
-                headers:helpHeaders,
-                alpn:'h2',
-            };
+        //     var helpParams = {
+        //         url:helpUrl,
+        //         timeout:5000,
+        //         headers:helpHeaders,
+        //         alpn:'h2',
+        //     };
 
 
-            const helpResp = await postRequest(helpParams);
-            const helpJson = JSON.parse(helpResp.body);
-            console.log(suffix)
-            if(Flag ==true){
-                console.log("助力正常链接....")
-            }else{
-                console.log("助力不良链接....")
-            }
-            console.log(name)
-            console.log(helpJson)
+        //     const helpResp = await postRequest(helpParams);
+        //     const helpJson = JSON.parse(helpResp.body);
+        //     console.log(suffix)
+        //     if(Flag ==true){
+        //         console.log("助力正常链接....")
+        //     }else{
+        //         console.log("助力不良链接....")
+        //     }
+        //     console.log(name)
+        //     console.log(helpJson)
 
-            if (helpJson.success !== true) {
-                throw new Error(`提交失败: ${helpJson.message}`);
-            }
+        //     if (helpJson.success !== true) {
+        //         throw new Error(`提交失败: ${helpJson.message}`);
+        //     }
 
-            console.log("请求成功:"+helpResp.body);
-        }
+        //     console.log("请求成功:"+helpResp.body);
+        // }
 
-        if(i==0||initJson.data.checkSubmit.compensationActive == true){
-            console.log("invite........")
-            let inviteUrl = "https://acbull.site/api/jdj/invite-links";
+        // if(i==0||initJson.data.checkSubmit.compensationActive == true){
+        //     console.log("invite........")
+        //     let inviteUrl = "https://acbull.site/api/jdj/invite-links";
 
-            let inviteHeaders = {
-                'accept':'*/*',
-                'sec-fetch-site':'same-origin',
-                'accept-encoding':'gzip, deflate, br, zstd',
-                'priority':'u=3, i',
-                //'content-length':'101',
-                'user-agent':randomUA,
-                'accept-language':'zh-CN,zh-Hans;q=0.9',
-                'referer':'https://acbull.site/jdj/',
-                'sec-fetch-mode':'cors',
-                'origin':'https://acbull.site',
-                'x-network-id':suffix,
-                'content-type':'application/json',
-                'sec-fetch-dest':'empty',
-            };
-            console.log($argument.tjbUrl)
-            let inviteBody = {
-                link: $argument.tjbUrl,
-                maxHelp:10
-            };
+        //     let inviteHeaders = {
+        //         'accept':'*/*',
+        //         'sec-fetch-site':'same-origin',
+        //         'accept-encoding':'gzip, deflate, br, zstd',
+        //         'priority':'u=3, i',
+        //         //'content-length':'101',
+        //         'user-agent':randomUA,
+        //         'accept-language':'zh-CN,zh-Hans;q=0.9',
+        //         'referer':'https://acbull.site/jdj/',
+        //         'sec-fetch-mode':'cors',
+        //         'origin':'https://acbull.site',
+        //         'x-network-id':suffix,
+        //         'content-type':'application/json',
+        //         'sec-fetch-dest':'empty',
+        //     };
+        //     console.log($argument.tjbUrl)
+        //     let inviteBody = {
+        //         link: $argument.tjbUrl,
+        //         maxHelp:10
+        //     };
 
-            var inviteParams = {
-                url:inviteUrl,
-                timeout:5000,
-                headers:inviteHeaders,
+        //     var inviteParams = {
+        //         url:inviteUrl,
+        //         timeout:5000,
+        //         headers:inviteHeaders,
                 
-                //alpn:'h2',
-                body:JSON.stringify(inviteBody),
-            };
+        //         //alpn:'h2',
+        //         body:JSON.stringify(inviteBody),
+        //     };
                 
-            const inviteResp = await postRequest(inviteParams);
+        //     const inviteResp = await postRequest(inviteParams);
             
-            console.log("inviteResp........")
-            console.log(JSON.stringify(inviteResp))
-            const inviteJson = JSON.parse(inviteResp.body);
+        //     console.log("inviteResp........")
+        //     console.log(JSON.stringify(inviteResp))
+        //     const inviteJson = JSON.parse(inviteResp.body);
 
 
-            if (inviteResp.resp.status !== 200) {
-                throw new Error(`提交失败: ${inviteJson.message}`);
-            }
+        //     if (inviteResp.resp.status !== 200) {
+        //         throw new Error(`提交失败: ${inviteJson.message}`);
+        //     }
 
-            console.log("请求成功:"+inviteResp.body);
+        //     console.log("请求成功:"+inviteResp.body);
 
-            $done(); // 只调用一次，结束脚本
-        }else{
-            $persistentStore.write(i + 1, "i");
-            $persistentStore.write(randomUA, "randomUA");
-            $persistentStore.write(suffix, "suffix");
-            $done(); // 只调用一次，结束脚本
-        }
+        //     $done(); // 只调用一次，结束脚本
+        // }else{
+        //     $persistentStore.write(i + 1, "i");
+        //     $persistentStore.write(randomUA, "randomUA");
+        //     $persistentStore.write(suffix, "suffix");
+        //     $done(); // 只调用一次，结束脚本
+        // }
 
     } catch (err) {
         console.log("脚本异常:"+err);
