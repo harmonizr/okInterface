@@ -28,117 +28,117 @@
                 });
             });
         }
-    //     function getRequest(params) {
-    //         return new Promise((resolve, reject) => {
-    //             $httpClient.get(params, (err, resp, body) => {
-    //                 if (err) return reject(err);
-    //                 resolve({ resp, body });
-    //             });
-    //         });
-    //     }
+        function getRequest(params) {
+            return new Promise((resolve, reject) => {
+                $httpClient.get(params, (err, resp, body) => {
+                    if (err) return reject(err);
+                    resolve({ resp, body });
+                });
+            });
+        }
      
 
-    //     console.log("start init.....")
-    //     let firstUrl = "https://acbull.site/api/jdj/init";
+        console.log("start init.....")
+        let firstUrl = "https://acbull.site/api/jdj/init";
 
 
-    //     let url = "https://acbull.site/api/jdj/init";
-    //     let headers = {
-    //         'user-agent': randomUA,
-    //         'sec-fetch-dest':'empty',
-    //         'accept-language':'zh-CN,zh-Hans;q=0.9',
-    //         'sec-fetch-mode':'cors',
-    //         'x-network-id': suffix,
-    //         'priority':'u=3, i',
-    //         'accept':'*/*',
-    //         'referer':'https://acbull.site/jdj/',
-    //         'accept-encoding':'gzip, deflate, br, zstd',
-    //         'sec-fetch-site':'same-origin',
-    //     };
+        let url = "https://acbull.site/api/jdj/init";
+        let headers = {
+            'user-agent': randomUA,
+            'sec-fetch-dest':'empty',
+            'accept-language':'zh-CN,zh-Hans;q=0.9',
+            'sec-fetch-mode':'cors',
+            'x-network-id': suffix,
+            'priority':'u=3, i',
+            'accept':'*/*',
+            'referer':'https://acbull.site/jdj/',
+            'accept-encoding':'gzip, deflate, br, zstd',
+            'sec-fetch-site':'same-origin',
+        };
 
-    //     var initParams = {
-    //         url:url,
-    //         timeout:5000,
-    //         headers:headers,
-    //         alpn:'h2',
-    //     };
+        var initParams = {
+            url:url,
+            timeout:5000,
+            headers:headers,
+            alpn:'h2',
+        };
 
-    //     var firstParams = {
-    //         url:firstUrl,
-    //         timeout:5000,
-    //         headers:headers,
-    //         alpn:'h2',
-    //     };
+        var firstParams = {
+            url:firstUrl,
+            timeout:5000,
+            headers:headers,
+            alpn:'h2',
+        };
 
 
-    //     console.log("4444")
+        console.log("4444")
   
        
-    //     const initResp = await getRequest(initParams);
+        const initResp = await getRequest(initParams);
 
-    //     console.log("55555"+JSON.stringify(initResp))
-    //     const initJson = JSON.parse(initResp.body);
+        console.log("55555"+JSON.stringify(initResp))
+        const initJson = JSON.parse(initResp.body);
        
 
-    //     if (initResp.resp.status !== 200) {
-    //         throw new Error(`获取 init 失败: ${initJson.message}`);
-    //     }
-    //     console.log("66666")
-    //     let Flag =  true;
+        if (initResp.resp.status !== 200) {
+            throw new Error(`获取 init 失败: ${initJson.message}`);
+        }
+        console.log("66666")
+        let Flag =  true;
 
-    //     let id = initJson.data.list[0].id;
-    //     for(let i in initJson.data.list){
-    //         if(initJson.data.list[i].full == true){
-    //             continue;
-    //         }
-    //         if(initJson.data.list[i].publisherNoHelpCount>0){
-    //             id = initJson.data.list[i].id;
-    //             flag = false;
-    //         }
-    //     }
-    //     //let id = $argument.helpId;
-    //     console.log("start help.....")
-    //   let helpUrl = "https://acbull.site/api/jdj/invite-links/"+id+"/used";
-    //   console.log(helpUrl)
-    //   let helpHeaders = {
-    //     'accept-encoding':'gzip, deflate, br, zstd',
-    //     'accept':'*/*',
-    //     'sec-fetch-mode':'cors',
-    //     'sec-fetch-site':'same-origin',
-    //     'sec-fetch-dest':'empty',
-    //     'x-network-id': suffix,
-    //     'content-length':'0',
-    //     'origin':'https://acbull.site',
-    //     'user-agent':randomUA,
-    //     'referer':'https://acbull.site/jdj/',
-    //     'priority':'u=3, i',
-    //     'accept-language':'zh-CN,zh-Hans;q=0.9',
-    //  };
+        let id = initJson.data.list[0].id;
+        for(let i in initJson.data.list){
+            if(initJson.data.list[i].full == true){
+                continue;
+            }
+            if(initJson.data.list[i].publisherNoHelpCount>0){
+                id = initJson.data.list[i].id;
+                flag = false;
+            }
+        }
+        //let id = $argument.helpId;
+        console.log("start help.....")
+      let helpUrl = "https://acbull.site/api/jdj/invite-links/"+id+"/used";
+      console.log(helpUrl)
+      let helpHeaders = {
+        'accept-encoding':'gzip, deflate, br, zstd',
+        'accept':'*/*',
+        'sec-fetch-mode':'cors',
+        'sec-fetch-site':'same-origin',
+        'sec-fetch-dest':'empty',
+        'x-network-id': suffix,
+        'content-length':'0',
+        'origin':'https://acbull.site',
+        'user-agent':randomUA,
+        'referer':'https://acbull.site/jdj/',
+        'priority':'u=3, i',
+        'accept-language':'zh-CN,zh-Hans;q=0.9',
+     };
 
-    //  var helpParams = {
-    //     url:helpUrl,
-    //     timeout:5000,
-    //     headers:helpHeaders,
-    //     alpn:'h2',
-    //  };
+     var helpParams = {
+        url:helpUrl,
+        timeout:5000,
+        headers:helpHeaders,
+        alpn:'h2',
+     };
 
 
-    //     const helpResp = await postRequest(helpParams);
-    //     const helpJson = JSON.parse(helpResp.body);
-    //     console.log(suffix)
-    //     if(flag ==true){
-    //         console.log("助力正常链接....")
-    //     }else{
-    //         console.log("助力不良链接....")
-    //     }
-    //     console.log(helpResp)
-    //     console.log(helpJson)
+        const helpResp = await postRequest(helpParams);
+        const helpJson = JSON.parse(helpResp.body);
+        console.log(suffix)
+        if(flag ==true){
+            console.log("助力正常链接....")
+        }else{
+            console.log("助力不良链接....")
+        }
+        console.log(helpResp)
+        console.log(helpJson)
 
-    //     if (helpJson.success !== true) {
-    //         throw new Error(`提交失败: ${helpJson.message}`);
-    //     }
+        if (helpJson.success !== true) {
+            throw new Error(`提交失败: ${helpJson.message}`);
+        }
 
-    //     console.log("请求成功:"+helpResp.body);
+        console.log("请求成功:"+helpResp.body);
 
       
       console.log("invite........")
@@ -155,7 +155,7 @@
             'referer':'https://acbull.site/jdj/',
             'sec-fetch-mode':'cors',
             'origin':'https://acbull.site',
-            'x-network-id':"nid_ajtzykqqyiftiocj",
+            'x-network-id':suffix,
             'content-type':'application/json',
             'sec-fetch-dest':'empty',
         };
@@ -173,20 +173,18 @@
             //alpn:'h2',
             body:JSON.stringify(inviteBody),
         };
-              console.log("1111........")
-              console.log(inviteParams)
              
         const inviteResp = await postRequest(inviteParams);
          
-                      console.log("11222........")
-                      console.log(JSON.stringify(inviteResp))
+        console.log("11222........")
+        console.log(JSON.stringify(inviteResp))
         const inviteJson = JSON.parse(inviteResp.body);
 
         console.log("22222........")
         console.log(inviteJson)
 
 
-        if (inviteJson.code !== 200) {
+        if (inviteResp.resp.status !== 200) {
             throw new Error(`提交失败: ${inviteJson.message}`);
         }
               console.log("33333........")
