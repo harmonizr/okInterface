@@ -29,6 +29,8 @@
             });
         }
         console.log("start init.....")
+        let firstUrl = "https://acbull.site/api/jdj/init";
+
 
         let url = "https://acbull.site/api/jdj/init";
         let headers = {
@@ -51,9 +53,20 @@
             alpn:'h2',
         };
 
+        var firstParams = {
+            url:firstUrl,
+            timeout:5000,
+            headers:headers,
+            alpn:'h2',
+        };
 
-               console.log("4444")
-      
+
+        console.log("4444")
+        const firstResp = await postRequest(firstParams);
+               console.log("55555"+JSON.stringify(firstResp))
+
+        //if(initResp.resp)
+       
         const initResp = await postRequest(initParams);
                   console.log("55555"+initResp.Headers)
 
