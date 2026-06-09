@@ -5,7 +5,7 @@ obj.data.helpdCount = 3;
 obj.data.userQuota.remaining = 7;
 obj.data.userQuota.todayHelped = 3;
 
-obj.data.checkSubmit.compensationActive = true;
+//obj.data.checkSubmit.compensationActive = true;
 obj.data.checkSubmit.earned = 3;
 obj.data.list = [];
 body = JSON.stringify(obj);//重新打包回json字符串
