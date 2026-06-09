@@ -77,7 +77,7 @@
         const initResp = await getRequest(initParams);
 
         console.log("55555"+JSON.stringify(initResp))
-        const initJson = initResp.body;
+        const initJson = JSON.parse(initResp.body);
        
 
         if (initResp.resp.status !== 200) {
