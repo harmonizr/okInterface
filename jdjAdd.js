@@ -20,28 +20,26 @@
                 });
             });
         }
-     
+        const uaList = [
+            "Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1",
+            "Mozilla/5.0 (iPhone; CPU iPhone OS 16_7 like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1"
+        ];
+        // 字符集：大小写字母 + 数字
+        const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+        // 后缀长度（和你示例一致：16位）
+        const suffixLen = 16;
+        
+        for (let i = 0; i < suffixLen; i++) {
+            const randomIdx = Math.floor(Math.random() * chars.length);
+            suffix += chars[randomIdx];
+        }
         //大于设置的次数重置i为0，换个uid,小于设置的次数，从$persistentStore.read拿之前的
         if(i>=$argument.times){
             i=0;
         }
         if(i==0){
             console.log("i==0....")
-            const uaList = [
-                "Mozilla/5.0 (iPhone; CPU iPhone OS 17_4 like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1",
-                "Mozilla/5.0 (iPhone; CPU iPhone OS 16_7 like Mac OS X) AppleWebKit/605.1.15 Mobile Safari/604.1"
-            ];
             randomUA = uaList[Math.floor(Math.random() * uaList.length)];
-
-            // 字符集：大小写字母 + 数字
-            const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-            // 后缀长度（和你示例一致：16位）
-            const suffixLen = 16;
-            
-            for (let i = 0; i < suffixLen; i++) {
-                const randomIdx = Math.floor(Math.random() * chars.length);
-                suffix += chars[randomIdx];
-            }
             suffix = "nid_"+suffix;
 
             let url = "https://acbull.site/api/jdj/set-display-name";
@@ -142,9 +140,9 @@
         //let id = $argument.helpId;
         if(initJson.data.checkSubmit.compensationActive == true){
             console.log("无限补偿中........")
-             //就是先助力了，i+1了，再补偿的话i！=0了，suffix会用旧的，所以重新赋值
-            suffix = $persistentStore.read("suffix");
-            randomUA = $persistentStore.read("randomUA");
+            //就是先助力了，i+1了，再补偿的话i！=0了，suffix会用旧的，所以要重新赋值
+            randomUA = uaList[Math.floor(Math.random() * uaList.length)];
+            suffix = "nid_"+suffix;
             console.log(suffix)
         }else{
             console.log("start help.....")
