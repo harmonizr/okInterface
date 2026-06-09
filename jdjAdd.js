@@ -80,7 +80,7 @@
         const initJson = initResp.body;
        
 
-        if (initResp.status !== 200) {
+        if (initResp.resp.status !== 200) {
             throw new Error(`获取 init 失败: ${initJson.message}`);
         }
         console.log("66666")
