@@ -143,36 +143,36 @@
       
       console.log("invite........")
       let inviteUrl = "https://acbull.site/api/jdj/invite-links";
-      let inviteHeaders = {
+    //   let inviteHeaders = {
+    //         'accept-encoding':'gzip, deflate, br, zstd',
+    //         'content-length':'101',
+    //         'accept':'*/*',
+    //         'sec-fetch-mode':'cors',
+    //         'sec-fetch-dest':'empty',
+    //         'content-type':'application/json',
+    //         'accept-language':'zh-CN,zh-Hans;q=0.9',
+    //         'x-network-id':suffix,
+    //         'referer':'https://acbull.site/jdj/',
+    //         'sec-fetch-site':'same-origin',
+    //         'priority':'u=3, i',
+    //         'user-agent':'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Mobile/15E148 Safari/604.1',
+    //         'origin':'https://acbull.site',
+    //     };
+        let inviteHeaders = {
+            //'accept':'*/*',
+            //'sec-fetch-site':'same-origin',
             'accept-encoding':'gzip, deflate, br, zstd',
-            'content-length':'101',
-            'accept':'*/*',
-            'sec-fetch-mode':'cors',
-            'sec-fetch-dest':'empty',
-            'content-type':'application/json',
-            'accept-language':'zh-CN,zh-Hans;q=0.9',
-            'x-network-id':suffix,
-            'referer':'https://acbull.site/jdj/',
-            'sec-fetch-site':'same-origin',
             'priority':'u=3, i',
-            'user-agent':'Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5 Mobile/15E148 Safari/604.1',
+            //'content-length':'101',
+            'user-agent':randomUA,
+            'accept-language':'zh-CN,zh-Hans;q=0.9',
+            'referer':'https://acbull.site/jdj/',
+            'sec-fetch-mode':'cors',
             'origin':'https://acbull.site',
+            'x-network-id':suffix,
+            'content-type':'application/json',
+            'sec-fetch-dest':'empty',
         };
-        // let inviteHeaders = {
-        //     //'accept':'*/*',
-        //     //'sec-fetch-site':'same-origin',
-        //     'accept-encoding':'gzip, deflate, br, zstd',
-        //     'priority':'u=3, i',
-        //     //'content-length':'101',
-        //     'user-agent':randomUA,
-        //     'accept-language':'zh-CN,zh-Hans;q=0.9',
-        //     'referer':'https://acbull.site/jdj/',
-        //     'sec-fetch-mode':'cors',
-        //     'origin':'https://acbull.site',
-        //     'x-network-id':suffix,
-        //     'content-type':'application/json',
-        //     'sec-fetch-dest':'empty',
-        // };
         console.log($argument.tjbUrl)
         let inviteBody = {
             link: $argument.tjbUrl,
@@ -188,22 +188,32 @@
         };
               console.log("1111........")
               console.log(inviteParams)
-        const inviteResp = await postRequest(inviteParams);
-                      console.log("11222........")
+        await $httpClient.post(inviteParams, function(errormsg,response,data) {
+    if (errormsg) {
+        console.log(errormsg);
+    } else {
+        console.log("Response Status: " + response.status);
+        console.log("Response Headers: " + JSON.stringify(response.headers));
+        console.log("Response Body: " + data);
+    }
+    $done();
+});     
+        // const inviteResp = await postRequest(inviteParams);
+        //               console.log("11222........")
 
-        const inviteJson = JSON.parse(inviteResp.body);
+        // const inviteJson = JSON.parse(inviteResp.body);
 
-              console.log("22222........")
+        //       console.log("22222........")
 
-        if (inviteJson.code !== 200) {
-            throw new Error(`提交失败: ${inviteJson.message}`);
-        }
-              console.log("33333........")
+        // if (inviteJson.code !== 200) {
+        //     throw new Error(`提交失败: ${inviteJson.message}`);
+        // }
+        //       console.log("33333........")
 
-        console.log("请求成功:"+inviteResp.body);
+        // console.log("请求成功:"+inviteResp.body);
 
 
-        $done(); // 只调用一次，结束脚本
+        // $done(); // 只调用一次，结束脚本
 
     } catch (err) {
         console.log("脚本异常:"+err.message);
