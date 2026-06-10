@@ -83,8 +83,6 @@
         }
         
         console.log("start init.....")
-        let firstUrl = "https://acbull.site/api/jdj/init";
-
 
         let url = "https://acbull.site/api/jdj/init";
         let headers = {
@@ -137,6 +135,10 @@
                 Flag = false;
             }
         }
+
+
+
+        
         //let id = $argument.helpId;
         if(initJson.data.checkSubmit.compensationActive == true){
             console.log("无限补偿中........")
@@ -183,6 +185,7 @@
             console.log(helpJson)
 
             if (helpJson.success !== true) {
+                $persistentStore.write(0, "i");//避免只有一个不良，这个账号一直助力不良，所以重置
                 throw new Error(`提交失败: ${helpJson.message}`);
             }
 
