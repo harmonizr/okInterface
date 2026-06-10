@@ -211,8 +211,11 @@
                 'sec-fetch-dest':'empty',
             };
             console.log($argument.tjbUrl)
+            let tjbUrlList = [$argument.tjbUrl,$argument.tjbUrl2,$argument.tjbUrl3];
+            let randomTjbUrl = tjbUrlList[Math.floor(Math.random() * tjbUrlList.length)];
+
             let inviteBody = {
-                link: $argument.tjbUrl,
+                link: randomTjbUrl,
                 maxHelp:10
             };
 
