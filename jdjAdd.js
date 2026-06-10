@@ -104,13 +104,6 @@
             headers:headers,
             alpn:'h2',
         };
-
-        var firstParams = {
-            url:firstUrl,
-            timeout:5000,
-            headers:headers,
-            alpn:'h2',
-        };
   
         const initResp = await getRequest(initParams);
 
