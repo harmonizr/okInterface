@@ -15,4 +15,4 @@ tjbUrl6=input,"{\"msg\":\"测试\"}",tag=淘金币链接,desc=发送的数据
 
 
 [Script]
-cron {interval} script-path=https://raw.giteeusercontent.com/user_hzr/okinterface/raw/master/jdjAdd.js,timeout = 300,tag=淘金币,argument=[{tjbUrl},{helpId},{times},{name}]
+cron {interval} script-path=https://raw.giteeusercontent.com/user_hzr/okinterface/raw/master/jdjAdd.js,timeout = 300,tag=淘金币,argument=[{tjbUrl},{tjbUrl2},{tjbUrl3},{tjbUrl4},{tjbUrl5},{tjbUrl6},{helpId},{times},{name}]
