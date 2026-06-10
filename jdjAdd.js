@@ -123,6 +123,9 @@
                 continue;
             }
             if(initJson.data.list[i].publisherNoHelpCount>0){
+                if($argument.times>0 && initJson.data.list[i].id == $persistentStore.read("id")){//当账号没重置时，避免助力到上次链接，所以跳过换新链接
+                    continue;
+                }
                 id = initJson.data.list[i].id;
                 name = initJson.data.list[i].publisherDisplayName;
                 Flag = false;
@@ -178,11 +181,11 @@
             console.log(helpJson)
 
             if (helpJson.success !== true) {
-                $persistentStore.write(0, "i");//避免只有一个不良，这个账号一直助力不良，所以重置
                 throw new Error(`提交失败: ${helpJson.message}`);
             }
 
             console.log("请求成功:"+helpResp.body);
+            $persistentStore.write(id, "id");
             $persistentStore.write(i + 1, "i");
             $persistentStore.write(randomUA, "randomUA");
             $persistentStore.write(suffix, "suffix");
