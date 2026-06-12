@@ -226,8 +226,7 @@
                 'content-type':'application/json',
                 'sec-fetch-dest':'empty',
             };
-            console.log($argument.tjbUrl)
-            let tjbUrlList = [$argument.tjbUrl,$argument.tjbUrl2,$argument.tjbUrl3];
+            let tjbUrlList = [$argument.tjbUrl,$argument.tjbUrl2,$argument.tjbUrl3,,$argument.tjbUrl4,$argument.tjbUrl5,$argument.tjbUrl6];
             let randomTjbUrl = tjbUrlList[Math.floor(Math.random() * tjbUrlList.length)];
 
             let inviteBody = {
