@@ -137,6 +137,7 @@
             if(initJson.data.list[i].full == true){
                 continue;
             }
+            id = initJson.data.list[i].id;
             name = initJson.data.list[i].publisherDisplayName;
             if(initJson.data.list[i].publisherNoHelpCount>0){
                 if($argument.times>0 && initJson.data.list[i].id == $persistentStore.read("id")){//当账号没重置时，避免助力到上次链接，所以跳过换新链接
@@ -145,6 +146,7 @@
                 id = initJson.data.list[i].id;
                 name = initJson.data.list[i].publisherDisplayName;
                 Flag = false;
+                break;
             }
         }
 
