@@ -269,7 +269,7 @@
 
     } catch (err) {
         console.log("脚本异常:"+err);
-        $notification.post("脚本异常", "", err);
+        $notification.post("脚本异常", "", err.message);
         $done();
     }
 })();
