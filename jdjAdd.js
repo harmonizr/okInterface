@@ -201,6 +201,9 @@
             console.log(helpJson)
 
             if (helpJson.success !== true) {
+                if(helpJson.message=="您已帮助过该链接"){
+                    $persistentStore.write(0, "i");
+                }
                 throw new Error(`提交失败: ${helpJson.message}`);
             }
 
