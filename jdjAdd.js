@@ -58,8 +58,23 @@
                 'accept-encoding':'gzip, deflate, br, zstd',
                 'accept-language':'zh-CN,zh-Hans;q=0.9',
             };
+            const nums = "0123456789";
+            const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+            // 海量常用中文汉字（一级常用汉字）
+            const chinese = `的一是在不了有和人这中大为上个国我以他来时用生到作地于出就分对成可主发年动同工也下能过子产种面而方后多行地然天于同民日事相处头里自合开两第如部现么事十全三使之行本就家风可到别外天四然二起新来数见民多三之入学道义都好然没明还同法如此各自其将两发然也用及时分然点生事分心几无前所手又行意方在多同行出当然如本力公然开但因其从而后可所之下十者行进着等度家电力里化如水自理小物现实加都两体制使日前下者高已理小物都加然大两本可下子自会和面年出然事也生方多行等分同出说同法家要时分三我成于可出对可其也下以然成可主发年动同工也下能过子产种面而方后多行地然天于同民日事相处头里自合开两第如部现么事十全三使之行本就家风可到别外天四然二起新来数见民多三之入学道义都好然没明还同法如此各自其将两发然也用及时分然点生事分心几无前所手又行意方在多同行出当然如本力公然开但因其从而后可所之下十者行进着等度家电力里化如水自理小物现实加都两体制使日前下者高已理小物都加然大两本可下子自会和面年出然事也生方多行等分同出说同法家要时分三我成于可出对可其也下以然成`;
 
-            let body = {"displayName":$argument.name};
+            // 合并所有字符池
+            const charPool = nums + letters + chinese;
+            let name = "";
+
+            for (let i = 0; i < 5; i++) {
+                const idx = Math.floor(Math.random() * charPool.length);
+                name += charPool[idx];
+            }
+            if($argument.name!=""){
+                name = $argument.name
+            }
+            let body = {"displayName":name};
             var params = {
                 url:url,
                 timeout:5000,
