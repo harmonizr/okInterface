@@ -149,7 +149,9 @@
                 break;
             }
         }
-
+        console.log("id id.....")
+        console.log(id);
+        console.log($persistentStore.read("id"));
 
 
         
