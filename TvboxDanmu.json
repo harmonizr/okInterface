@@ -1,5 +1,5 @@
 {
-  "spider":"https://gitee.com/zj521jj/little-tiger-spot/raw/master/jar/HubanTC.jar" ,    
+  "spider":"https://gh-proxy.org/https://github.com/Silent1566/CatVodSpider/raw/refs/heads/main/jar/danmu.jar" ,    
   "lives": [],
   "sites": [
     {
@@ -47,7 +47,7 @@
             "key": "huban",
             "name": "虎斑弹幕|小窗",
             "type": 3,
-            "jar": "https://gitee.com/zj521jj/little-tiger-spot/raw/master/jar/HubanTC.jar",
+            "jar": "https://gitee.com/zj521jj/little-tiger-spot/raw/master/jar/HubanTC.jar;md5;4ce29ce27eeff6a73a230dd92d98ba0c",
             "api": "csp_Huban"
         },
         {
