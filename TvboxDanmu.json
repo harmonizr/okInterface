@@ -1,7 +1,14 @@
 {
-  "spider":"https://gh-proxy.org/https://github.com/Silent1566/CatVodSpider/raw/refs/heads/main/jar/danmu.jar" ,    
+  "spider":"https://zl.wpscdn.cn/2026/06/25/space_img/943e508c-6dd2-4003-9c58-155c25213eaa.png" ,    
   "lives": [],
   "sites": [
+     {
+            "key": "弹幕",
+            "name": "Ⓜ️嗷呜弹幕设置",
+            "type": 3,
+            "jar": "https://zl.wpscdn.cn/2026/06/25/space_img/943e508c-6dd2-4003-9c58-155c25213eaa.png",
+            "api": "csp_AAConfigAmns"
+    },  
     {
       "key": "leo_danmaku",
       "name": "LEO| 弹幕",
@@ -26,36 +33,14 @@
         "lpHeight": 0.85,
         "titleMappingsUrl": "https://ghfast.top/https://raw.githubusercontent.com/goodcommunication/mydm/main/yins.json"
       }
-    } 
-   ,
-        // {
-        //     "key": "Tg豆瓣",
-        //     "name": "🔍Tg豆瓣┃本接口免费-🈲贩卖",
-        //     "type": 3,
-        //     "api": "csp_TgYunDouBanPan",
-        //     "searchable": 1,
-        //     "changeable": 0,
-        //     "ext": {
-        //         "siteUrl": "http://127.0.0.1:9999",
-        //         "count": 4,
-        //         "channelUsername": "Tgsearchers6,peccxinpd,yunpan139,yggpan,yunpanuc,shareAliyun,yunpan189,BaiduCloudDisk,Channel_Shares_115,gimy115,ydypzyfx,dianying4K,sbsbsnsqq,Q_dongman,ysmffx,XiangxiuNBB,yoyokuakeduanju,yeqingjie_GJG666,TG654TG,PanjClub,guoman4K,alyp_1,kuake_yppan,Baidu_Netdisk,bdwpzhpd,baidu_yppan,zyfb123,xx123pan,zyzhpd123,yp123pan,cloudtianyi,txtyzy,tianyirigeng,tyypzhpd,zaihuayun,ali_yppan",
-        //         "commonConfig": "https://gh-proxy.com/raw.githubusercontent.com/yoursmile66/TVBox/main/json/peizhi.json",
-        //         "filter": "https://gh-proxy.com/raw.githubusercontent.com/yoursmile66/TVBox/main/json/douban.json"
-        //     }
-        // },
-         {
-            "key": "huban",
-            "name": "虎斑弹幕|小窗",
-            "type": 3,
-            "jar": "https://gitee.com/zj521jj/little-tiger-spot/raw/master/jar/HubanTC.jar;md5;4ce29ce27eeff6a73a230dd92d98ba0c",
-            "api": "csp_Huban"
-        },
-        {
-            "key": "弹幕",
-            "name": "Ⓜ️嗷呜弹幕设置",
-            "type": 3,
-            "jar": "https://zl.wpscdn.cn/2026/06/25/space_img/943e508c-6dd2-4003-9c58-155c25213eaa.png",
-            "api": "csp_AAConfigAmns"
-        }
+    } ,
+    
+    {
+        "key": "huban",
+        "name": "虎斑弹幕|小窗",
+        "type": 3,
+        "jar": "https://gitee.com/zj521jj/little-tiger-spot/raw/master/jar/HubanTC.jar;md5;4ce29ce27eeff6a73a230dd92d98ba0c",
+        "api": "csp_Huban"
+    }
   ]
 }
