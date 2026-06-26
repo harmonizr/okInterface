@@ -1,11 +1,11 @@
 {
-  "spider": "https://gh-proxy.org/https://github.com/Silent1566/CatVodSpider/raw/refs/heads/main/jar/danmu.jar",
   "lives": [],
   "sites": [
     {
       "key": "leo_danmaku",
       "name": "LEO| 弹幕",
       "type": 3,
+      "jar":"https://gh-proxy.org/https://github.com/Silent1566/CatVodSpider/raw/refs/heads/main/jar/danmu.jar",
       "api": "csp_DanmakuSpider",
       "searchable": 1,
       "changeable": 0,
