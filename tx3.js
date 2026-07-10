@@ -1,39 +1,39 @@
-// globalThis.vod1 = function(ids) {
-//     let html1 = request('https://pbaccess.video.qq.com/trpc.videosearch.mobile_search.MultiTerminalSearch/MbSearch?vplatform=2', {
-//         body: {
-//             "version": "25042201",
-//             "clientType": 1,
-//             "filterValue": "",
-//             "uuid": "B1E50847-D25F-4C4B-BBA0-36F0093487F6",
-//             "retry": 0,
-//             "query": ids,
-//             "pagenum": 0,
-//             "isPrefetch": true,
-//             "pagesize": 30,
-//             "queryFrom": 0,
-//             "searchDatakey": "",
-//             "transInfo": "",
-//             "isneedQc": true,
-//             "preQid": "",
-//             "adClientInfo": "",
-//             "extraInfo": {
-//                 "isNewMarkLabel": "1",
-//                 "multi_terminal_pc": "1",
-//                 "themeType": "1",
-//                 "sugRelatedIds": "{}",
-//                 "appVersion": ""
-//             }
-//         },
-//         headers: {
-//             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.139 Safari/537.36',
-//             'Content-Type': 'application/json',
-//             'origin': 'https://v.qq.com',
-//             'referer': 'https://v.qq.com/'
-//         },
-//         'method': 'POST'
-//     }, true);
-//     return html1;
-// }
+globalThis.vod1 = function(ids) {
+    let html1 = request('https://pbaccess.video.qq.com/trpc.videosearch.mobile_search.MultiTerminalSearch/MbSearch?vplatform=2', {
+        body: {
+            "version": "25042201",
+            "clientType": 1,
+            "filterValue": "",
+            "uuid": "B1E50847-D25F-4C4B-BBA0-36F0093487F6",
+            "retry": 0,
+            "query": ids,
+            "pagenum": 0,
+            "isPrefetch": true,
+            "pagesize": 30,
+            "queryFrom": 0,
+            "searchDatakey": "",
+            "transInfo": "",
+            "isneedQc": true,
+            "preQid": "",
+            "adClientInfo": "",
+            "extraInfo": {
+                "isNewMarkLabel": "1",
+                "multi_terminal_pc": "1",
+                "themeType": "1",
+                "sugRelatedIds": "{}",
+                "appVersion": ""
+            }
+        },
+        headers: {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.139 Safari/537.36',
+            'Content-Type': 'application/json',
+            'origin': 'https://v.qq.com',
+            'referer': 'https://v.qq.com/'
+        },
+        'method': 'POST'
+    }, true);
+    return html1;
+}
 
 var rule = {
     title: '腾云驾雾[官]',
