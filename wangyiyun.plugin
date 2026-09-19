@@ -33,10 +33,6 @@ PRRR = switch, false, true, tag = 隐藏[首页-雷达歌单], desc = 是否隐�
 HMPR = switch, false, true, tag = 隐藏[首页-音乐合伙人], desc = 是否隐藏首页音乐合伙人
 PRMST = switch, false, true, tag = 隐藏[首页-推荐专属歌单], desc = 是否隐藏首页专属歌单
 PRCN = switch, false, true, tag = 隐藏[首页-你的专属歌单], desc = 是否隐藏首页你的专属歌单
-# ===== 伪 VIP =====
-VipEnabled = switch, true, false, tag=[伪 VIP] 开启, desc=关闭后所有 VIP 接口透传原响应
-VipLevel = select, "1", "2", "3", "4", "5", "6", "7", tag=[伪 VIP] 等级, desc=默认 7 级（满级）
-GrowthValue = input, 99999, tag=[伪 VIP] 成长值, desc=默认 99999
 
 Music163_VIP_Shared = switch, false, true, tag = 启用[共享会员], desc = 是否启用网易云音乐共享会员
 
@@ -79,7 +75,6 @@ DOMAIN, ipv6.music.163.com, REJECT
 
 [Script]
 
-http-response ^https?:\/\/(ipv4|interface\d?)\.music\.163\.com\/e?api\/(music-vip-membership\/(client|front)\/vip\/info|vipnewcenter\/app\/resource\/newaccountpage|vip-center-bff\/(card\/entry\/list|float\/data)) script-path=https://raw.githubusercontent.com/Yu9191/NeteasemusicAd/main/wyyad.js, requires-body=true, binary-body-mode=true, timeout=20, tag=伪 VIP, argument=VipEnabled={VipEnabled}&VipLevel={VipLevel}&GrowthValue={GrowthValue}&LogLevel={LogLevel}
 
 #----------  Yuheng0101 ----------#
 # 解锁黑胶音乐
