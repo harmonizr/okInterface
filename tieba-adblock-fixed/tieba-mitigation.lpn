@@ -1,0 +1,19 @@
+#!name=贴吧去广告(临时缓解版)
+#!desc=20261028:脚本仍用 app2smile 原版(逻辑不变),仅把 [Script] 的 timeout 从 10 秒提到 60 秒,避免大信息流(推荐页刷很多帖)时 97KB 脚本解码+重编码超过10秒被 Loon 掐断导致"帖子加载很久然后弹网络有问题"。零上传、可直接导入。彻底修复(无广告时不重编码+异常放行+null安全)请用 tieba-fixed.lpn 并托管两个修复版 JS
+#!openUrl=https://github.com/app2smile/rules
+#!date=2026-10-28
+
+[Argument]
+per_filter_video_thread = select,"0","1",tag=推荐页不展示视频贴,desc=设置为1则推荐页不展示视频贴
+
+[Rule]
+DOMAIN,180.76.76.200,REJECT
+# no-resolve需在最后
+IP-CIDR,180.76.76.200/32,REJECT,no-resolve
+
+[Mitm]
+hostname = tiebac.baidu.com
+
+[Script]
+http-response ^https?:\/\/(tiebac|c\.tieba)\.baidu\.com\/(c\/(s\/sync|f\/(ad\/getSplashAd|frs\/(page|threadlist|generalTabList)|pb\/(pic)?page|excellent\/personalized))$|tiebaads\/commonbatch\?) script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/tieba-json.js, requires-body=true, timeout=60, tag=贴吧json
+http-response ^https?:\/\/(tiebac|c\.tieba)\.baidu\.com\/c\/(b\/ad\/adBid|f\/(frs\/(page|threadlist|generalTabList)|ad\/getFeedAd|pb\/page|excellent\/personalized))\?cmd script-path=https://raw.githubusercontent.com/app2smile/rules/master/js/tieba-proto.js, requires-body=true, binary-body-mode=true, timeout=60, tag=贴吧proto, argument=[{per_filter_video_thread}]

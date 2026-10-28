@@ -1,0 +1,19 @@
+#!name=贴吧去广告(修复版)
+#!desc=20261028修复:1)无广告/无修改时不重编码,直接 $done({}) 原样放行(常见请求耗时骤降);2)解析或改写异常时放行原始响应(fail-open),任何意外都不会再让帖子请求失败;3)全链路 null 安全;4)去掉脚本内通知弹窗;5)timeout 10秒->60秒,大信息流不再被掐断。脚本引用你 GitHub 上的修复版 JS
+#!openUrl=https://github.com/app2smile/rules
+#!date=2026-10-28
+
+[Argument]
+per_filter_video_thread = select,"0","1",tag=推荐页不展示视频贴,desc=设置为1则推荐页不展示视频贴
+
+[Rule]
+DOMAIN,180.76.76.200,REJECT
+# no-resolve需在最后
+IP-CIDR,180.76.76.200/32,REJECT,no-resolve
+
+[Mitm]
+hostname = tiebac.baidu.com
+
+[Script]
+http-response ^https?:\/\/(tiebac|c\.tieba)\.baidu\.com\/(c\/(s\/sync|f\/(ad\/getSplashAd|frs\/(page|threadlist|generalTabList)|pb\/(pic)?page|excellent\/personalized))$|tiebaads\/commonbatch\?) script-path=https://raw.githubusercontent.com/harmonizr/okInterface/master/tieba-adblock-fixed/tieba-json-fixed.js, requires-body=true, timeout=60, tag=贴吧json
+http-response ^https?:\/\/(tiebac|c\.tieba)\.baidu\.com\/c\/(b\/ad\/adBid|f\/(frs\/(page|threadlist|generalTabList)|ad\/getFeedAd|pb\/page|excellent\/personalized))\?cmd script-path=https://raw.githubusercontent.com/harmonizr/okInterface/master/tieba-adblock-fixed/tieba-proto-fixed.js, requires-body=true, binary-body-mode=true, timeout=60, tag=贴吧proto, argument=[{per_filter_video_thread}]
