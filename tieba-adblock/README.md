@@ -11,8 +11,8 @@
 ## 文件
 | 文件 | 作用 |
 |---|---|
-| `tieba-adblock.lpx` | **主插件**（自包含，JS 已用 data URI 内嵌），整个导入 Loon 即可 |
-| `tieba_feed_ad.js` | 兜底用：若你的 Loon 不认 data URI，把此 JS 导入本地脚本，再改 [Script] 引用 |
+| `tieba-adblock.lpx` | **主插件**，`[Script]` 引用同目录独立 JS（raw URL），导入 Loon 即自动拉取 |
+| `tieba_feed_ad.js` | 独立 JS（推荐流 protobuf 手术），主插件 `[Script]` 通过 raw URL 引用 |
 
 ## 安装
 1. 把 `tieba-adblock.lpx` 通过「分享」导入 Loon，或在 **Loon → 设置 → 自定义 → 本地配置** 新建并粘贴内容。
@@ -22,7 +22,7 @@
 
 ## 可选
 - **想保留百度游戏**：删掉 `[Rule]` 里的 `REJECT,DOMAIN-SUFFIX,gamedelivery.cdn.bcebos.com`。
-- **推荐流广告没消失**：把 `tieba_feed_ad.js` 导入 Loon 本地脚本，把插件 `[Script]` 那行的 `data:text/javascript;base64,...` 换成 `script("tieba_feed_ad.js")`。
+- **推荐流广告没消失**：确认 `tieba_feed_ad.js` 可访问（同一 raw URL 能打开）；Loon 会缓存，可手动刷新脚本缓存。
 
 ## 原理与安全
 - 只用 `[Rule]` REJECT 纯广告/统计 host + `[Rewrite]` 拦广告接口 + `[Script]` 手术推荐流响应；**不会**误伤 `gss0`(头像CDN)、`tieba-ares`(混 UI 图标) 等内容 host。
