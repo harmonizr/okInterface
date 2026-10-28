@@ -1,5 +1,5 @@
 #!name = 贴吧去广告
-#!desc = 拦截百度贴吧全部广告：信息流/推荐流 native 广告 / 帖内 / 评论区 / 贴纸开屏素材 / 三方广告 SDK 与统计
+#!desc = 拦截百度贴吧广告：推荐流 native 广告卡 / 广告素材 / 三方广告 SDK 与统计（不改动 App 正常请求，安全）
 #!author = Loon 社区
 #!system = iOS, iPadOS
 #!loon_version = 3.5.1(978)
@@ -8,8 +8,10 @@
 #!type = normal
 
 # =====================================================================
-# 一、纯广告 / 统计 / 三方广告 SDK：REJECT 域名（无需 MitM，最稳）
-#       想保留百度游戏，删掉 gamedelivery 那行。
+# 一、纯广告 / 埋点 / 三方广告 SDK：REJECT 域名
+#   格式：匹配类型,域名,策略（策略在最后！）
+#   这些 host 经抓包确认只承载广告/统计，不承载 App 内容，拦截安全。
+#   想保留百度游戏，删掉 gamedelivery 那行。
 # =====================================================================
 [Rule]
 DOMAIN-SUFFIX,gsp0.baidu.com,REJECT
@@ -26,26 +28,11 @@ DOMAIN-SUFFIX,nsclick.baidu.com,REJECT
 DOMAIN-SUFFIX,mlog.bigda.com,REJECT
 
 # =====================================================================
-# 二、MitM：仅对需要改 JSON 的 HTTPS 接口（material/home 评论区广告）
-#       getFeedAd / excellent/personalized 都是 http，不需要 MitM
-# =====================================================================
-[Mitm]
-hostname = tieba.baidu.com
-
-# =====================================================================
-# 三、Rewrite：内容主机上的广告专用接口 + 首页/评论区 JSON 清洗
-# =====================================================================
-[Rewrite]
-# 信息流广告 / 广告竞价 / 广告曝光日志 → 命中回 200 空体，不请求上游
-request if ${url} ~= /baidu\.com\/c\/(f|b|s)\/ad\/(getFeedAd|adBid|adLog|adNewLog)/i then reject(200)
-# 首页/评论区：material/home 把 comment_area_ads、is_tiebaplus_ad 归零
-response if ${url} ~= /tieba\.baidu\.com\/c\/f\/material\/home/ && ${response.status} == 200 then response.json.jq(`walk(if type=="object" then (if has("comment_area_ads") then .comment_area_ads=0 else . end) | (if has("is_tiebaplus_ad") then .is_tiebaplus_ad="0" else . end) else . end)`)
-
-# =====================================================================
-# 四、Script：推荐流 native 广告（"天天有保"等）protobuf 手术
-#       [Script] 引用独立 JS（本仓库 tieba-adblock/tieba_feed_ad.js），走 jsDelivr 加速（国内更稳）。
-#       Loon 会自动拉取并缓存该 JS。若 jsDelivr 失效，可换回 GitHub raw：
-#       https://raw.githubusercontent.com/harmonizr/okInterface/master/tieba-adblock/tieba_feed_ad.js
+# 二、Script：推荐流 native 广告卡（"天天有保"等）protobuf 手术
+#   [Script] 引用独立 JS（走 jsDelivr，国内更稳）。仅改 excellent/personalized
+#   这一个响应的 body，出错原样放行，不会弄坏 App。
+#   若 jsDelivr 失效可换 GitHub raw：
+#   https://raw.githubusercontent.com/harmonizr/okInterface/master/tieba-adblock/tieba_feed_ad.js
 # =====================================================================
 [Script]
 response if ${url} ~= /tiebac\.baidu\.com\/c\/f\/excellent\/personalized/i && ${response.status} == 200 then script("https://cdn.jsdelivr.net/gh/harmonizr/okInterface@master/tieba-adblock/tieba_feed_ad.js") with requires_body=true, binary_body_mode=true, tag="贴吧推荐流去广告"
