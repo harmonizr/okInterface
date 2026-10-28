@@ -29,11 +29,11 @@ DOMAIN-SUFFIX,mlog.bigda.com,REJECT
 # =====================================================================
 # 二、Script：信息流 native 广告卡（"天天有保/京东/快手"等）protobuf 手术
 #   覆盖 推荐(excellent/personalized) / 热门(frs/page) / 最新(pb/page、firstPage)
-#   JS 引用【本地脚本】tieba_feed_ad.js —— 需先把该 .js 导入 Loon（分享→用 Loon 打开），
-#   再导入本 .lpx。本地加载不依赖网络，国内最稳。
-#   若本地没加载成功（脚本任务里仍看不到执行），把下面 script(...) 里的
-#   "tieba_feed_ad.js" 换成远程地址再试：
+#   JS 托管在本仓库同目录（harmonizr/okInterface/tieba-adblock/tieba_feed_ad.js），
+#   Loon 导入本 .lpx 后会自动拉取并缓存，无需本地导入 JS。
+#   若脚本任务里看不到执行（国内访问 GitHub raw 不稳定），把这行 script(...) 里的
+#   地址换成 jsDelivr 镜像再试：
 #   "https://cdn.jsdelivr.net/gh/harmonizr/okInterface@master/tieba-adblock/tieba_feed_ad.js"
 # =====================================================================
 [Script]
-response if ${url} ~= /tiebac\.baidu\.com\/c\/(f\/excellent\/personalized|f\/frs\/page|f\/pb\/(page|firstPage))/i && ${response.status} == 200 then script("tieba_feed_ad.js") with requires_body=true, binary_body_mode=true, tag="贴吧信息流去广告"
+response if ${url} ~= /tiebac\.baidu\.com\/c\/(f\/excellent\/personalized|f\/frs\/page|f\/pb\/(page|firstPage))/i && ${response.status} == 200 then script("https://github.com/harmonizr/okInterface/raw/master/tieba-adblock/tieba_feed_ad.js") with requires_body=true, binary_body_mode=true, tag="贴吧信息流去广告"
