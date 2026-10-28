@@ -1,5 +1,5 @@
 #!name = 贴吧去广告
-#!desc = 拦截百度贴吧广告：推荐流 native 广告卡 / 广告素材 / 三方广告 SDK 与统计（不改动 App 正常请求，安全）
+#!desc = 拦截百度贴吧广告：信息流 native 广告卡(推荐/热门/最新) + 广告素材/三方 SDK/统计（不改动 App 正常请求）
 #!author = Loon 社区
 #!system = iOS, iPadOS
 #!loon_version = 3.5.1(978)
@@ -8,9 +8,8 @@
 #!type = normal
 
 # =====================================================================
-# 一、纯广告 / 埋点 / 三方广告 SDK：REJECT 域名
-#   格式：匹配类型,域名,策略（策略在最后！）
-#   这些 host 经抓包确认只承载广告/统计，不承载 App 内容，拦截安全。
+# 一、纯广告 / 埋点 / 三方广告 SDK：REJECT 域名（格式：匹配类型,域名,策略）
+#   抓包确认这些 host 只承载广告/统计，App 不依赖，拦截安全。
 #   想保留百度游戏，删掉 gamedelivery 那行。
 # =====================================================================
 [Rule]
@@ -28,11 +27,13 @@ DOMAIN-SUFFIX,nsclick.baidu.com,REJECT
 DOMAIN-SUFFIX,mlog.bigda.com,REJECT
 
 # =====================================================================
-# 二、Script：推荐流 native 广告卡（"天天有保"等）protobuf 手术
-#   [Script] 引用独立 JS（走 jsDelivr，国内更稳）。仅改 excellent/personalized
-#   这一个响应的 body，出错原样放行，不会弄坏 App。
-#   若 jsDelivr 失效可换 GitHub raw：
-#   https://raw.githubusercontent.com/harmonizr/okInterface/master/tieba-adblock/tieba_feed_ad.js
+# 二、Script：信息流 native 广告卡（"天天有保/京东/快手"等）protobuf 手术
+#   覆盖 推荐(excellent/personalized) / 热门(frs/page) / 最新(pb/page、firstPage)
+#   JS 引用【本地脚本】tieba_feed_ad.js —— 需先把该 .js 导入 Loon（分享→用 Loon 打开），
+#   再导入本 .lpx。本地加载不依赖网络，国内最稳。
+#   若本地没加载成功（脚本任务里仍看不到执行），把下面 script(...) 里的
+#   "tieba_feed_ad.js" 换成远程地址再试：
+#   "https://cdn.jsdelivr.net/gh/harmonizr/okInterface@master/tieba-adblock/tieba_feed_ad.js"
 # =====================================================================
 [Script]
-response if ${url} ~= /tiebac\.baidu\.com\/c\/f\/excellent\/personalized/i && ${response.status} == 200 then script("https://cdn.jsdelivr.net/gh/harmonizr/okInterface@master/tieba-adblock/tieba_feed_ad.js") with requires_body=true, binary_body_mode=true, tag="贴吧推荐流去广告"
+response if ${url} ~= /tiebac\.baidu\.com\/c\/(f\/excellent\/personalized|f\/frs\/page|f\/pb\/(page|firstPage))/i && ${response.status} == 200 then script("tieba_feed_ad.js") with requires_body=true, binary_body_mode=true, tag="贴吧信息流去广告"
