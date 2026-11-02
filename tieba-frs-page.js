@@ -1,3 +1,4 @@
+
 // tieba-frs-page.js — Loon 脚本：去除百度贴吧 frs/page 帖子流里内嵌的广告卡片
 // 原理：frs/page 是「protobuf 外层 + 内嵌 JSON」。广告卡片是若干段独立的、
 //       带长度前缀的 protobuf 字符串字段（顶层键 "ad_common"）。
