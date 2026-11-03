@@ -90,18 +90,50 @@
       } else { p = m + MARK.length; }
     }
 
-    if (ranges.length === 0) { $done({}); return; }
-
-    for (var r = ranges.length - 1; r >= 0; r--) {
-      var a = ranges[r][0], z = ranges[r][1];
-      for (var k = a + 1; k < z; k++) { b[k] = 0x20; }  // 内部全变空格 → {   ...   } 空对象
-      changed++;
+    if (ranges.length > 0) {
+      for (var r = ranges.length - 1; r >= 0; r--) {
+        var a = ranges[r][0], z = ranges[r][1];
+        for (var k = a + 1; k < z; k++) { b[k] = 0x20; }  // 内部全变空格 → {   ...   } 空对象
+        changed++;
+      }
     }
 
-    console.log('[tieba-frs] 去除广告 item 数: ' + changed + ' / 命中 ' + ranges.length);
+    // ===== 第二遍：模拟会员，把「直播引流卡」配置里的 svip_status:0 → 1 =====
+    // 卡片 JSON 形如 {"close_text":"屏蔽直播内容","is_vip_close_live":1,"svip_status":0}
+    // App 依据 svip_status 决定是否自动屏蔽直播卡；翻成 1 即等价开会员。同长度(0→1)，不破帧。
+    // 守卫：只有 160 字节内有 "is_vip_close_live" 的 svip_status 才翻，避免误翻其它用途。
+    var SVIPKEY  = [0x22,0x73,0x76,0x69,0x70,0x5f,0x73,0x74,0x61,0x74,0x75,0x73,0x22]; // "svip_status"
+    var CLOSEKEY = [0x69,0x73,0x5f,0x76,0x69,0x70,0x5f,0x63,0x6c,0x6f,0x73,0x65,0x5f,0x6c,0x69,0x76,0x65]; // is_vip_close_live
+    function findSeq2(seq, from, to) {
+      for (var i = from; i + seq.length <= to; i++) {
+        if (b[i] !== seq[0]) continue;
+        var ok = true;
+        for (var j = 1; j < seq.length; j++) { if (b[i+j] !== seq[j]) { ok = false; break; } }
+        if (ok) return i;
+      }
+      return -1;
+    }
+    var svipFlip = 0, ssp = 0;
+    while (true) {
+      var km = findSeq2(SVIPKEY, ssp, n);
+      if (km < 0) break;
+      ssp = km + 1;
+      var q = km + SVIPKEY.length;            // 跳过 "svip_status"
+      while (q < n && b[q] === 0x20) q++;     // 可选空格
+      if (q < n && b[q] === 0x3a) q++;        // ':'
+      while (q < n && b[q] === 0x20) q++;     // 可选空格
+      if (q >= n || b[q] !== 0x30) continue;  // 不是 ':0'（已是1/其它/畸形）跳过
+      var lo = km - 160; if (lo < 0) lo = 0;
+      if (findSeq2(CLOSEKEY, lo, km) < 0) continue;  // 非直播卡配置，不翻
+      b[q] = 0x31;                             // '0' → '1'
+      svipFlip++;
+    }
+
+    if (changed === 0 && svipFlip === 0) { $done({}); return; }
+    console.log('[tieba-frs] 广告item: ' + changed + ' / svip翻转(直播卡): ' + svipFlip);
     $done({ body: b });   // 长度不变，仅改内容
   } catch (e) {
     console.log('[tieba-frs] 出错，保持原响应: ' + e);
     $done({});
   }
-})();
+})
