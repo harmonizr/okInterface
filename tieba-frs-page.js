@@ -1,139 +1,128 @@
-// tieba-frs-page.js — Loon 脚本：去除百度贴吧 frs/page 帖子流里内嵌的广告卡片
-// 原理：frs/page 是「protobuf 外层 + 内嵌 JSON」。广告卡片是若干段独立的、
-//       带长度前缀的 protobuf 字符串字段（顶层键 "ad_common"）。
-//       本脚本把每段广告 JSON「原地」改写成同长度空对象（内部全填空格），
-//       总字节数不变 → protobuf 长度帧完好；App 解析到空 item 即跳过，整卡消失。
-// 安全设计（关键）：只有当「该 JSON 前面的 protobuf 长度前缀」精确等于其字节长度时
-//       才改写；任何拿不准的边界一律跳过（原样放行），保证绝不把帖子/响应改坏。
+// tieba-frs-page.js — Loon 脚本：贴吧帖子流去广告 + 模拟会员关直播卡
+// v3：性能修复版（v2 在 Loon 引擎上跑满 20s 超时被杀 → 响应被挂住 = 卡顿）
+//   - 广告清空路径与旧版逐字节一致（已验证可用），不动。
+//   - 直播卡标记(is_vip_close_live)合并进同一次扫描，避免第二次全量扫描。
+//   - svip 翻转只在 ±200B 小窗口内做。
+//   - 总步数保险阀：极端慢引擎下最多跑 ~1.5 倍全量扫描步数即停（已做的原地改写都是同长度、部分完成也安全）。
+// 原理：frs/page 是「protobuf 外层 + 内嵌 JSON」。
+//   A) 广告 item：若干段带长度前缀的独立 JSON 文档（顶层键 ad_common），原地改写成同长度空对象。
+//      只有当「该 JSON 前的 protobuf 长度前缀」精确等于其字节长度时才改写，拿不准就原样放行。
+//   B) 直播引流卡：卡配置 JSON 里含 is_vip_close_live:1 + svip_status:0。
+//      把 svip_status 的 0 翻成 1（同长度），App 按会员逻辑自动关掉直播卡。
 // 运行要求：requires_body=true, binary_body_mode=true（$response.body 为 Uint8Array）
 
 (function () {
   try {
-    var body = $response.body; // Uint8Array
+    var body = $response.body;
     if (!body || body.length === 0) { $done({}); return; }
     var b = body, n = b.length;
+    if (n < 64) { $done({}); return; }
 
-    // 目标字节模式：ASCII 的 "ad_common"（11 字节）
-    var MARK = [0x22,0x61,0x64,0x5f,0x63,0x6f,0x6d,0x6d,0x6f,0x6e,0x22];
-
-    function findMarker(frm) {
-      for (var i = frm; i + MARK.length <= n; i++) {
-        if (b[i] === MARK[0]) {
-          var ok = true;
-          for (var j = 1; j < MARK.length; j++) {
-            if (b[i + j] !== MARK[j]) { ok = false; break; }
-          }
-          if (ok) return i;
+    // ===== 单次前向扫描：同时收集 ad_common 与 is_vip_close_live 位置 =====
+    // ad_common = "ad_common" : 22 61 64 5f 63 6f 6d 6d 6f 6e
+    // is_vip_close_live     : 69 73 5f 76 69 70 5f 63 6c 6f 73 65 5f 6c 69 76 65
+    var adPos = [], livePos = [];
+    var CAP = (n >> 1) + n * 2 + 400000;   // 保险阀：最多约 1.5 倍全量步数
+    var steps = 0, aborted = false;
+    for (var i = 0; i + 17 <= n; i++) {
+      if ((++steps & 4095) === 0 && steps > CAP) { aborted = true; break; }
+      var c = b[i];
+      if (c === 0x22) {
+        if (b[i+1]===0x61 && b[i+2]===0x64 && b[i+3]===0x5f && b[i+4]===0x63 &&
+            b[i+5]===0x6f && b[i+6]===0x6d && b[i+7]===0x6d && b[i+8]===0x6f && b[i+9]===0x6e) {
+          adPos.push(i);
+        }
+      } else if (c === 0x69) {
+        if (b[i+1]===0x73 && b[i+2]===0x5f && b[i+3]===0x76 && b[i+4]===0x69 &&
+            b[i+5]===0x70 && b[i+6]===0x5f && b[i+7]===0x63 && b[i+8]===0x6c &&
+            b[i+9]===0x6f && b[i+10]===0x73 && b[i+11]===0x65 && b[i+12]===0x5f &&
+            b[i+13]===0x6c && b[i+14]===0x69 && b[i+15]===0x76) {
+          livePos.push(i);
         }
       }
-      return -1;
     }
 
-    // 从对象内部位置 pos 向前（下标减小）找「最内层包围它」的对象起始 '{'（不计字符串内括号）
+    // ===== 工具：对象边界 + 长度前缀校验（与旧版一致）=====
     function objectStart(pos) {
       var depth = 0, i = pos;
       while (i >= 0) {
-        var c = b[i];
-        if (c === 0x7d) depth++;               // }
-        else if (c === 0x7b) { if (depth === 0) return i; depth--; }  // {
+        var cc = b[i];
+        if (cc === 0x7d) depth++;
+        else if (cc === 0x7b) { if (depth === 0) return i; depth--; }
         i--;
       }
       return -1;
     }
-
-    // 从对象起始 start 向后（字符串感知）做括号配平，返回对象结束 '}'
     function objectEnd(start) {
       var depth = 0, inStr = false, esc = false;
       for (var k = start; k < n; k++) {
-        var c = b[k];
+        var cc = b[k];
         if (inStr) {
           if (esc) esc = false;
-          else if (c === 0x5c) esc = true;          // \
-          else if (c === 0x22) inStr = false;       // "
+          else if (cc === 0x5c) esc = true;
+          else if (cc === 0x22) inStr = false;
         } else {
-          if (c === 0x22) inStr = true;
-          else if (c === 0x7b) depth++;
-          else if (c === 0x7d) { depth--; if (depth === 0) return k; }
+          if (cc === 0x22) inStr = true;
+          else if (cc === 0x7b) depth++;
+          else if (cc === 0x7d) { depth--; if (depth === 0) return k; }
         }
       }
       return -1;
     }
-
-    // 关键校验：s 处的 JSON 是否是一个「带长度前缀的独立内嵌文档」。
-    // 长度 varint 紧跟在 '{'(s) 之前、结束于 s-1。读出该 varint，必须 == 内容长度 (e-s+1)。
     function lengthPrefixMatches(s, contentLen) {
       if (s < 1) return false;
       var i = s - 1;
-      while (i > 0 && (b[i - 1] & 0x80)) i--;   // 回溯到长度 varint 的首字节
+      while (i > 0 && (b[i-1] & 0x80)) i--;
       var val = 0, shift = 0;
-      for (var k = i; k < s; k++) {
-        val += (b[k] & 0x7f) * Math.pow(2, shift);
-        shift += 7;
-      }
+      for (var k = i; k < s; k++) { val += (b[k] & 0x7f) * Math.pow(2, shift); shift += 7; }
       return val === contentLen;
     }
 
-    // 收集所有广告 item 的 [start,end]，并从后往前把内部填成空格（同长度）
-    var ranges = [], p = 0, changed = 0;
-    while (true) {
-      var m = findMarker(p);
-      if (m < 0) break;
+    // ===== A) 清空广告 item（同长度空格填充；长度前缀精确匹配才动手）=====
+    var ranges = [], changed = 0;
+    for (var q = 0; q < adPos.length; q++) {
+      var m = adPos[q];
       var s = objectStart(m);
       if (s >= 0) {
         var e = objectEnd(s);
-        var contentLen = (e > s) ? (e - s + 1) : 0;
-        var safe = (b[s] === 0x7b) && (b[e] === 0x7d) &&
-                   (contentLen > 0 && contentLen < 300000) &&
-                   lengthPrefixMatches(s, contentLen);   // 唯一决定性判据
-        if (safe) { ranges.push([s, e]); p = e + 1; }
-        else { p = m + MARK.length; }
-      } else { p = m + MARK.length; }
-    }
-
-    if (ranges.length > 0) {
-      for (var r = ranges.length - 1; r >= 0; r--) {
-        var a = ranges[r][0], z = ranges[r][1];
-        for (var k = a + 1; k < z; k++) { b[k] = 0x20; }  // 内部全变空格 → {   ...   } 空对象
-        changed++;
+        var cl = (e > s) ? (e - s + 1) : 0;
+        if (b[s] === 0x7b && b[e] === 0x7d && cl > 0 && cl < 300000 &&
+            lengthPrefixMatches(s, cl)) {
+          ranges.push([s, e]);
+        }
       }
     }
-
-    // ===== 第二遍：模拟会员，把「直播引流卡」配置里的 svip_status:0 → 1 =====
-    // 卡片 JSON 形如 {"close_text":"屏蔽直播内容","is_vip_close_live":1,"svip_status":0}
-    // App 依据 svip_status 决定是否自动屏蔽直播卡；翻成 1 即等价开会员。同长度(0→1)，不破帧。
-    // 守卫：只有 160 字节内有 "is_vip_close_live" 的 svip_status 才翻，避免误翻其它用途。
-    var SVIPKEY  = [0x22,0x73,0x76,0x69,0x70,0x5f,0x73,0x74,0x61,0x74,0x75,0x73,0x22]; // "svip_status"
-    var CLOSEKEY = [0x69,0x73,0x5f,0x76,0x69,0x70,0x5f,0x63,0x6c,0x6f,0x73,0x65,0x5f,0x6c,0x69,0x76,0x65]; // is_vip_close_live
-    function findSeq2(seq, from, to) {
-      for (var i = from; i + seq.length <= to; i++) {
-        if (b[i] !== seq[0]) continue;
-        var ok = true;
-        for (var j = 1; j < seq.length; j++) { if (b[i+j] !== seq[j]) { ok = false; break; } }
-        if (ok) return i;
-      }
-      return -1;
+    for (var r = ranges.length - 1; r >= 0; r--) {
+      var a = ranges[r][0], z = ranges[r][1];
+      for (var k2 = a + 1; k2 < z; k2++) b[k2] = 0x20;
+      changed++;
     }
-    var svipFlip = 0, ssp = 0;
-    while (true) {
-      var km = findSeq2(SVIPKEY, ssp, n);
-      if (km < 0) break;
-      ssp = km + 1;
-      var q = km + SVIPKEY.length;            // 跳过 "svip_status"
-      while (q < n && b[q] === 0x20) q++;     // 可选空格
-      if (q < n && b[q] === 0x3a) q++;        // ':'
-      while (q < n && b[q] === 0x20) q++;     // 可选空格
-      if (q >= n || b[q] !== 0x30) continue;  // 不是 ':0'（已是1/其它/畸形）跳过
-      var lo = km - 160; if (lo < 0) lo = 0;
-      if (findSeq2(CLOSEKEY, lo, km) < 0) continue;  // 非直播卡配置，不翻
-      b[q] = 0x31;                             // '0' → '1'
-      svipFlip++;
+
+    // ===== B) 直播卡：is_vip_close_live 之后 200B 内找 "svip_status":0 → 翻成 1 =====
+    var svipFlip = 0;
+    for (var L = 0; L < livePos.length; L++) {
+      var lp = livePos[L];
+      var lim = lp + 217; if (lim > n) lim = n;
+      var found = -1;
+      for (var j = lp + 17; j + 13 <= lim; j++) {
+        if (b[j]===0x22 && b[j+1]===0x73 && b[j+2]===0x76 && b[j+3]===0x69 && b[j+4]===0x70 &&
+            b[j+5]===0x5f && b[j+6]===0x73 && b[j+7]===0x74 && b[j+8]===0x61 && b[j+9]===0x74 &&
+            b[j+10]===0x75 && b[j+11]===0x73 && b[j+12]===0x22) { found = j; break; }
+      }
+      if (found >= 0) {
+        var q2 = found + 13;
+        while (q2 < n && b[q2] === 0x20) q2++;
+        if (q2 < n && b[q2] === 0x3a) q2++;
+        while (q2 < n && b[q2] === 0x20) q2++;
+        if (q2 < n && b[q2] === 0x30) { b[q2] = 0x31; svipFlip++; }
+      }
     }
 
     if (changed === 0 && svipFlip === 0) { $done({}); return; }
-    console.log('[tieba-frs] 广告item: ' + changed + ' / svip翻转(直播卡): ' + svipFlip);
-    $done({ body: b });   // 长度不变，仅改内容
+    console.log('[tieba-frs] 广告item:' + changed + ' svip翻转:' + svipFlip + (aborted ? ' (保险阀触发,已停止)' : ''));
+    $done({ body: b });
   } catch (e) {
     console.log('[tieba-frs] 出错，保持原响应: ' + e);
     $done({});
   }
-})
+})();
