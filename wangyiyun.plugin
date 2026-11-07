@@ -37,6 +37,9 @@ PRCN = switch, false, true, tag = 隐藏[首页-你的专属歌单], desc = 是�
 Music163_VIP_Shared = switch, false, true, tag = 启用[共享会员], desc = 是否启用网易云音乐共享会员
 
 [Rule]
+# 网易云音乐运营/推荐位资源接口（可能同时承载普通推荐内容，按需启用）
+URL-REGEX,^https?://interface3\.music\.163\.com/eapi/link/position/show/resource$,REJECT
+
 DOMAIN, iadmat.nosdn.127.net, REJECT
 DOMAIN, iadmatapk.nosdn.127.net, REJECT
 DOMAIN, iadmusicmat.music.126.net, REJECT
