@@ -16,6 +16,7 @@ hostname = az2-api.ksapisrv.com
 response if ${url} ~= /rest\/nebula\/(ad\/splashAd|tube\/standard\/serial\/episode\/scroll)/ then script("https://raw.githubusercontent.com/harmonizr/okInterface/refs/heads/master/ks_lite_ad.js") with tag="KS-Lite Ad-Remove", requires_body=true, timeout=30
 
 [Rule]
+DOMAIN-SUFFIX, e.kuaishou.com, REJECT
 # Ad component warmup download
 ^https?://ad-resource-warmup\.kwd\.inkuai\.com/ reject
 # Ad series exit prediction model (EVE)
