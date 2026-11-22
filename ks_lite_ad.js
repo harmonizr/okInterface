@@ -1,102 +1,160 @@
-// Kuaishou Lite (Kuaishou Lite, kpn=NEBULA) - Remove video ads in series feed + splash ad
-// Loon Script (new syntax Script API), JS
-// Applicable endpoints (determined by actual measurement from HAR 2026-11-22):
-//   rest/nebula/tube/standard/serial/episode/scroll  -> Clear ad insertion / IAA timer / commercial banner in series (short drama) feed
-//   rest/nebula/ad/splashAd                          -> Clear splash ad list
-// Keep the unlock mechanism (unlockSeriesAdType), only remove the ads themselves
+// 快手极速版 (kpn=NEBULA) - 去剧集流内视频广告
+// Loon Script (新语法 Script API), JS / ES5
+// 关键设计: 只做局部字符串手术, 绝不整包 JSON.parse/stringify
+//   原因: 响应里的 photo_id / serialId 是 19 位 int64, 超过 JS 安全整数上限(2^53),
+//         整包 round-trip 会把 ID 改坏 -> 客户端按坏 ID 拉流 -> 播放失败/网络错误。
+//   只有 seriesAdConfig 这个块内确认无大整数, 才允许单独 parse 该块。
+//
+// 处理对象 (URL 命中时):
+//   rest/nebula/tube/standard/serial/episode/scroll
+//     - "adTubeInnerTitleConfig" 广告横幅/内嵌标题(指向商业广告短剧)  -> 空对象
+//     - "verticalTubeIaaAdTime"  流内 IAA 广告计时                    -> 0
+//     - "seriesAdConfig".insertAdInfo(广告插入点)                     -> 删除
+//       (保留 unlockSeriesAdType 看广告解锁机制, 不影响解锁)
+//   rest/nebula/ad/splashAd
+//     - "ads" 数组 -> []
+// 未命中/异常: 一律原样放行 ($done({}))
 
 (function () {
     "use strict";
 
-    function utf8Length(s) {
-        var n = 0, i = 0;
-        while (i < s.length) {
-            var c = s.charCodeAt(i);
-            if (c < 0x80) { n += 1; i += 1; }
-            else if (c < 0x800) { n += 2; i += 1; }
-            else if (c >= 0xD800 && c < 0xDC00 && i + 1 < s.length &&
-                     s.charCodeAt(i + 1) >= 0xDC00 && s.charCodeAt(i + 1) < 0xE000) { n += 4; i += 2; }
-            else { n += 3; i += 1; }
-        }
-        return n;
+    if (!$response || $response.status !== 200 || !$response.body || !$response.body.length) {
+        $done({}); return;
     }
-
-    function safeParse(v) {
-        if (typeof v === "string") {
-            try { return JSON.parse(v); } catch (e) { return null; }
-        }
-        if (v && typeof v === "object") return v;
-        return null;
-    }
-
-    function finish(newBody) {
-        if (newBody === null || newBody === undefined) { $done({}); return; }
-        // Loon 在修改响应 Body 后自动处理 Content-Length / Transfer-Encoding / Content-Encoding
-        $done({ body: newBody });
-    }
-
-    if (!$response || $response.status !== 200 || !$response.body) { $done({}); return; }
-
-    var root;
-    try { root = JSON.parse($response.body); } catch (e) { $done({}); return; }
-    if (!root || typeof root !== "object") { $done({}); return; }
-
     var url = $request.url || "";
+    var isScroll = /rest\/nebula\/tube\/standard\/serial\/episode\/scroll/.test(url);
+    var isSplash = /rest\/nebula\/ad\/splashAd/.test(url);
+    if (!isScroll && !isSplash) { $done({}); return; }
 
-    // ---------- Splash ad: clear ad list ----------
-    if (/rest\/nebula\/ad\/splashAd/.test(url)) {
-        root.ads = [];
-        if (typeof root.policy === "string") {
-            var p = safeParse(root.policy);
-            if (p && typeof p === "object") {
-                p.clearAds = true;
-                p.splashAdShowInterval = 0;
-                p.splashAdDayLimit = 0;
-                root.policy = JSON.stringify(p);
+    // 定位 "key":value 的 value 结尾位置(不闭包); 支持 字符串/对象/数组/数字
+    function valueEnd(s, start) {
+        var ch = s.charAt(start);
+        if (ch === '{' || ch === '[') {
+            var close = ch === '{' ? '}' : ']';
+            var depth = 0, inStr = false, esc = false;
+            for (var j = start; j < s.length; j++) {
+                var c = s.charAt(j);
+                if (inStr) {
+                    if (esc) { esc = false; }
+                    else if (c === '\\') { esc = true; }
+                    else if (c === '"') { inStr = false; }
+                } else if (c === '"') { inStr = true; }
+                else if (c === ch) { depth++; }
+                else if (c === close) { depth--; if (depth === 0) return j + 1; }
             }
+            return -1; // 不闭合
         }
-        finish(JSON.stringify(root));
-        return;
+        if (ch === '"') {
+            var k = start + 1;
+            for (; k < s.length; k++) {
+                if (s.charAt(k) === '\\') { k++; continue; }
+                if (s.charAt(k) === '"') break;
+            }
+            if (k >= s.length) return -1;
+            return k + 1;
+        }
+        for (var m = start; m < s.length; m++) {
+            var cc = s.charCodeAt(m);
+            if (cc === 44 || cc === 125 || cc === 93 || cc === 10 || cc === 13) return m;
+        }
+        return s.length;
     }
 
-    // ---------- Series feed: clear ad insertion, IAA timer, commercial banner ----------
-    if (/rest\/nebula\/tube\/standard\/serial\/episode\/scroll/.test(url)) {
-        var feeds = root.feeds;
-        if (Array.isArray(feeds)) {
-            for (var i = 0; i < feeds.length; i++) {
-                var f = feeds[i];
-                if (!f || !f.standardSerial || !f.standardSerial.serial) continue;
-                var cp = f.standardSerial.serial.customParams;
-                if (!cp || typeof cp !== "object") continue;
+    // 替换顶层 "key" 的值; newValue 为不带引号包裹的 JSON 字面量文本
+    function replaceJsonValue(s, key, newValue) {
+        var out = "";
+        var rest = s;
+        for (;;) {
+            var i = rest.indexOf('"' + key + '"');
+            if (i < 0) { out += rest; break; }
+            var colon = i + key.length + 2;         // 收尾引号后一位, 应为 ':'
+            if (colon >= rest.length || rest.charAt(colon) !== ':') {
+                out += rest.slice(0, i + 1);        // 误匹配(出现在别的字符串里), 跳过
+                rest = rest.slice(i + 1);
+                continue;
+            }
+            var v = colon + 1;
+            while (rest.charAt(v) === ' ') v++;
+            var end = valueEnd(rest, v);
+            if (end < 0) { out += rest; break; }    // 值不闭合, 保守放弃
+            out += rest.slice(0, i) + '"' + key + '":' + newValue;
+            rest = rest.slice(end);
+        }
+        return out;
+    }
 
-                // Commercial banner / inner title ad (jump to CommercialSeriesDetail)
-                if ("adTubeInnerTitleConfig" in cp) cp.adTubeInnerTitleConfig = "";
-                // In-feed IAA ad timer
-                if ("verticalTubeIaaAdTime" in cp) cp.verticalTubeIaaAdTime = 0;
-
-                // seriesAdConfig (stringified JSON): disable ad insertion, keep unlock ad
-                var sc = safeParse(cp.seriesAdConfig);
-                if (sc && typeof sc === "object") {
-                    delete sc.insertAdInfo;
-                    sc.supportBannerAd = false;
-                    sc.bannerAdGap = 0;
-                    if (typeof sc.seriesCommonParam === "string") {
-                        var c = safeParse(sc.seriesCommonParam);
-                        if (c && typeof c === "object") {
-                            c.hitSeriesFeedAdverseSwitch = false;
-                            c.hitComicSeriesIaapFeedAdSwitch = false;
-                            sc.seriesCommonParam = JSON.stringify(c);
-                        }
-                    }
-                    if (typeof cp.seriesAdConfig === "string") {
-                        cp.seriesAdConfig = JSON.stringify(sc);
-                    }
+    // 对每一个 "key" 出现处: JSON.parse 其值对象, 用 fn 修改, 再 JSON.stringify 写回同一段;
+    // fn 返回 null 表示该处不改, 原样保留
+    function transformJsonValue(s, key, fn) {
+        var out = "";
+        var rest = s;
+        for (;;) {
+            var i = rest.indexOf('"' + key + '"');
+            if (i < 0) { out += rest; break; }
+            var colon = i + key.length + 2;
+            if (colon >= rest.length || rest.charAt(colon) !== ':') {
+                out += rest.slice(0, i + 1);
+                rest = rest.slice(i + 1);
+                continue;
+            }
+            var v = colon + 1;
+            while (rest.charAt(v) === ' ') v++;
+            var end = valueEnd(rest, v);
+            if (end < 0) { out += rest; break; }
+            var valText = rest.slice(v, end);
+            var obj;
+            try { obj = JSON.parse(valText); } catch (e) { obj = null; }
+            if (obj && typeof obj === 'object') {
+                var res = fn(obj);
+                if (res !== null && res !== undefined) {
+                    out += rest.slice(0, i) + '"' + key + '":' + JSON.stringify(res);
+                    rest = rest.slice(end);
+                    continue;
                 }
             }
+            out += rest.slice(0, end);
+            rest = rest.slice(end);
         }
-        finish(JSON.stringify(root));
-        return;
+        return out;
     }
 
-    $done({});
+    var body = $response.body;
+
+    if (isScroll) {
+        // 1) 广告横幅/内嵌标题 -> 清空
+        body = replaceJsonValue(body, 'adTubeInnerTitleConfig', '{}');
+        // 2) IAA 广告计时 -> 关闭
+        body = replaceJsonValue(body, 'verticalTubeIaaAdTime', '0');
+        // 3) seriesAdConfig 块内: 删广告插入点, 关横幅 (保留看广告解锁 unlockSeriesAdType)
+        body = transformJsonValue(body, 'seriesAdConfig', function (o) {
+            var changed = false;
+            if ('insertAdInfo' in o) { delete o.insertAdInfo; changed = true; }
+            if ('supportBannerAd' in o) { o.supportBannerAd = false; changed = true; }
+            if ('bannerAdGap' in o) { o.bannerAdGap = 0; changed = true; }
+            if (typeof o.seriesCommonParam === 'string') {
+                try {
+                    var c = JSON.parse(o.seriesCommonParam);
+                    if (c && typeof c === 'object') {
+                        c.hitSeriesFeedAdverseSwitch = false;
+                        c.hitComicSeriesIaapFeedAdSwitch = false;
+                        o.seriesCommonParam = JSON.stringify(c);
+                        changed = true;
+                    }
+                } catch (e) {}
+            }
+            return changed ? o : null;
+        });
+    } else {
+        // 开屏广告: 清空广告列表
+        body = replaceJsonValue(body, 'ads', '[]');
+    }
+
+    // 保守校验: 结果必须仍是 JSON, 否则原样放行
+    try {
+        JSON.parse(body);
+    } catch (e) {
+        $done({});
+        return;
+    }
+    $done({ body: body });
 })();
