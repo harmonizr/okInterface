@@ -15,9 +15,3 @@ hostname = az2-api.ksapisrv.com
 # Series feed (ad insertion / IAA timer / commercial banner) + splash ad
 response if ${url} ~= /rest\/nebula\/(ad\/splashAd|tube\/standard\/serial\/episode\/scroll)/ then script("https://raw.githubusercontent.com/harmonizr/okInterface/refs/heads/master/ks_lite_ad.js") with tag="KS-Lite Ad-Remove", requires_body=true, timeout=30
 
-[Rule]
-DOMAIN,ad-resource-warmup.kwd.inkuai.com,REJECT
-URL-REGEX,^https?://[a-z0-9-]+\.?wsukwai\.com/kos/.*Task_Ad,REJECT
-URL-REGEX,^https?://az2-api\.ksapisrv\.com/rest/nebula/log/ad/trackLog,REJECT
-URL-REGEX,^https?://qbugreport\.html5\.qq\.com/ybstat,REJECT
-URL-REGEX,^https?://api\.anjuke\.com/anjuke/market/ad/,REJECT
