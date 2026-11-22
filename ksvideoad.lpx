@@ -1,17 +1,22 @@
 # ============================================================
-# Kuaishou Lite (kpn=NEBULA) - Remove video ad flow
-# Loon config snippet (merge into the [MITM] / [Script] / [Rule] sections of the main config)
-# Verified in 2026-11-22 HAR
-#   - Series (short drama / course) feed ads: rest/nebula/tube/standard/serial/episode/scroll
-#   - Splash ad: rest/nebula/ad/splashAd
-#   - Ad resource warmup / ad model / ad tracking: REJECT
-# Requires the script ks_lite_ad.js to be placed in Loon's scripts directory
+# 快手极速版 (kpn=NEBULA) 去视频广告 - v4 (全端点)
+# Loon 主配置片段（2026-11-22 HAR1~5 实测）
+#
+# 广告链路(全部实测确认):
+#   api.e.kuaishou.cn
+#     rest/e/neo/mixed/ad                  混插广告视频本体 (本次真正的广告源)
+#     rest/e/v2/diverse/ad                 广告视频本体
+#     rest/miniSeries/n/iaa/scheme         短剧流混插开关 (base64 adScheme)
+#     rest/miniSeries/n/commercial/iaa/panel  "看广告解锁" 入口
+#   az2-api.ksapisrv.com
+#     rest/nebula/tube/standard/serial/episode/scroll  剧集流广告插入配置
+#     rest/nebula/ad/splashAd              开屏广告
+# 不使用 reject 规则(会触发服务端风控 result:11 导致播放失败)
 # ============================================================
 
 [MITM]
-hostname = az2-api.ksapisrv.com
+hostname = az2-api.ksapisrv.com, api.e.kuaishou.cn
 
 [Script]
-# Series feed (ad insertion / IAA timer / commercial banner) + splash ad
-response if ${url} ~= /rest\/nebula\/(ad\/splashAd|tube\/standard\/serial\/episode\/scroll)/ then script("https://raw.githubusercontent.com/harmonizr/okInterface/refs/heads/master/ks_lite_ad.js") with tag="KS-Lite Ad-Remove", requires_body=true, timeout=30
-
+# 全部 6 个端点统一交给 ks_lite_ad.js, 脚本内按 URL 分发处理
+response if ${url} ~= /rest\/(nebula\/(ad\/splash|tube\/standard\/serial\/episode\/scroll)|e\/(neo\/mixed\/ad|v2\/diverse\/ad)|miniSeries\/n\/(iaa\/scheme|commercial\/iaa\/panel))/ then script("https://raw.githubusercontent.com/harmonizr/okInterface/refs/heads/master/ks_lite_ad.js") with tag="KS-Lite 去广告", requires_body=true, timeout=30
