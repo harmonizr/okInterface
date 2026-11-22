@@ -1,19 +1,17 @@
-// 快手极速版 (kpn=NEBULA) - 去视频广告 v3
+// 快手极速版 (kpn=NEBULA) - 去视频广告 v4 (全端点版)
 // Loon Script (新语法 Script API), JS / ES5
 // 设计: 只做局部字符串手术, 绝不整包 JSON.parse/stringify (响应含 19 位 int64,
-//       整包 round-trip 会损坏 photo_id 导致拉流失败)
+//       整包 round-trip 会损坏 photo_id 导致拉流失败)。
 //
-// 处理端点:
-//   rest/nebula/tube/standard/serial/episode/scroll  (az2-api.ksapisrv.com)
-//     - "adTubeInnerTitleConfig" 广告横幅   -> {}
-//     - "verticalTubeIaaAdTime"  IAA 计时   -> 0
-//     - "seriesAdConfig".insertAdInfo(广告插入点) -> 删除 (保留看广告解锁)
-//   rest/nebula/ad/splashAd (az2-api.ksapisrv.com)
-//     - "ads" -> []
-//   rest/e/v2/diverse/ad (api.e.kuaishou.cn)
-//     - 广告视频下发接口, data.feeds -> [] (整条广告不出现)
-//   rest/miniSeries/n/iaa/scheme (api.e.kuaishou.cn)
-//     - data.adScheme(base64 JSON) 里 mixedAd/fullMixed -> false (短剧流内混插广告关闭)
+// 处理端点 (按 URL 分发):
+//   az2-api.ksapisrv.com:
+//     rest/nebula/tube/standard/serial/episode/scroll  清 insertAdInfo / IAA计时 / 商业横幅
+//     rest/nebula/ad/splashAd                          ads -> []
+//   api.e.kuaishou.cn:
+//     rest/e/neo/mixed/ad        混插广告视频本体      feeds -> []
+//     rest/e/v2/diverse/ad       广告视频本体          data.feeds -> []
+//     rest/miniSeries/n/iaa/scheme          adScheme(base64) mixedAd/fullMixed -> false
+//     rest/miniSeries/n/commercial/iaa/panel  看广告解锁入口  adsInfo.canAccessAds -> false
 // 未命中/异常: 原样放行
 
 (function () {
@@ -24,10 +22,14 @@
     }
     var url = $request.url || "";
     var isScroll = /rest\/nebula\/tube\/standard\/serial\/episode\/scroll/.test(url);
-    var isSplash = /rest\/nebula\/ad\/splashAd/.test(url);
+    var isSplash = /rest\/nebula\/ad\/splash/.test(url);
+    var isMixedAd = /\/rest\/e\/neo\/mixed\/ad/.test(url);
     var isDiverseAd = /\/rest\/e\/v2\/diverse\/ad/.test(url);
     var isIaaScheme = /\/rest\/miniSeries\/n\/iaa\/scheme/.test(url);
-    if (!isScroll && !isSplash && !isDiverseAd && !isIaaScheme) { $done({}); return; }
+    var isCommercialPanel = /\/rest\/miniSeries\/n\/commercial\/iaa\/panel/.test(url);
+    if (!(isScroll || isSplash || isMixedAd || isDiverseAd || isIaaScheme || isCommercialPanel)) {
+        $done({}); return;
+    }
 
     // ---------- 通用工具 ----------
 
@@ -65,7 +67,7 @@
         return s.length;
     }
 
-    // 替换所有 "key" 的值; newValue 为 JSON 字面量文本
+    // 替换所有 "key" 的值; newValue 为 JSON 字面量文本 (可出现在顶层或任意嵌套层级)
     function replaceJsonValue(s, key, newValue) {
         var out = "";
         var rest = s;
@@ -88,7 +90,7 @@
         return out;
     }
 
-    // 对每个 "key" 的 JSON 值: parse -> fn -> stringify 写回; fn 返回 null 表示不动
+    // 对每个 "key" 的 JSON 对象值: parse -> fn -> stringify 写回; fn 返回 null 表示不动
     function transformJsonValue(s, key, fn) {
         var out = "";
         var rest = s;
@@ -183,7 +185,7 @@
     function patchB64JsonValue(body, key, fn) {
         var i = body.indexOf('"' + key + '"');
         if (i < 0) return body;
-        var v = i + key.length + 2;      // 收尾引号后一位, 应为 ':'
+        var v = i + key.length + 2;
         if (v >= body.length || body.charAt(v) !== ':') return body;
         v++;
         while (body.charAt(v) === ' ') v++;
@@ -229,17 +231,20 @@
         });
     } else if (isSplash) {
         body = replaceJsonValue(body, 'ads', '[]');
-    } else if (isDiverseAd) {
-        // 广告视频下发: 整个广告条目去掉
+    } else if (isMixedAd || isDiverseAd) {
+        // 广告视频本体: 清空 feed (neo 在顶层, diverse 在 data 下, 同 key 名)
         body = replaceJsonValue(body, 'feeds', '[]');
-    } else {
-        // iaa/scheme: 关闭短剧流内混插广告
+    } else if (isIaaScheme) {
+        // 关闭短剧流内混插广告开关
         body = patchB64JsonValue(body, 'adScheme', function (o) {
             if (!('mixedAd' in o) && !('fullMixed' in o)) return null;
             o.mixedAd = false;
             o.fullMixed = false;
             return o;
         });
+    } else if (isCommercialPanel) {
+        // 关闭 "看广告解锁" 入口
+        body = replaceJsonValue(body, 'adsInfo', '{"canAccessAds":false}');
     }
 
     try {
