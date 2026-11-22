@@ -1,19 +1,20 @@
-// 快手极速版 (kpn=NEBULA) - 去剧集流内视频广告
+// 快手极速版 (kpn=NEBULA) - 去视频广告 v3
 // Loon Script (新语法 Script API), JS / ES5
-// 关键设计: 只做局部字符串手术, 绝不整包 JSON.parse/stringify
-//   原因: 响应里的 photo_id / serialId 是 19 位 int64, 超过 JS 安全整数上限(2^53),
-//         整包 round-trip 会把 ID 改坏 -> 客户端按坏 ID 拉流 -> 播放失败/网络错误。
-//   只有 seriesAdConfig 这个块内确认无大整数, 才允许单独 parse 该块。
+// 设计: 只做局部字符串手术, 绝不整包 JSON.parse/stringify (响应含 19 位 int64,
+//       整包 round-trip 会损坏 photo_id 导致拉流失败)
 //
-// 处理对象 (URL 命中时):
-//   rest/nebula/tube/standard/serial/episode/scroll
-//     - "adTubeInnerTitleConfig" 广告横幅/内嵌标题(指向商业广告短剧)  -> 空对象
-//     - "verticalTubeIaaAdTime"  流内 IAA 广告计时                    -> 0
-//     - "seriesAdConfig".insertAdInfo(广告插入点)                     -> 删除
-//       (保留 unlockSeriesAdType 看广告解锁机制, 不影响解锁)
-//   rest/nebula/ad/splashAd
-//     - "ads" 数组 -> []
-// 未命中/异常: 一律原样放行 ($done({}))
+// 处理端点:
+//   rest/nebula/tube/standard/serial/episode/scroll  (az2-api.ksapisrv.com)
+//     - "adTubeInnerTitleConfig" 广告横幅   -> {}
+//     - "verticalTubeIaaAdTime"  IAA 计时   -> 0
+//     - "seriesAdConfig".insertAdInfo(广告插入点) -> 删除 (保留看广告解锁)
+//   rest/nebula/ad/splashAd (az2-api.ksapisrv.com)
+//     - "ads" -> []
+//   rest/e/v2/diverse/ad (api.e.kuaishou.cn)
+//     - 广告视频下发接口, data.feeds -> [] (整条广告不出现)
+//   rest/miniSeries/n/iaa/scheme (api.e.kuaishou.cn)
+//     - data.adScheme(base64 JSON) 里 mixedAd/fullMixed -> false (短剧流内混插广告关闭)
+// 未命中/异常: 原样放行
 
 (function () {
     "use strict";
@@ -24,9 +25,13 @@
     var url = $request.url || "";
     var isScroll = /rest\/nebula\/tube\/standard\/serial\/episode\/scroll/.test(url);
     var isSplash = /rest\/nebula\/ad\/splashAd/.test(url);
-    if (!isScroll && !isSplash) { $done({}); return; }
+    var isDiverseAd = /\/rest\/e\/v2\/diverse\/ad/.test(url);
+    var isIaaScheme = /\/rest\/miniSeries\/n\/iaa\/scheme/.test(url);
+    if (!isScroll && !isSplash && !isDiverseAd && !isIaaScheme) { $done({}); return; }
 
-    // 定位 "key":value 的 value 结尾位置(不闭包); 支持 字符串/对象/数组/数字
+    // ---------- 通用工具 ----------
+
+    // 定位 "key":value 的 value 结尾位置; 支持 字符串/对象/数组/数字
     function valueEnd(s, start) {
         var ch = s.charAt(start);
         if (ch === '{' || ch === '[') {
@@ -42,7 +47,7 @@
                 else if (c === ch) { depth++; }
                 else if (c === close) { depth--; if (depth === 0) return j + 1; }
             }
-            return -1; // 不闭合
+            return -1;
         }
         if (ch === '"') {
             var k = start + 1;
@@ -60,31 +65,30 @@
         return s.length;
     }
 
-    // 替换顶层 "key" 的值; newValue 为不带引号包裹的 JSON 字面量文本
+    // 替换所有 "key" 的值; newValue 为 JSON 字面量文本
     function replaceJsonValue(s, key, newValue) {
         var out = "";
         var rest = s;
         for (;;) {
             var i = rest.indexOf('"' + key + '"');
             if (i < 0) { out += rest; break; }
-            var colon = i + key.length + 2;         // 收尾引号后一位, 应为 ':'
+            var colon = i + key.length + 2;
             if (colon >= rest.length || rest.charAt(colon) !== ':') {
-                out += rest.slice(0, i + 1);        // 误匹配(出现在别的字符串里), 跳过
+                out += rest.slice(0, i + 1);
                 rest = rest.slice(i + 1);
                 continue;
             }
             var v = colon + 1;
             while (rest.charAt(v) === ' ') v++;
             var end = valueEnd(rest, v);
-            if (end < 0) { out += rest; break; }    // 值不闭合, 保守放弃
+            if (end < 0) { out += rest; break; }
             out += rest.slice(0, i) + '"' + key + '":' + newValue;
             rest = rest.slice(end);
         }
         return out;
     }
 
-    // 对每一个 "key" 出现处: JSON.parse 其值对象, 用 fn 修改, 再 JSON.stringify 写回同一段;
-    // fn 返回 null 表示该处不改, 原样保留
+    // 对每个 "key" 的 JSON 值: parse -> fn -> stringify 写回; fn 返回 null 表示不动
     function transformJsonValue(s, key, fn) {
         var out = "";
         var rest = s;
@@ -118,14 +122,93 @@
         return out;
     }
 
+    // ---------- Base64 (UTF-8 感知) ----------
+    var B64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+    function b64encode(str) {
+        var bytes = [], i = 0;
+        while (i < str.length) {
+            var c = str.charCodeAt(i++);
+            if (c < 0x80) { bytes.push(c); }
+            else if (c < 0x800) { bytes.push(192 + (c >> 6), 128 + (c & 63)); }
+            else if (c >= 0xD800 && c < 0xDC00 && i < str.length) {
+                var c2 = str.charCodeAt(i++);
+                var cp = 0x10000 + ((c & 0x3FF) << 10) + (c2 & 0x3FF);
+                bytes.push(240 + (cp >> 18), 128 + ((cp >> 12) & 63), 128 + ((cp >> 6) & 63), 128 + (cp & 63));
+            }
+            else { bytes.push(224 + (c >> 12), 128 + ((c >> 6) & 63), 128 + (c & 63)); }
+        }
+        var out = '';
+        for (i = 0; i < bytes.length; i += 3) {
+            var a = bytes[i];
+            var b = i + 1 < bytes.length ? bytes[i + 1] : 0;
+            var dd = i + 2 < bytes.length ? bytes[i + 2] : 0;
+            out += B64.charAt(a >> 2);
+            out += B64.charAt(((a & 3) << 4) | (b >> 4));
+            out += i + 1 < bytes.length ? B64.charAt(((b & 15) << 2) | (dd >> 6)) : '=';
+            out += i + 2 < bytes.length ? B64.charAt(dd & 63) : '=';
+        }
+        return out;
+    }
+    function b64decode(s) {
+        s = s.replace(/[^A-Za-z0-9+\/]/g, '');
+        s = s + '==='.slice(0, (4 - s.length % 4) % 4);
+        var map = {}, i;
+        for (i = 0; i < 64; i++) map[B64.charAt(i)] = i;
+        var bytes = [], buf = 0, bits = 0;
+        for (i = 0; i < s.length; i++) {
+            var v = map[s.charAt(i)];
+            if (v === undefined) continue;
+            buf = (buf << 6) | v;
+            bits += 6;
+            if (bits >= 8) { bits -= 8; bytes.push((buf >> bits) & 255); }
+        }
+        var out = '', j = 0, cp;
+        while (j < bytes.length) {
+            var x = bytes[j++];
+            if (x < 0x80) { out += String.fromCharCode(x); }
+            else if (x < 0xE0) { out += String.fromCharCode(((x & 31) << 6) | (bytes[j++] & 63)); }
+            else if (x < 0xF0) {
+                cp = ((x & 15) << 10) | ((bytes[j++] & 63) << 6) | (bytes[j++] & 63);
+                out += String.fromCharCode(cp);
+            } else {
+                cp = ((x & 7) << 16) | ((bytes[j++] & 63) << 12) | ((bytes[j++] & 63) << 6) | (bytes[j++] & 63);
+                cp -= 0x10000;
+                out += String.fromCharCode(0xD800 + (cp >> 10), 0xDC00 + (cp & 0x3FF));
+            }
+        }
+        return out;
+    }
+
+    // 修改 base64 字符串值 "key":"<b64json>" 里的 JSON 字段
+    function patchB64JsonValue(body, key, fn) {
+        var i = body.indexOf('"' + key + '"');
+        if (i < 0) return body;
+        var v = i + key.length + 2;      // 收尾引号后一位, 应为 ':'
+        if (v >= body.length || body.charAt(v) !== ':') return body;
+        v++;
+        while (body.charAt(v) === ' ') v++;
+        if (body.charAt(v) !== '"') return body;
+        v++;
+        var end = v;
+        for (; end < body.length; end++) {
+            if (body.charAt(end) === '\\') { end++; continue; }
+            if (body.charAt(end) === '"') break;
+        }
+        if (end >= body.length) return body;
+        var inner;
+        try { inner = JSON.parse(b64decode(body.slice(v, end))); } catch (e) { return body; }
+        if (!inner || typeof inner !== 'object') return body;
+        var res = fn(inner);
+        if (!res) return body;
+        return body.slice(0, v) + b64encode(JSON.stringify(res)) + body.slice(end);
+    }
+
+    // ---------- 执行 ----------
     var body = $response.body;
 
     if (isScroll) {
-        // 1) 广告横幅/内嵌标题 -> 清空
         body = replaceJsonValue(body, 'adTubeInnerTitleConfig', '{}');
-        // 2) IAA 广告计时 -> 关闭
         body = replaceJsonValue(body, 'verticalTubeIaaAdTime', '0');
-        // 3) seriesAdConfig 块内: 删广告插入点, 关横幅 (保留看广告解锁 unlockSeriesAdType)
         body = transformJsonValue(body, 'seriesAdConfig', function (o) {
             var changed = false;
             if ('insertAdInfo' in o) { delete o.insertAdInfo; changed = true; }
@@ -144,12 +227,21 @@
             }
             return changed ? o : null;
         });
-    } else {
-        // 开屏广告: 清空广告列表
+    } else if (isSplash) {
         body = replaceJsonValue(body, 'ads', '[]');
+    } else if (isDiverseAd) {
+        // 广告视频下发: 整个广告条目去掉
+        body = replaceJsonValue(body, 'feeds', '[]');
+    } else {
+        // iaa/scheme: 关闭短剧流内混插广告
+        body = patchB64JsonValue(body, 'adScheme', function (o) {
+            if (!('mixedAd' in o) && !('fullMixed' in o)) return null;
+            o.mixedAd = false;
+            o.fullMixed = false;
+            return o;
+        });
     }
 
-    // 保守校验: 结果必须仍是 JSON, 否则原样放行
     try {
         JSON.parse(body);
     } catch (e) {
