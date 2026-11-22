@@ -13,7 +13,7 @@ hostname = az2-api.ksapisrv.com
 
 [Script]
 # Series feed (ad insertion / IAA timer / commercial banner) + splash ad
-response if ${url} ~= /rest\/nebula\/(ad\/splashAd|tube\/standard\/serial\/episode\/scroll)/ then script("ks_lite_ad.js") with tag="KS-Lite Ad-Remove", requires_body=true, timeout=30
+response if ${url} ~= /rest\/nebula\/(ad\/splashAd|tube\/standard\/serial\/episode\/scroll)/ then script("https://raw.githubusercontent.com/harmonizr/okInterface/refs/heads/master/ks_lite_ad.js") with tag="KS-Lite Ad-Remove", requires_body=true, timeout=30
 
 [Rule]
 # Ad component warmup download
